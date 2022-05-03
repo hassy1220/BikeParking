@@ -24,11 +24,13 @@
             <% end %>
           <% end %>
       </div>
+
       <div class="col-6">
           <h3>コメント<%= @park_area.comments.count %>件</h3>
           <table>
           <% @park_area.comments.each do |list| %>
            <tr>
+             <td><%= image_tag list.customer.get_bike_image(50,50) %></td>
              <td><%= list.comment %></td>
            </tr>
           <% end %>

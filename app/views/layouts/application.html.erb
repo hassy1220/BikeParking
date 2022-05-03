@@ -11,12 +11,12 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
-      <div class="container-fluid">
-        <h3>BIKEPARKING</h3>
-      </div>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info sticky-top">
+
+        <a class="navbar-brand" href="#">BIKEPARKING</a>
+
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav">
             <% if customer_signed_in? %>
               <li class="nav-item mr-5"><%= link_to"ログアウト",destroy_customer_session_path,method: :delete, class:"nav-link active" %></li>
               <li class="nav-item mr-5"><%= link_to"駐車場投稿",new_public_park_path, class:"nav-link active" %></li>
