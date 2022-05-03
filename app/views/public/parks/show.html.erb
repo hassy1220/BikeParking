@@ -6,22 +6,24 @@
     </div>
     <div class="row">
       <div class="col-6">
-          <h3>駐車場詳細</h3>
-          <p>外観画像</p>
           <%= image_tag @park_area.get_image(300,300) %>
           <p>駐車場名：<%= @park_area.name %></p>
           <p>説明：<%= @park_area.description %></p>
           <p>金額：<%= @park_area.price %>円 / <%= @park_area.parking_time %>時間</p>
           <p>駐車可能条件：<%= @park_area.spec %></p>
 
-          <% if  @park_area.user_favorite_by(current_customer) %>
+          <% if @park_area.user_favorite_by(current_customer) %>
             <%= link_to public_park_favorites_path(@park_area.id),method: :delete do %>
-              💖いいね<%= @park_area.favorite_user.count %>件
+              <p>💖いいね<%= @park_area.favorite_user.count %>件</p>
             <% end %>
           <% else %>
             <%= link_to public_park_favorites_path(@park_area.id),method: :post do %>
-              💛良いね<%= @park_area.favorite_user.count %>件
+              <p>💛良いね<%= @park_area.favorite_user.count %>件</p>
             <% end %>
+          <% end %>
+
+          <% if @park_area.customer == current_customer %>
+            <%= link_to"削除",public_park_path(@park_area.id),method: :delete,class:"btn btn-danger" %>
           <% end %>
       </div>
 

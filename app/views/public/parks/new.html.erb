@@ -13,7 +13,7 @@
 
   <%= form_with model: @park,url: public_parks_path do |f| %>
   <table class="table">
-    <tr><%= f.file_field :image,accept:"image/jpg",class:"form-control-file" %></tr>
+    <tr><%= f.file_field :image,accept:"image/jpg",class:"form-control-file",multiple: true %></tr>
     <tr>
        <td>駐輪場名</td>
        <td><%= f.text_field :name,class:"form-control" %></td>

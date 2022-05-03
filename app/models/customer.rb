@@ -8,6 +8,11 @@ class Customer < ApplicationRecord
   has_many:favorites,dependent: :destroy
   has_many:favorite_park,through: :favorites,source: :park
 
+  # is_deletedがfalseならtrueを返すようにしている
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
+
   # フォロー本人目線
   has_many:relationships,class_name: "Relationship",foreign_key: "follow_id",dependent: :destroy
   # フォローされた人目線

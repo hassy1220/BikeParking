@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   }
 
   namespace :public do
-    resources:parks,only:[:new,:create,:show,:index] do
+    resources:parks,only:[:new,:create,:show,:index,:destroy] do
       resources:comments,only:[:create]
       resource:favorites,only:[:create,:destroy]
     end
@@ -21,7 +21,10 @@ Rails.application.routes.draw do
       resource:relationships,only:[:create,:destroy]
     end
     get 'searches/search'
-
   end
+  # 退会確認画面
+  get 'customers/:id/unsubscribe' => 'public/customers#unsubscribe', as: 'unsubscribe'
+  # 論理削除用のルーティング
+  patch 'customers/:id/withdrawal' => 'public/customers#withdrawal', as: 'withdrawal'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

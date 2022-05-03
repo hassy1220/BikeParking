@@ -34,6 +34,12 @@ class Public::ParksController < ApplicationController
     end
   end
 
+  def destroy
+     @park_area = Park.find(params[:id])
+     @park_area.destroy
+     redirect_to public_parks_path
+  end
+
 
   private
   def park_params

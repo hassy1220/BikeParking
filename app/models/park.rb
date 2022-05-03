@@ -1,5 +1,5 @@
 class Park < ApplicationRecord
-  has_one_attached:image
+  has_one_attached :image
   # has_many_attached :image
   has_many:comments,dependent: :destroy
   belongs_to:customer
@@ -10,6 +10,8 @@ class Park < ApplicationRecord
   validates :name,presence: true
   validates :price,presence: true
   validates :purpose,presence: true
+  validates :lat,length: { minimum: 4}
+  validates :lng,length: { minimum: 4}
 
   def get_image(width,height)
     unless image.attached?

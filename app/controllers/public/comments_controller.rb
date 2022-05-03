@@ -5,8 +5,10 @@ class Public::CommentsController < ApplicationController
     comment.park_id = @park.id
     comment.customer_id = current_customer.id
     comment.save
-    # app/mailers/comment_mailer.rb内のsend_commentメソッドに内容を送信
-    CommentMailer.with(customer: @park.customer.id,park: @park.id).send_comment.deliver_now
+    if @park.customer.is_deleted == false
+      # app/mailers/comment_mailer.rb内のsend_commentメソッドに内容を送信
+      CommentMailer.with(customer: @park.customer.id,park: @park.id).send_comment.deliver_now
+    end
     redirect_to public_park_path(@park.id)
   end
   private
