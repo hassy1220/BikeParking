@@ -29,12 +29,16 @@
             <% end %>
           </ul>
         </div>
-
     </nav>
+    <main class="jumbotron">
 
+     <%= yield %>
+    </main>
+
+
+    <!--yieldより上に以下記述するとリロードした際に予期せぬ動作をすることがある-->
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['KEY'] %>&callback=initMap">
     </script>
-    <%= yield %>
   </body>
 </html>
