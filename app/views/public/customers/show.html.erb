@@ -1,12 +1,21 @@
 <div class="container">
   <div>
-    <h1>マイページ</h1>
     <%= image_tag @customer.get_bike_image(400,400) %>
     <p>名前<%= @customer.name %></p>
     <p>自己紹介<%= @customer.description %></p>
     <% if @customer == current_customer %>
-      <%= link_to"編集",edit_public_customer_path(current_customer.id) %>
+      <p><%= link_to"編集",edit_public_customer_path(current_customer.id) %></p>
     <% end %>
+
+    <p>フォロー数:<%= @customer.follow_user.count %> / フォロワー数:<%= @customer.follower_user.count %></p>
+    <% unless @customer == current_customer %>
+      <% if @customer.follow_user_by(current_customer) %>
+        <p><%= link_to"解除",public_customer_relationships_path(@customer.id),method: :delete,class:"btn btn-danger" %></p>
+      <% else %>
+        <p><%= link_to"フォロー",public_customer_relationships_path(@customer.id),method: :post,class:"btn btn-success" %></p>
+      <% end %>
+    <% end %>
+
   </div>
 
   <div>
