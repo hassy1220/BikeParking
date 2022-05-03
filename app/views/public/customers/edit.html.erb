@@ -1,0 +1,23 @@
+<div class="container">
+  <h3>情報編集</h3>
+
+  <% flash.each do |message_type, messages| %>
+    <% if messages.class == Array %>
+      <% messages.each do |message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+    <% else %>
+        <div class="alert alert-<%= message_type %>"><%= messages %></div>
+    <% end %>
+  <% end %>
+
+  <%= form_with model: @customer,url: public_customer_path(@customer.id) do |f| %>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %><br>
+    <%= f.label :description %><br>
+    <%= f.text_area :description,rows: 3 %><br>
+    <label>プロフィール画像</label><br>
+    <%= f.file_field :bike_image,accept:"image/jpg" %><br>
+    <%= f.submit"変更" %>
+  <% end %>
+</div>

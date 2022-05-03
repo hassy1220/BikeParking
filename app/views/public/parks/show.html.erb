@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row">
+      <div id="map" style="width:100%; height:500px"></div>
+      <a>緯度：<%= @park_area.lat %></a>
+      <a>経度：<%= @park_area.lng %></a>
+    </div>
+    <div class="row">
+      <div class="col-6">
+          <h3>駐車場詳細</h3>
+          <p>外観画像</p>
+          <%= image_tag @park_area.get_image(300,300) %>
+          <p>駐車場名：<%= @park_area.name %></p>
+          <p>説明：<%= @park_area.description %></p>
+          <p>金額：<%= @park_area.price %>円 / <%= @park_area.parking_time %>時間</p>
+          <p>駐車可能条件：<%= @park_area.spec %></p>
+
+          <% if  @park_area.user_favorite_by(current_customer) %>
+            <%= link_to public_park_favorites_path(@park_area.id),method: :delete do %>
+              💖いいね<%= @park_area.favorite_user.count %>件
+            <% end %>
+          <% else %>
+            <%= link_to public_park_favorites_path(@park_area.id),method: :post do %>
+              💛良いね<%= @park_area.favorite_user.count %>件
+            <% end %>
+          <% end %>
+      </div>
+      <div class="col-6">
+          <h3>コメント<%= @park_area.comments.count %>件</h3>
+          <table>
+          <% @park_area.comments.each do |list| %>
+           <tr>
+             <td><%= list.comment %></td>
+           </tr>
+          <% end %>
+          </table>
+          <%= form_with model:  @park_comment,url: public_park_comments_path(@park_area.id) do |f| %>
+           <%= f.text_field :comment,rows: 5 %>
+           <%= f.submit"送信" %>
+          <% end %>
+      </div>
+    </div>
+</div>
+
+
+
+<input type="hidden" id="park_area_lat" value="<%= @park_area.lat %>">
+<input type="hidden" id="park_area_lng" value="<%= @park_area.lng %>">
+
+<script>
+   function initMap() {
+      // /18行目が初期マップ位置の拡大状況・19行目が緯度経度で福岡市を表示させる様にしている/
+      var opts = {
+        zoom: 12,
+        center: new google.maps.LatLng(33.60639,130.41806),
+        restriction: {
+		　  　latLngBounds: {
+		　　   	north: 33.681563,
+		　　   	south: 33.555133,
+		　　   	west: 130.35940,
+		　　   	east: 130.461512
+	　　    	},
+	　　  	strictBounds: false
+　　    }
+      };
+
+      var map = new google.maps.Map(document.getElementById("map"), opts);
+
+      //変数lat/lngを宣言し、park_area_lat/lng(ID)のValue値を取得
+      var lat =document.getElementById("park_area_lat").value
+    　var lng =document.getElementById("park_area_lng").value
+      // LatLng(,)に19/20行目で取得した緯度経度を入れる。
+      var m_latlng = new google.maps.LatLng(lat,lng);
+      var marker = new google.maps.Marker({
+   　   　　 position: m_latlng,
+      　    map: map
+      });
+    }
+
+ </script>

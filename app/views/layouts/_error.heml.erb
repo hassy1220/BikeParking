@@ -1,0 +1,9 @@
+<% flash.each do |message_type, messages| %>
+    <% if messages.class == Array %>
+      <% messages.each do |message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+    <% else %>
+        <div class="alert alert-<%= message_type %>"><%= messages %></div>
+  <% end %>
+<% end %>

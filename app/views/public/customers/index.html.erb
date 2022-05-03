@@ -1,0 +1,14 @@
+<div class="container">
+ <h1>ユーザー一覧</h1>
+ <table class="table">
+   <% @customers.each do |customer| %>
+   <tr>
+     <td>
+      <%= link_to public_customer_path(customer.id) do %>
+        <%= customer.name %>
+      <% end %>
+     </td>
+   </tr>
+   <% end %>
+ </table>
+</div>
