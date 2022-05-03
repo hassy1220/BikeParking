@@ -43,6 +43,6 @@ class Public::ParksController < ApplicationController
 
   private
   def park_params
-    params.require(:park).permit(:lat,:lng,:name,:description,:image,:spec,:price,:purpose,:parking_time)
+    params.require(:park).permit(:lat,:lng,:name,:description,:spec,:price,:purpose,:parking_time,images: [])
   end
 end

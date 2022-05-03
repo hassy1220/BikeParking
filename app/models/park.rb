@@ -1,5 +1,5 @@
 class Park < ApplicationRecord
-  has_one_attached :image
+  has_many_attached :images
   # has_many_attached :image
   has_many:comments,dependent: :destroy
   belongs_to:customer
@@ -14,11 +14,10 @@ class Park < ApplicationRecord
   validates :lng,length: { minimum: 4}
 
   def get_image(width,height)
-    unless image.attached?
+    unless images.attached?
       file_path = Rails.root.join("app/assets/images/parking-space-g37442e9c0_1280.jpg")
-      image.attach(io:File.open(file_path),filename:"default-image.jpg",content_type:"image/jpeg")
+      images.attach(io:File.open(file_path),filename:"default-image.jpg",content_type:"image/jpeg")
     end
-      image.variant(resize_to_limit:[width,height]).processed
   end
 
    #そのユーザーが良いねしているか判定

@@ -6,7 +6,15 @@
     </div>
     <div class="row">
       <div class="col-6">
-          <%= image_tag @park_area.get_image(300,300) %>
+
+        <% if @park_area.get_image(150,150) %>
+          <!--投稿画像がなかったら、サンプリ画像を表示-->
+        <% else %>
+           <% @park_area.images.each do |image| %>
+             <%= image_tag(image, width:150,height:150) %>
+           <% end %>
+        <% end %>
+
           <p>駐車場名：<%= @park_area.name %></p>
           <p>説明：<%= @park_area.description %></p>
           <p>金額：<%= @park_area.price %>円 / <%= @park_area.parking_time %>時間</p>
