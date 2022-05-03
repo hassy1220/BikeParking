@@ -11,13 +11,14 @@ class Public::ParksController < ApplicationController
   end
 
   def index
-    @parks = Park.all
     @like_park = @posts = Park.includes(:favorite_user).sort {|a,b| b.favorite_user.size <=> a.favorite_user.size}
     if params[:content].blank?
       @park_area = Park.pluck(:lng, :lat, :name, :id)
+      @parks = Park.all
     else
       # 目的地検索した場合の処理
       @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").pluck(:lng, :lat, :name, :id)
+      @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%")
     end
 
   end
