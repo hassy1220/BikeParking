@@ -8,6 +8,11 @@ class Customer < ApplicationRecord
   has_many:favorites,dependent: :destroy
   has_many:favorite_park,through: :favorites,source: :park
 
+# 　自分はたくさんの通知を持っている
+  has_many:active_notifications,class_name: :"Notification",foreign_key: :visitor_id,dependent: :destroy
+  # 相手もたくさんの通知を持っている
+  has_many:passive_notifications,class_name: :"Notification",foreign_key: :visited_id,dependent: :destroy
+
   # is_deletedがfalseならtrueを返すようにしている
   def active_for_authentication?
     super && (is_deleted == false)
@@ -41,5 +46,17 @@ class Customer < ApplicationRecord
   def follow_user_by(user)
     follower_user.exists?(id: user.id)
   end
+
+  def create_notification_follow!(current_customer)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_customer.id, id, 'follow'])
+    if temp.blank?
+      notification = current_customer.active_notifications.new(
+        visited_id: id,
+        action: 'follow'
+      )
+      notification.save if notification.valid?
+    end
+  end
+
 
 end

@@ -1,0 +1,31 @@
+<div class="container">
+<% unless @notification.blank? %>
+   <% @notification.each do |notification| %>
+   <div>
+      <%= link_to public_customer_path(notification.visitor), style: "font-weight: bold;" do %>
+        <%= notification.visitor.name %>
+      <% end %>
+        さんが
+      <% case notification.action %>
+        <% when 'follow' then %>
+         あなたをフォローしました
+      <% when 'like' then %>
+        <%= link_to public_park_path(notification.park.id), style: "font-weight: bold;" do %>
+          <%= notification.park.name %>
+        <% end %>
+          にいいねしました
+      <% when 'comment' then %>
+        <% if notification.park.customer_id == notification.visited.id %>
+          <%= link_to public_park_path(notification.park.id), style: "font-weight: bold;" do %>
+            <%= notification.park.name %>
+          <% end %>
+          にコメントしました
+        <% else %>
+        <% end %>
+      <% end %>
+   </div>
+   <% end %>
+<% else %>
+<p>通知はありません</p>
+<% end %>
+</div>

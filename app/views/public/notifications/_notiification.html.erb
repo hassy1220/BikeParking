@@ -1,0 +1,25 @@
+<% visitor = notification.visitor %>
+<% visited = notification.visited %>
+<span>
+      <%= link_to public_customerr_path(visitor) do %>
+        <%= visitor.name %>
+      <% end %>
+        さんが
+
+      <% case notification.action %>
+        <% when 'follow' then %>
+         "あなたをフォローしました"
+      <% when 'like' then %>
+        <% link_to 'あなたの投稿', "#", style: "font-weight: bold;" %>
+          "にいいねしました"
+      <% when 'comment' then %>
+        <% if notification.park.customer_id == visited.id %>
+          <%= link_to "あなたの投稿","#", style: "font-weight: bold;" %>
+        <% else %>
+          <span>
+            <% link_to "#" do %>
+            <% end %>
+            "にコメントしました"
+          </span>
+
+</span>

@@ -8,6 +8,7 @@ class Public::FavoritesController < ApplicationController
       favorite.park_id = park.id
       favorite.customer_id = current_customer.id
       favorite.save
+      park.create_notification_like!(current_customer)
       redirect_to request.referer
     end
   end
