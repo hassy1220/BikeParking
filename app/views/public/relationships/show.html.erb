@@ -1,0 +1,21 @@
+<div class="container">
+  <% if @key == "follow" %>
+    <h1>フォロー一覧</h1>
+    <table class="table">
+      <% @follow_customer.each do |customer| %>
+      <tr>
+        <td><%= customer.follower.name %></td>
+      </tr>
+      <% end %>
+    </table>
+  <% elsif @key == "follower" %>
+  <h1>フォロワー一覧</h1>
+    <table class="table">
+      <% @follower_customer.each do |customer| %>
+      <tr>
+        <td><%= customer.follow.name %></td>
+      </tr>
+      <% end %>
+    </table>
+  <% end %>
+</div>

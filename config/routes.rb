@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       resource:favorites,only:[:create,:destroy]
     end
     resources:customers,only:[:index,:show,:edit,:update] do
-      resource:relationships,only:[:create,:destroy]
+      resource:relationships,only:[:create,:destroy,:show]
     end
     resources:notifications,only:[:index]
     get 'searches/search'

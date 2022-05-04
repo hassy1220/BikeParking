@@ -8,7 +8,15 @@
       <p><%= link_to"退会",unsubscribe_path(@customer.id),class:"btn btn-danger" %></p>
     <% end %>
 
-    <p>フォロー数:<%= @customer.follow_user.count %> / フォロワー数:<%= @customer.follower_user.count %></p>
+    <p>フォロー数:
+      <%= link_to public_customer_relationships_path(@customer.id,key: "follow") do %>
+        <%= @customer.follow_user.count %>
+      <% end %>
+      / フォロワー数:
+        <%= link_to public_customer_relationships_path(@customer.id,key: "follower") do %>
+          <%= @customer.follower_user.count %>
+        <% end %>
+    </p>
     <% unless @customer == current_customer %>
       <% if @customer.follow_user_by(current_customer) %>
         <p><%= link_to"解除",public_customer_relationships_path(@customer.id),method: :delete,class:"btn btn-danger" %></p>

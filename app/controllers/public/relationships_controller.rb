@@ -14,4 +14,11 @@ class Public::RelationshipsController < ApplicationController
     relationship.destroy
     redirect_to request.referer
   end
+
+  def show
+    @key = params[:key]
+    customer = Customer.find(params[:customer_id])
+    @follow_customer = customer.relationships
+    @follower_customer = customer.reverse_of_relationships
+  end
 end
