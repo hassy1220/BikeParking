@@ -12,9 +12,9 @@
 
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-info sticky-top">
-
-        <a class="navbar-brand" href="#">BIKEPARKING</a>
-
+        <%= link_to root_path,class:"navbar-brand" do %>
+        BIKEPARKING
+        <% end %>
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav">
             <% if customer_signed_in? %>
