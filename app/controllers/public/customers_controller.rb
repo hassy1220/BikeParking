@@ -1,4 +1,5 @@
 class Public::CustomersController < ApplicationController
+  before_action :correct_customer, only: [:edit, :update,:unsubscribe,:withdrawal]
   def index
     @customers = Customer.where(is_deleted: false)
   end
@@ -31,6 +32,14 @@ class Public::CustomersController < ApplicationController
   private
   def customer_params
     params.require(:customer).permit(:name,:description,:bike_image)
+  end
+
+  # URL直打ちしたら、マイページに飛ばす(編集、更新、退会)
+  def correct_customer
+    @customer = Customer.find(params[:id])
+    unless @customer == current_customer
+      redirect_to public_customer_path(current_customer.id)
+    end
   end
 
 end

@@ -12,8 +12,10 @@
   <% end %>
 
   <%= form_with model: @park,url: public_parks_path do |f| %>
-  <table>
-    <tr><%= f.file_field :images,multiple:true,accept:"image/jpg" %></tr>
+  <table class="table">
+    <tr>
+      <td>Choose file</td>
+      <td><%= f.file_field :images,multiple:true,accept:"image/jpg" %></td>
     <tr>
        <td>駐輪場名</td>
        <td><%= f.text_field :name,class:"form-control" %></td>

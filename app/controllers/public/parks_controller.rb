@@ -1,4 +1,5 @@
 class Public::ParksController < ApplicationController
+  before_action :move_to_signed_in, except: [:index]
   def new
     @park = Park.new
     @park_areas = Park.all.pluck(:lat,:lng)
@@ -44,5 +45,12 @@ class Public::ParksController < ApplicationController
   private
   def park_params
     params.require(:park).permit(:lat,:lng,:name,:description,:spec,:price,:purpose,:parking_time,images: [])
+  end
+
+  def move_to_signed_in
+    unless customer_signed_in?
+      #サインインしていないユーザーはログインページが表示される
+      redirect_to new_customer_session_path
+    end
   end
 end
