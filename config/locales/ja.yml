@@ -1,0 +1,8 @@
+ja:
+  enums:
+    park:
+      spec:
+        small: 原付
+        mideam: 中型
+        big: 大型
+        medeamorbig: 中型/大型可能

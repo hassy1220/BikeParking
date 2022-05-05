@@ -26,15 +26,7 @@
     </tr>
     <tr>
        <td>駐車可能条件</td>
-       <td><%= f.label :small %>
-           <%= f.radio_button :spec, :small %>
-           <%= f.label :mideam %>
-           <%= f.radio_button :spec, :mideam %>
-           <%= f.label :big %>
-           <%= f.radio_button :spec, :big %>
-           <%= f.label :medeamorbig %>
-           <%= f.radio_button :spec, :medeamorbig %>
-       </td>
+       <td><%= f.collection_radio_buttons :spec, Park.specs_i18n, :first , :last %></td>
     </tr>
     <tr>
       <td>目的地</td>
