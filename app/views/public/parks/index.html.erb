@@ -8,26 +8,28 @@
   </div>
   <div class="row">
     <div class="col-8">
-      <h3>駐車場一覧</h3>
-      <table class="table">
-       <tr>
-         <td>駐車場名</td>
-         <td>説明</td>
-         <td>目的地(商業施設、コンビニ等)</td>
-
-       </tr>
-       <% @parks.each do |park| %>
-       <tr>
-         <td>
-           <%= link_to public_park_path(park.id) do %>
-             <%= park.name %>
-           <% end %>
-         </td>
-         <td><%= park.description %></td>
-         <td><%= park.purpose %></td>
-       </tr>
-       <% end %>
-      </table>
+      <div id="park-index">
+        <h3>駐車場一覧</h3>
+        <table class="table">
+         <tr>
+           <td>駐車場名</td>
+           <td>説明</td>
+           <td>目的地(商業施設、コンビニ等)</td>
+  
+         </tr>
+         <% @parks.each do |park| %>
+         <tr>
+           <td>
+             <%= link_to public_park_path(park.id) do %>
+               <%= park.name %>
+             <% end %>
+           </td>
+           <td><%= park.description %></td>
+           <td><%= park.purpose %></td>
+         </tr>
+         <% end %>
+        </table>
+      </div>
     </div>
 
     <div class="col-3 offset-1">

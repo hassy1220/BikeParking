@@ -1,25 +1,21 @@
 class Public::FavoritesController < ApplicationController
   def create
-    park = Park.find(params[:park_id])
-    if Favorite.find_by(park_id: park.id,customer_id: current_customer.id)
-      redirect_to request.referer
+    @park_area = Park.find(params[:park_id])
+    if Favorite.find_by(park_id: @park_area.id,customer_id: current_customer.id)
     else
       favorite = Favorite.new
-      favorite.park_id = park.id
+      favorite.park_id = @park_area.id
       favorite.customer_id = current_customer.id
       favorite.save
-      park.create_notification_like!(current_customer)
-      redirect_to request.referer
+      @park_area.create_notification_like!(current_customer)
     end
   end
   def destroy
-    park = Park.find(params[:park_id])
-    if Favorite.find_by(park_id: park.id,customer_id: current_customer.id)
-      favorite = Favorite.find_by(park_id: park.id,customer_id: current_customer.id)
+     @park_area = Park.find(params[:park_id])
+    if Favorite.find_by(park_id:  @park_area.id,customer_id: current_customer.id)
+      favorite = Favorite.find_by(park_id:  @park_area.id,customer_id: current_customer.id)
       favorite.destroy
-      redirect_to request.referer
     else
-      redirect_to request.referer
     end
   end
 end

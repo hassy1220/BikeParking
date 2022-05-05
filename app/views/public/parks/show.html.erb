@@ -6,62 +6,44 @@
     </div>
     <div class="row">
       <div class="col-6">
-
-        <% if @park_area.get_image(150,150) %>
-          <!--投稿画像がなかったら、サンプリ画像を表示-->
-        <% else %>
-           <% @park_area.images.each do |image| %>
-             <%= image_tag(image, width:150,height:150) %>
-           <% end %>
-        <% end %>
-
-          <table class="table">
-            <tr>
-              <td>駐車場名</td>
-              <td><%= @park_area.name %></td>
-            </tr>
-            <tr>
-              <td>説明</td>
-              <td><%= @park_area.description %></td>
-            </tr>
-            <tr>
-              <td>金額</td>
-              <td><%= @park_area.price %>円 / <%= @park_area.parking_time %>時間</td>
-            </tr>
-            <tr>
-              <td>駐車可能条件</td>
-              <td><%= @park_area.spec %></td>
-            </tr>
-          </table>
-          <% if @park_area.user_favorite_by(current_customer) %>
-            <%= link_to public_park_favorites_path(@park_area.id),method: :delete do %>
-              <p>💖いいね<%= @park_area.favorite_user.count %>件</p>
-            <% end %>
+          <% if @park_area.get_image(150,150) %>
+            <!--投稿画像がなかったら、サンプリ画像を表示-->
           <% else %>
-            <%= link_to public_park_favorites_path(@park_area.id),method: :post do %>
-              <p>💛良いね<%= @park_area.favorite_user.count %>件</p>
-            <% end %>
+             <% @park_area.images.each do |image| %>
+               <%= image_tag(image, width:150,height:150) %>
+             <% end %>
           <% end %>
 
+          <table class="table">
+              <tr>
+                <td>駐車場名</td>
+                <td><%= @park_area.name %></td>
+              </tr>
+              <tr>
+                <td>説明</td>
+                <td><%= @park_area.description %></td>
+              </tr>
+              <tr>
+                <td>金額</td>
+                <td><%= @park_area.price %>円 / <%= @park_area.parking_time %>時間</td>
+              </tr>
+              <tr>
+                <td>駐車可能条件</td>
+                <td><%= @park_area.spec %></td>
+              </tr>
+          </table>
+          <div id="favorite_btn_<%= @park_area.id %>">
+            <%= render "public/favorites/favorite",park_area: @park_area %>
+          </div>
           <% if @park_area.customer == current_customer %>
-            <%= link_to"削除",public_park_path(@park_area.id),method: :delete,class:"btn btn-danger" %>
+            <p class="text-right"><%= link_to"削除",public_park_path(@park_area.id),method: :delete,class:"btn btn-danger" %></p>
           <% end %>
       </div>
 
       <div class="col-6">
-          <h3>コメント<%= @park_area.comments.count %>件</h3>
-          <table>
-          <% @park_area.comments.each do |list| %>
-           <tr>
-             <td><%= image_tag list.customer.get_bike_image(50,50) %></td>
-             <td><%= list.comment %></td>
-           </tr>
-          <% end %>
-          </table>
-          <%= form_with model:  @park_comment,url: public_park_comments_path(@park_area.id) do |f| %>
-           <%= f.text_field :comment,rows: 5 %>
-           <%= f.submit"送信" %>
-          <% end %>
+        <div id="comment_btn">
+          <%= render "public/comments/comment",park_area: @park_area,park_comment: @park_comment %>
+        </div>
       </div>
     </div>
 </div>
