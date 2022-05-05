@@ -28,11 +28,20 @@
                 <li class="nav-item mr-5"><%= link_to"ユーザー一覧",public_customers_path, class:"nav-link active" %></li>
                 <li class="nav-item mr-5"><%= link_to"マイページ",public_customer_path(current_customer.id), class:"nav-link active" %></li>
                 <li class="nav-item mr-5"><%= link_to"通知",public_notifications_path, class:"nav-link active" %></li>
-              <% else %>
-                <li class="nav-item"><%= link_to"新規登録",new_customer_registration_path, class:"nav-link active" %></li>
-                <li class="nav-item"><%= link_to"サインイン",new_customer_session_path, class:"nav-link active" %></li>
-                <li class="nav-item mr-5"><%= link_to"駐車場一覧",public_parks_path, class:"nav-link active" %></li>
               <% end %>
+              <% unless customer_signed_in? %>
+                <% unless  admin_signed_in? %>
+                 <li class="nav-item"><%= link_to"新規登録",new_customer_registration_path, class:"nav-link active" %></li>
+                 <li class="nav-item"><%= link_to"サインイン",new_customer_session_path, class:"nav-link active" %></li>
+                 <li class="nav-item mr-5"><%= link_to"駐車場一覧",public_parks_path, class:"nav-link active" %></li>
+                <% end %>
+              <% end %>
+              <% if admin_signed_in? %>
+                <li class="nav-item"><%= link_to"会員一覧",new_customer_registration_path, class:"nav-link active" %></li>
+                <li class="nav-item"><%= link_to"投稿一覧",new_customer_registration_path, class:"nav-link active" %></li>
+                <li class="nav-item"><%= link_to"ログアウト",new_customer_registration_path, class:"nav-link active" %></li>
+              <% end %>
+
             </ul>
         </div>
     </nav>
