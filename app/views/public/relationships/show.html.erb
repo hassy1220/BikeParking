@@ -4,7 +4,9 @@
     <table class="table">
       <% @follow_customer.each do |customer| %>
       <tr>
-        <td><%= customer.follower.name %></td>
+        <% if customer.follower.is_deleted == false %>
+          <td><%= customer.follower.name %></td>
+        <% end %>
       </tr>
       <% end %>
     </table>
@@ -13,7 +15,9 @@
     <table class="table">
       <% @follower_customer.each do |customer| %>
       <tr>
-        <td><%= customer.follow.name %></td>
+        <% if customer.follow.is_deleted == false %>
+          <td><%= customer.follow.name %></td>
+        <% end %>
       </tr>
       <% end %>
     </table>

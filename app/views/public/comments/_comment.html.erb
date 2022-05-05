@@ -1,9 +1,14 @@
-<h3>コメント<%= park_area.comments.count %>件</h3>
-    <table>
+<h3>コメント</h3>
+    <table class="table">
     <% park_area.comments.each do |list| %>
       <tr>
-        <td><%= image_tag list.customer.get_bike_image(50,50) %></td>
-        <td><%= list.comment %></td>
+        <% if list.customer.is_deleted == false %>
+          <td>
+            <%= image_tag list.customer.get_bike_image(50,50) %><br>
+            <%= list.customer.name %>
+          </td>
+          <td><%= list.comment %></td>
+        <% end %>
       </tr>
     <% end %>
     </table>

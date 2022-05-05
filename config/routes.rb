@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
 
+  namespace :admin do
+    resources:customers,only:[:index,:show]
+  end
+
   namespace :public do
     resources:parks,only:[:new,:create,:show,:index,:destroy] do
       resources:comments,only:[:create]

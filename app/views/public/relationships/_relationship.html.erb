@@ -1,0 +1,16 @@
+<p>フォロー数:
+  <%= link_to public_customer_relationships_path(customer.id,key: "follow") do %>
+    <%= customer.follow_user.where(is_deleted: false).count %>
+  <% end %>
+    / フォロワー数:
+  <%= link_to public_customer_relationships_path(customer.id,key: "follower") do %>
+    <%= customer.follower_user.where(is_deleted: false).count %>
+  <% end %>
+</p>
+  <% unless customer == current_customer %>
+    <% if customer.follow_user_by(current_customer) %>
+      <p><%= link_to"解除",public_customer_relationships_path(customer.id),method: :delete,remote: true,class:"btn btn-danger" %></p>
+    <% else %>
+      <p><%= link_to"フォロー",public_customer_relationships_path(customer.id),method: :post,remote: true,class:"btn btn-success" %></p>
+    <% end %>
+  <% end %>

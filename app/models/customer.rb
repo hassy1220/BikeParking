@@ -43,6 +43,15 @@ class Customer < ApplicationRecord
       bike_image.variant(resize_to_limit:[width,height]).processed
   end
 
+  # 会員が退会しているかどうか
+  def customer_status
+    if is_deleted == false
+      "有効"
+    else
+      "退会"
+    end
+  end
+
   def follow_user_by(user)
     follower_user.exists?(id: user.id)
   end

@@ -37,9 +37,9 @@
                 <% end %>
               <% end %>
               <% if admin_signed_in? %>
-                <li class="nav-item"><%= link_to"会員一覧",new_customer_registration_path, class:"nav-link active" %></li>
+                <li class="nav-item"><%= link_to"会員一覧",admin_customers_path, class:"nav-link active" %></li>
                 <li class="nav-item"><%= link_to"投稿一覧",new_customer_registration_path, class:"nav-link active" %></li>
-                <li class="nav-item"><%= link_to"ログアウト",new_customer_registration_path, class:"nav-link active" %></li>
+                <li class="nav-item"><%= link_to"ログアウト",destroy_admin_session_path,method: :delete, class:"nav-link active" %></li>
               <% end %>
 
             </ul>
