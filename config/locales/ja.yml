@@ -6,3 +6,22 @@ ja:
         mideam: 中型
         big: 大型
         medeamorbig: 中型/大型可能
+  activerecord:
+    errors:
+      models:
+        park:
+          attributes:
+            name:
+              blank: を入力してください
+            purpose:
+              blank: を入力してください
+            lat:
+              too_short: をマップ上でクリックしてください
+            price:
+              blank: を入力してください
+    attributes:
+      park:
+        name: 駐車場名
+        price: 金額
+        purpose: 目的地
+        lat: 投稿する駐車場の位置

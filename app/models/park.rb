@@ -14,7 +14,7 @@ class Park < ApplicationRecord
   validates :price,presence: true
   validates :purpose,presence: true
   validates :lat,length: { minimum: 4}
-  validates :lng,length: { minimum: 4}
+
 
   def get_image(width,height)
     unless images.attached?
