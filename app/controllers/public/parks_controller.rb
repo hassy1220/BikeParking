@@ -17,9 +17,9 @@ class Public::ParksController < ApplicationController
       @park_area = Park.pluck(:lng, :lat, :name, :id)
       @parks = Park.page(params[:page]).per(5)
     else
-      # 目的地検索した場合の処理
-      @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").pluck(:lng, :lat, :name, :id)
-      @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%")
+      # 目的地か駐車場名から検索した場合の処理
+      @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).pluck(:lng, :lat, :name, :id)
+      @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").page(params[:page]).per(5)
     end
 
   end
