@@ -3,6 +3,11 @@
     目的地検索<%= f.search_field :content,placeholder:"目的地or駐車場名" %>
     <%= f.submit"検索" %>
   <% end %>
+  <%= form_with url: public_parks_path,method: :get do |f| %>
+    目的地検索<%= f.search_field :place_address,placeholder:"目的地or駐車場名" %>
+    <%= f.submit"検索" %>
+  <% end %>
+
 　<div class="row">
      <div id="map" style="width:100%; height:500px"></div>
   </div>
@@ -40,7 +45,7 @@
          <td>順位</td>
          <td>駐車場名</td>
        </tr>
-       <% @like_park.each.with_index(1) do |park, i| %>
+       <% @like_park.each.with_index(@start) do |park, i| %>
        <tr>
          <td><%= i %></td>
          <td>
@@ -51,12 +56,13 @@
        </tr>
        <% end %>
       </table>
-
+      <%= paginate @like_park %>
     </div>
   </div>
 </div>
 
 <input type="hidden" id="park_area" value='<%= @park_area %>'>
+<input type="hidden" id="place" value='<%= @place %>'>
 
 
 
@@ -64,14 +70,14 @@
 var marker = [];
  function initMap() {
    var opts = {
-    zoom: 12,
-    center: new google.maps.LatLng(33.60639,130.41806),
-    restriction: {
+    zoom: 14,
+     center: new google.maps.LatLng(33.588807,130.420435),
+     restriction: {
 		　　latLngBounds: {
-		　　	north: 33.681563,
-		　　	south: 33.555133,
-		　　	west: 130.35940,
-		　　	east: 130.461512
+		　　	north: 33.604947,
+		　　	south: 33.577563,
+		　　	west: 130.389021,
+		　　	east: 130.450347
 	　　	},
 	　　	strictBounds: false
 　　 }
@@ -93,13 +99,14 @@ var marker = [];
 
 
     // 情報ウインドウを表示させ、駐車場名を表示
-    var infowindow = new google.maps.InfoWindow({
-     content: contentStr,
-     position: latlng
-    });
-    infowindow.open(map);
-  }
- };
+      var infowindow = new google.maps.InfoWindow({
+        content: contentStr,
+        position: latlng
+      });
+      infowindow.open(map);
+    };
+  };
+
 
 
  </script>

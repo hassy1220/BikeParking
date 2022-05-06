@@ -12,7 +12,12 @@ class Public::ParksController < ApplicationController
   end
 
   def index
-    @like_park = @posts = Park.includes(:favorite_user).sort {|a,b| b.favorite_user.size <=> a.favorite_user.size}
+    @place = params[:place_address]
+    par_page = 5
+    @start = ((params[:page] || 1 ).to_i - 1) * par_page +1
+    like_park = @posts = Park.includes(:favorite_user).sort {|a,b| b.favorite_user.size <=> a.favorite_user.size}
+    # いいね順で取得した配列をkaminariに適用させる。
+    @like_park = Kaminari.paginate_array(like_park).page(params[:page]).per(5)
     if params[:content].blank?
       @park_area = Park.pluck(:lng, :lat, :name, :id)
       @parks = Park.page(params[:page]).per(5)
