@@ -1,4 +1,8 @@
 <div class="container">
+
+  <input type="text" id="keyword"><button id="search">検索実行</button>
+  <button id="clear">結果クリア</button>
+
   <div id="map" style="width:100%; height:500px"></div>
 
   <% flash.each do |message_type, messages| %>
@@ -97,22 +101,50 @@
    　    position: m_latlng,
         map: map
     　});
+　　});
 
-    // 　function getAddress(latlng) {
-    //     var geocoder = new google.maps.Geocoder();
-    //   　geocoder.geocode({
-    //   　　latLng: latlng
-    // 　　}, function(results, status) {
-    //   　　if (status == google.maps.GeocoderStatus.OK) {
-    //   　　 // results.length > 1 で返ってくる場合もありますが・・・。
-    //   　    if (results[0].geometry) {
 
-    //     //  住所を取得(日本の場合だけ「日本, 」を削除)
-    //         var address = results[0].formatted_address.replace(/^日本, /, '');
-    //   　    };
-    //   　　};
-    //     )}:
-    // 　};
+　　// 検索実行ボタンが押下されたとき(住所検索)
+    document.getElementById('search').addEventListener('click', function() {
+      var place = document.getElementById('keyword').value;
+      var geocoder = new google.maps.Geocoder();      // geocoderのコンストラクタ
+
+      geocoder.geocode({
+        address: place
+      }, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+
+          var bounds = new google.maps.LatLngBounds();
+
+          for (var i in results) {
+            if (results[0].geometry) {
+              // 緯度経度を取得
+              var latlng = results[0].geometry.location;
+              // 住所を取得
+              var address = results[0].formatted_address;
+              // 検索結果地が含まれるように範囲を拡大
+              bounds.extend(latlng);
+              // マーカーのセット
+              var marker = new google.maps.Marker({
+                position: latlng,
+                map: map
+    　        });
+            }
+          }
+        } else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+            alert("見つかりません");
+        } else {
+            console.log(status);
+            alert("エラー発生");
+        }
+
+      });
     });
+    // 結果クリアーボタン押下時
+    document.getElementById('clear').addEventListener('click', function() {
+      deletemaker();
+    });
+
+
   };
  </script>

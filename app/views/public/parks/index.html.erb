@@ -3,10 +3,6 @@
     目的地検索<%= f.search_field :content,placeholder:"目的地or駐車場名" %>
     <%= f.submit"検索" %>
   <% end %>
-  <%= form_with url: public_parks_path,method: :get do |f| %>
-    目的地検索<%= f.search_field :place_address,placeholder:"目的地or駐車場名" %>
-    <%= f.submit"検索" %>
-  <% end %>
 
 　<div class="row">
      <div id="map" style="width:100%; height:500px"></div>

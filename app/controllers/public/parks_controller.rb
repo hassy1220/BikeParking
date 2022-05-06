@@ -4,6 +4,7 @@ class Public::ParksController < ApplicationController
     @park = Park.new
     @park_areas = Park.all.pluck(:lat,:lng)
     @park_area = Park.pluck(:lng, :lat)
+    @place = params[:place_address]
   end
 
   def show
@@ -12,7 +13,6 @@ class Public::ParksController < ApplicationController
   end
 
   def index
-    @place = params[:place_address]
     par_page = 5
     @start = ((params[:page] || 1 ).to_i - 1) * par_page +1
     like_park = @posts = Park.includes(:favorite_user).sort {|a,b| b.favorite_user.size <=> a.favorite_user.size}
