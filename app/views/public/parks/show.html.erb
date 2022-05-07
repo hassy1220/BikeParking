@@ -1,9 +1,10 @@
 <div class="container">
-      <div id="map" style="width:100%; height:500px"></div>
-      <a>緯度：<%= @park_area.lat %></a>
-      <a>経度：<%= @park_area.lng %></a>
-    <div class="row">
-      <div class="col-6">
+  <div class="row">
+    <div class="col-6">
+      <div id="map" style="width:100%; height:600px"></div>
+    </div>
+    <div class="col-6 show_detail">
+
           <% if @park_area.get_image(150,150) %>
             <!--投稿画像がなかったら、サンプリ画像を表示-->
           <% else %>
@@ -33,12 +34,14 @@
           <div id="favorite_btn_<%= @park_area.id %>">
             <%= render "public/favorites/favorite",park_area: @park_area %>
           </div>
-          <% if @park_area.customer == current_customer %>
-            <p class="text-right"><%= link_to"削除",public_park_path(@park_area.id),method: :delete,class:"btn btn-danger" %></p>
-          <% end %>
-      </div>
 
-      <div class="col-6">
+          <% if @park_area.customer == current_customer %>
+            <%= link_to"削除",public_park_path(@park_area.id),method: :delete,class:"btn btn-danger delete_btn" %></a>
+          <% end %>
+    </div>
+  </div>
+
+      <div>
         <div id="comment_btn">
           <%= render "public/comments/comment",park_comment: @park_comment, park_comments: @park_comments, park_area: @park_area %>
         </div>
@@ -53,26 +56,27 @@
 
 <script>
    function initMap() {
+     //変数lat/lngを宣言し、park_area_lat/lng(ID)のValue値を取得
+      var lat =document.getElementById("park_area_lat").value
+    　var lng =document.getElementById("park_area_lng").value
+
       // /18行目が初期マップ位置の拡大状況・19行目が緯度経度で福岡市を表示させる様にしている/
       var opts = {
-        zoom: 14,
-         center: new google.maps.LatLng(33.588807,130.420435),
-         restriction: {
-		　  　latLngBounds: {
-		　　   	north: 33.604947,
-		　　   	south: 33.577563,
-		　　	    west: 130.389021,
-		　　	    east: 130.450347
-	　　	 },
-	　　  	strictBounds: false
-　　    }
+        zoom: 15,
+     center: new google.maps.LatLng(lat,lng),
+     restriction: {
+		　　latLngBounds: {
+		　　	north: 33.600947,
+		　　	south: 33.577563,
+		　　	west: 130.386021,
+		　　	east: 130.440347
+	　    },
+	　　	strictBounds: true
+　　 }
       };
 
       var map = new google.maps.Map(document.getElementById("map"), opts);
 
-      //変数lat/lngを宣言し、park_area_lat/lng(ID)のValue値を取得
-      var lat =document.getElementById("park_area_lat").value
-    　var lng =document.getElementById("park_area_lng").value
       // LatLng(,)に19/20行目で取得した緯度経度を入れる。
       var m_latlng = new google.maps.LatLng(lat,lng);
       var marker = new google.maps.Marker({

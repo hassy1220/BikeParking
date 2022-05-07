@@ -12,7 +12,7 @@ class Public::CommentsController < ApplicationController
       # app/mailers/comment_mailer.rb内のsend_commentメソッドに内容を送信
       CommentMailer.with(customer: @park.customer.id,park: @park.id).send_comment.deliver_now
     end
-    @park_comments = @park.comments
+    @park_comments = @park.comments.page(params[:page]).per(5)
   end
   private
   def comment_params

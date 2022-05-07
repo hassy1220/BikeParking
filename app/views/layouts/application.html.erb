@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>BikeParking</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -45,12 +45,28 @@
             </ul>
         </div>
     </nav>
-    <main class="jumbotron">
+    <main>
 
      <%= yield %>
     </main>
-
-
+    <footer>
+      <div class='container mt-5'>
+  	   <div class='row'>
+    	   <div class='mx-auto'>
+        		<div class="text-center">
+        		  <i class="fa-brands fa-twitter mr-3 fa-2x"></i>
+          		<i class="fa-brands fa-facebook-f mr-3 fa-2x"></i>
+          		<i class="fa-brands fa-instagram mr-3 fa-2x"></i>
+        		</div>
+        		<div class="mt-3">
+        		  <p><i class="fa-solid fa-phone fa-fw"></i>xxx-xxxx-xxx</p>
+          	  <p><i class="fa-solid fa-location-dot fa-fw"></i>〇〇県〇〇市〇〇町〇丁目</p>
+            	<p><i class="fa-solid fa-envelope fa-fw"></i>naganocake@mail.com</p>
+        	  </div>
+    	</div>
+    </div>
+  </div>
+    </footer>
     <!--yieldより上に以下記述するとリロードした際に予期せぬ動作をすることがある-->
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['KEY'] %>&callback=initMap">

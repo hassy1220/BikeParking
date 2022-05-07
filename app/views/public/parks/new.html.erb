@@ -2,7 +2,7 @@
 
   <input type="text" id="keyword"><button id="search">検索実行</button>
 
-  <div id="map" style="width:100%; height:500px"></div>
+  <div id="map" style="width:100%; height:600px"></div>
 
   <% flash.each do |message_type, messages| %>
     <% if messages.class == Array %>
@@ -57,16 +57,16 @@
   function initMap() {
     // /43行目が初期マップ位置の拡大状況・44行目が緯度経度で福岡市を表示させる様にしている/
    var opts = {
-     zoom: 14,
-     center: new google.maps.LatLng(33.588807,130.420435),
+     zoom: 15,
+     center: new google.maps.LatLng(33.589815,130.412306),
      restriction: {
 		　　latLngBounds: {
-		　　	north: 33.604947,
+		　　	north: 33.600947,
 		　　	south: 33.577563,
-		　　	west: 130.389021,
-		　　	east: 130.450347
-	　　	},
-	　　	strictBounds: false
+		　　	west: 130.386021,
+		　　	east: 130.440347
+	　 },
+	　　	strictBounds: true
 　　 }
    };
 

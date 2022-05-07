@@ -1,3 +1,4 @@
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~bootstrap/scss/bootstrap';
 
 *{
@@ -25,8 +26,18 @@
   justify-content: center;
 }
 
-body{
+.show_detail{
+  position: relative;
+}
 
+.delete_btn{
+  position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.container{
+  margin-top:40px;
 }
 
 // 駐車場一覧画面
