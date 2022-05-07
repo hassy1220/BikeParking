@@ -10,6 +10,7 @@ class Public::ParksController < ApplicationController
   def show
     @park_area = Park.find(params[:id])
     @park_comment = Comment.new
+    @park_comments = @park_area.comments.page(params[:page]).per(5)
   end
 
   def index
@@ -18,13 +19,26 @@ class Public::ParksController < ApplicationController
     like_park = @posts = Park.includes(:favorite_user).sort {|a,b| b.favorite_user.size <=> a.favorite_user.size}
     # いいね順で取得した配列をkaminariに適用させる。
     @like_park = Kaminari.paginate_array(like_park).page(params[:page]).per(5)
+    # 目的地・駐車場名検索しているかどうか判定
     if params[:content].blank?
-      @park_area = Park.pluck(:lng, :lat, :name, :id)
-      @parks = Park.page(params[:page]).per(5)
+      # 目的地・駐車場名検索していないが、駐車可能条件検索しているか判定
+      if params[:engine_spec].blank?
+        @park_area = Park.pluck(:lng, :lat, :name, :id)
+        @parks = Park.page(params[:page]).per(5)
+      else
+        @park_area = Park.where(spec: params[:engine_spec]).pluck(:lng, :lat, :name, :id)
+        @parks = Park.where(spec: params[:engine_spec]).page(params[:page]).per(5)
+      end
     else
-      # 目的地か駐車場名から検索した場合の処理
-      @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).pluck(:lng, :lat, :name, :id)
-      @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").page(params[:page]).per(5)
+      if params[:engine_spec].blank?
+        # 目的地か駐車場名から検索した場合の処理
+        @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).pluck(:lng, :lat, :name, :id)
+        @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").page(params[:page]).per(5)
+      else
+        @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).where(spec: params[:engine_spec]).pluck(:lng, :lat, :name, :id)
+        @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").where(spec: params[:engine_spec]).page(params[:page]).per(5)
+
+      end
     end
 
   end

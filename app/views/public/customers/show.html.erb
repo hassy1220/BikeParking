@@ -4,8 +4,10 @@
     <p>名前<%= @customer.name %></p>
     <p>自己紹介<%= @customer.description %></p>
     <% if @customer == current_customer %>
-      <p><%= link_to"編集",edit_public_customer_path(current_customer.id),class:"btn btn-success" %></p>
-      <p><%= link_to"退会",unsubscribe_path(@customer.id),class:"btn btn-danger" %></p>
+      <p>
+        <%= link_to"編集",edit_public_customer_path(current_customer.id),class:"btn btn-success" %>
+        <%= link_to"退会",unsubscribe_path(@customer.id),class:"btn btn-danger" %>
+      </p>
     <% end %>
     <div id="relationship_btn">
       <%= render "public/relationships/relationship",customer: @customer %>
@@ -22,6 +24,28 @@
          <td>目的地(商業施設、コンビニ等)</td>
        </tr>
        <% @customer.favorite_park.each do |park| %>
+       <tr>
+         <td>
+           <%= link_to public_park_path(park.id) do %>
+             <%= park.name %>
+           <% end %>
+         </td>
+         <td><%= park.description %></td>
+         <td><%= park.purpose %></td>
+       </tr>
+       <% end %>
+      </table>
+  </div>
+
+  <div>
+    <h3>投稿一覧</h3>
+    <table class="table">
+       <tr>
+         <td>駐車場名</td>
+         <td>説明</td>
+         <td>目的地(商業施設、コンビニ等)</td>
+       </tr>
+       <% @customer_park.each do |park| %>
        <tr>
          <td>
            <%= link_to public_park_path(park.id) do %>

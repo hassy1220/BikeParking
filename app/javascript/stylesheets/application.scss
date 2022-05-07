@@ -1,5 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
 
+*{
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
+  font-family:serif;
+}
+
 .top_img{
     background-image: url("../../assets/images/bicycles-gd617e37a4_1280.jpg");
     height:700px;
@@ -18,8 +25,8 @@
   justify-content: center;
 }
 
-main{
-  font-family:serif;
+body{
+
 }
 
 // 駐車場一覧画面

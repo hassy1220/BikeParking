@@ -1,0 +1,15 @@
+<div class="container">
+  <table class="table">
+  <% @parks.each do |park| %>
+    <tr>
+      <td>
+        <%= link_to admin_park_path(park.id) do %>
+         <%= park.name %>
+        <% end %>
+      </td>
+      <td><%= park.description %></td>
+      <td><%= park.purpose %></td>
+    </tr>
+  <% end %>
+  </table>
+</div>

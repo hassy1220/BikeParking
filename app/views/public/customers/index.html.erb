@@ -3,12 +3,12 @@
  <table class="table">
    <% @customers.each do |customer| %>
    <tr>
-     <td>
+     <td class="text-center">
       <%= link_to public_customer_path(customer.id) do %>
         <%= customer.name %>
       <% end %>
      </td>
-     <td id="index_relationship_btn_<%= customer.id %>">
+     <td id="index_relationship_btn_<%= customer.id %>" class="text-center">
       <%= render "public/relationships/index_relationship",customer: customer %>
      </td>
    </tr>

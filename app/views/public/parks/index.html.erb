@@ -1,16 +1,19 @@
 <div class="container">
-  <%= form_with url: public_parks_path,method: :get do |f| %>
-    目的地検索<%= f.search_field :content,placeholder:"目的地or駐車場名" %>
+  <button type="button"class="btn btn-info" data-toggle="collapse" data-target="#demo">詳細検索▷</button>
+  <div id="demo" class="collapse">
+    <%= form_with url: public_parks_path,method: :get do |f| %>
+    ▷<%= f.search_field :content,placeholder:"目的地or駐車場名" %><br>
+    ▷<%= f.collection_radio_buttons :engine_spec, Park.specs_i18n, :first , :last %>
     <%= f.submit"検索" %>
-  <% end %>
+    <% end %>
+　</div>
 
-　<div class="row">
-     <div id="map" style="width:100%; height:500px"></div>
-  </div>
+    <div id="map" style="width:100%; height:500px"></div>
+
   <div class="row">
     <div class="col-8">
       <div>
-        <h3>駐車場一覧</h3>
+        <h3 class="font-weight-bold">駐車場一覧</h3>
         <table class="table">
          <tr>
            <td>駐車場名</td>
@@ -35,7 +38,7 @@
     </div>
 
     <div class="col-3 offset-1">
-      <h3>駐輪場ランキング</h3>
+      <h3 class="font-weight-bold">駐輪場ランキング</h3>
        <table class="table">
        <tr>
          <td>順位</td>
