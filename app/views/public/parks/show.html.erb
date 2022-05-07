@@ -34,9 +34,20 @@
           <div id="favorite_btn_<%= @park_area.id %>">
             <%= render "public/favorites/favorite",park_area: @park_area %>
           </div>
+          <div class="text-center">
+            <p>投稿者</p>
+            <% if @park_area.customer.is_deleted == false %>
+              <%=  image_tag @park_area.customer.get_bike_image(100,100) %>
+              <%= link_to public_customer_path( @park_area.customer.id) do %>
+                <%=  @park_area.customer.name %>
+              <% end %>
+            <% else %>
+              <p class="text-danger">退会済みです。何かありましたら、お問合わせページより問い合わせください</p>
+            <% end %>
+          </div>
 
           <% if @park_area.customer == current_customer %>
-            <%= link_to"削除",public_park_path(@park_area.id),method: :delete,class:"btn btn-danger delete_btn" %></a>
+            <%= link_to"削除",public_park_path(@park_area.id),method: :delete,class:"btn btn-danger delete_btn" %>
           <% end %>
     </div>
   </div>
