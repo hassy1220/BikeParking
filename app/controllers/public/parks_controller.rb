@@ -14,6 +14,7 @@ class Public::ParksController < ApplicationController
   end
 
   def index
+
     par_page = 5
     @start = ((params[:page] || 1 ).to_i - 1) * par_page +1
     like_park = @posts = Park.includes(:favorite_user).sort {|a,b| b.favorite_user.size <=> a.favorite_user.size}
@@ -23,21 +24,36 @@ class Public::ParksController < ApplicationController
     if params[:content].blank?
       # 目的地・駐車場名検索していないが、駐車可能条件検索しているか判定
       if params[:engine_spec].blank?
-        @park_area = Park.pluck(:lng, :lat, :name, :id)
-        @parks = Park.page(params[:page]).per(5)
+        # 住所を選択しているか
+        if params[:address].blank?
+          @park_area = Park.pluck(:lng, :lat, :name, :id)
+          @parks = Park.page(params[:page]).per(5)
+        else
+          @park_area = Park.where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
+          @parks = Park.where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:page]).per(5)
+        end
       else
-        @park_area = Park.where(spec: params[:engine_spec]).pluck(:lng, :lat, :name, :id)
-        @parks = Park.where(spec: params[:engine_spec]).page(params[:page]).per(5)
+        if params[:address].blank?
+          @park_area = Park.where(spec: params[:engine_spec]).pluck(:lng, :lat, :name, :id)
+          @parks = Park.where(spec: params[:engine_spec]).page(params[:page]).per(5)
+        else
+          @park_area = Park.where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
+          @parks = Park.where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:page]).per(5)
+        end
       end
     else
       if params[:engine_spec].blank?
-        # 目的地か駐車場名から検索した場合の処理
-        @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).pluck(:lng, :lat, :name, :id)
-        @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").page(params[:page]).per(5)
+        if params[:address].blank?
+          # 目的地か駐車場名から検索した場合の処理
+          @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).pluck(:lng, :lat, :name, :id)
+          @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").page(params[:page]).per(5)
+        else
+          @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
+          @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:page]).per(5)
+        end
       else
-        @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).where(spec: params[:engine_spec]).pluck(:lng, :lat, :name, :id)
-        @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").where(spec: params[:engine_spec]).page(params[:page]).per(5)
-
+        @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
+        @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:page]).per(5)
       end
     end
 
@@ -63,7 +79,7 @@ class Public::ParksController < ApplicationController
 
   private
   def park_params
-    params.require(:park).permit(:lat,:lng,:name,:description,:spec,:price,:purpose,:parking_time,images: [])
+    params.require(:park).permit(:lat,:lng,:name,:description,:spec,:price,:purpose,:addressOutput,:parking_time,images: [])
   end
 
   def move_to_signed_in

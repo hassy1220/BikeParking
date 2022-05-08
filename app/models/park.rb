@@ -9,6 +9,7 @@ class Park < ApplicationRecord
   has_many:notifications,dependent: :destroy
 
   enum spec: { small: 0, mideam: 1, big: 2, medeamorbig: 3 }
+  enum address: {zenniki: 0 ,Hakata: 1, Chuo: 2}
 
   validates :name,presence: true
   validates :price,presence: true

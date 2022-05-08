@@ -6,6 +6,10 @@ ja:
         mideam: 中型
         big: 大型
         medeamorbig: 中型/大型可能
+      address:
+        zenniki: 全域
+        Hakata: 博多区
+        Chuo: 中央区
     contact:
       subject:
         others: その他

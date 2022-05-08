@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2022_05_07_155518) do
     t.integer "spec", default: 0, null: false
     t.integer "price", null: false
     t.integer "parking_time", default: 0, null: false
+    t.string "addressOutput"
     t.string "purpose", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -1,25 +1,31 @@
-<div class="container">
+<div class="container text-center">
 <% unless @notification.blank? %>
    <% @notification.each do |notification| %>
    <div>
       <%= link_to public_customer_path(notification.visitor), style: "font-weight: bold;" do %>
-        <%= notification.visitor.name %>
+        <i class="fa-regular fa-hand fa-fw"></i><%= notification.visitor.name %>
       <% end %>
         さんが
       <% case notification.action %>
         <% when 'follow' then %>
-         あなたをフォローしました
+         あなたをフォローしました<i class="fa-solid fa-phone fa-fw"></i>
+         <%= link_to"削除",public_notification_path(notification.id),method: :delete,class:"btn btn-danger" %>
+
       <% when 'like' then %>
         <%= link_to public_park_path(notification.park.id), style: "font-weight: bold;" do %>
           <%= notification.park.name %>
         <% end %>
-          にいいねしました
+          にいいねしました<i class="fa-solid fa-phone fa-fw"></i>
+        <%= link_to"削除",public_notification_path(notification.id),method: :delete,class:"btn btn-danger" %>
+
       <% when 'comment' then %>
         <% if notification.park.customer_id == notification.visited.id %>
           <%= link_to public_park_path(notification.park.id), style: "font-weight: bold;" do %>
             <%= notification.park.name %>
           <% end %>
-          にコメントしました
+          にコメントしました<i class="fa-solid fa-phone fa-fw"></i>
+          <%= link_to"削除️",public_notification_path(notification.id),method: :delete,class:"btn btn-danger" %>
+
         <% else %>
         <% end %>
       <% end %>

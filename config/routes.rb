@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resources:customers,only:[:index,:show,:edit,:update] do
       resource:relationships,only:[:create,:destroy,:show]
     end
-    resources:notifications,only:[:index]
+    resources:notifications,only:[:index,:destroy]
     get 'searches/search'
     resources:contacts,only:[:new,:create]
   end

@@ -9,6 +9,7 @@ class CreateParks < ActiveRecord::Migration[6.1]
       t.integer :spec,null: false, default: 0
       t.integer :price,null: false, default: ""
       t.integer :parking_time,null: false, default: 0
+      t.string :addressOutput
       t.string :purpose,null: false, default: ""
       t.timestamps
     end
