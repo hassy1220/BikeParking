@@ -1,9 +1,9 @@
 <% if park_area.user_favorite_by(current_customer) %>
     <%= link_to public_park_favorites_path(park_area.id),method: :delete,remote: true do %>
-      <p>💖いいね<%= park_area.favorite_user.count %>件</p>
+      💖いいね<%= park_area.favorite_user.count %>件
     <% end %>
 <% else %>
     <%= link_to public_park_favorites_path(park_area.id),method: :post,remote: true do %>
-      <p>💛良いね<%= park_area.favorite_user.count %>件</p>
+      💛良いね<%= park_area.favorite_user.count %>件
     <% end %>
 <% end %>

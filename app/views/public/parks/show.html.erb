@@ -15,8 +15,8 @@
 
           <table class="table">
               <tr>
-                <td>駐車場名</td>
-                <td><%= @park_area.name %></td>
+                <td style="width: 30%">駐車場名</td>
+                <td style="width: 70%"><%= @park_area.name %></td>
               </tr>
               <tr>
                 <td>説明</td>
@@ -48,6 +48,7 @@
 
           <% if @park_area.customer == current_customer %>
             <%= link_to"削除",public_park_path(@park_area.id),method: :delete,class:"btn btn-danger delete_btn" %>
+            <%= link_to"編集",edit_public_park_path(@park_area.id),method: :get,class:"btn btn-success" %>
           <% end %>
     </div>
   </div>

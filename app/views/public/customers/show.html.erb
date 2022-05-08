@@ -21,9 +21,9 @@
     <h3>いいね一覧</h3>
     <table class="table table-striped table-hover">
        <tr>
-         <td>駐車場名</td>
-         <td>説明</td>
-         <td>目的地(商業施設、コンビニ等)</td>
+         <th style="width: 20%">駐車場名</th>
+         <th style="width: 60%">説明</th>
+         <th style="width: 20%">目的地(商業施設、コンビニ等)</th>
        </tr>
        <% @customer.favorite_park.each do |park| %>
        <tr>
@@ -43,9 +43,9 @@
     <h3>投稿一覧</h3>
     <table class="table table-striped table-hover">
        <tr>
-         <td>駐車場名</td>
-         <td>説明</td>
-         <td>目的地(商業施設、コンビニ等)</td>
+         <th style="width: 20%">駐車場名</th>
+         <th style="width: 60%">説明</th>
+         <th style="width: 20%">目的地(商業施設、コンビニ等)</th>
        </tr>
        <% @customer_park.each do |park| %>
        <tr>

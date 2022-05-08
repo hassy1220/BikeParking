@@ -14,7 +14,6 @@ class Public::ParksController < ApplicationController
   end
 
   def index
-
     par_page = 5
     @start = ((params[:page] || 1 ).to_i - 1) * par_page +1
     like_park = @posts = Park.includes(:favorite_user).sort {|a,b| b.favorite_user.size <=> a.favorite_user.size}
@@ -56,7 +55,17 @@ class Public::ParksController < ApplicationController
         @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:page]).per(5)
       end
     end
+  end
 
+  def edit
+    @park = Park.find(params[:id])
+  end
+
+  def update
+   @park = Park.find(params[:id])
+
+   @park.update(park_params)
+   redirect_to public_park_path(@park.id)
   end
 
   def create

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
 
   namespace :public do
-    resources:parks,only:[:new,:create,:show,:index,:destroy] do
+    resources:parks,only:[:new,:create,:show,:index,:destroy,:edit,:update] do
       resources:comments,only:[:create]
       resource:favorites,only:[:create,:destroy]
     end

@@ -28,9 +28,23 @@ ja:
               too_short: をマップ上でクリックしてください
             price:
               blank: を入力してください
+        customer:
+          attributes:
+            email:
+              blank: を入力してください
+              taken: は既に存在しています
+            password:
+              blank: を入力してください
+            name:
+              blank: を入力してください
     attributes:
       park:
         name: 駐車場名
         price: 金額
         purpose: 目的地
         lat: 投稿する駐車場の位置
+      customer:
+        email: メールアドレス
+        password: パスワード
+        name: 名前
+        password_confirmation: 確認用パスワード
