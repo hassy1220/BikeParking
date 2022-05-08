@@ -1,12 +1,14 @@
 <div class="container">
   <div>
-    <%= image_tag @customer.get_bike_image(400,400) %>
+      <%= image_tag @customer.get_bike_image(400,400) %>
     <p>名前<%= @customer.name %></p>
     <p>自己紹介<%= @customer.description %></p>
     <% if @customer == current_customer %>
       <p>
-        <%= link_to"編集",edit_public_customer_path(current_customer.id),class:"btn btn-success" %>
-        <%= link_to"退会",unsubscribe_path(@customer.id),class:"btn btn-danger" %>
+        <% if @customer.name != "guestuser" %>
+          <%= link_to"編集",edit_public_customer_path(current_customer.id),class:"btn btn-success" %>
+          <%= link_to"退会",unsubscribe_path(@customer.id),class:"btn btn-danger" %>
+        <% end %>
       </p>
     <% end %>
     <div id="relationship_btn">

@@ -30,10 +30,15 @@ class Customer < ApplicationRecord
 
   has_many:contacts
 
-
   has_one_attached:bike_image
-
   validates :name,presence: true
+
+  def self.guest
+    find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |customer|
+      customer.password = SecureRandom.urlsafe_base64
+      customer.name = "guestuser"
+    end
+  end
 
   # カスタマーのプロフィール画像を表示させるメソッド
   def get_bike_image(width,height)

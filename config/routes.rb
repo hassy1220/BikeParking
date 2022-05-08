@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
+  devise_scope :customer do
+    post 'customers/guest_sign_in', to: 'customers/sessions#guest_sign_in'
+  end
 
   namespace :admin do
     resources:customers,only:[:index,:show]
@@ -34,4 +37,7 @@ Rails.application.routes.draw do
   # 論理削除用のルーティング
   patch 'customers/:id/withdrawal' => 'public/customers#withdrawal', as: 'withdrawal'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+
+
 end
