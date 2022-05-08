@@ -28,6 +28,7 @@ class Customer < ApplicationRecord
   # フォローされた人目線でフォローしている人一覧
   has_many:follower_user,through: :reverse_of_relationships,source: :follow
 
+  has_many:contacts
 
 
   has_one_attached:bike_image

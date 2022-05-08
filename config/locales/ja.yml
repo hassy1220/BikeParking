@@ -6,6 +6,11 @@ ja:
         mideam: 中型
         big: 大型
         medeamorbig: 中型/大型可能
+    contact:
+      subject:
+        others: その他
+        posted_content: 投稿内容について
+        unauthorizes_user: 不正ユーザー
   activerecord:
     errors:
       models:

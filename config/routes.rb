@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     end
     resources:notifications,only:[:index]
     get 'searches/search'
+    resources:contacts,only:[:new,:create]
   end
   # 退会確認画面
   get 'customers/:id/unsubscribe' => 'public/customers#unsubscribe', as: 'unsubscribe'
