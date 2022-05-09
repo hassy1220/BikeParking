@@ -1,7 +1,11 @@
 <div class="container">
-  <h1>会員詳細</h1>
-  <%= image_tag @customer.get_bike_image(200,200) %>
-  <%= @customer.name %>
-  <%= @customer.description %>
-  <%= @customer.customer_status %>
+  <div>
+      <%= image_tag @customer.get_bike_image(400,400) %>
+    <p>名前：<%= @customer.name %></p>
+    <p>自己紹介：<%= @customer.description %></p>
+    <p>会員ステータス：<%= @customer.customer_status %></p>
+      <p>
+        <%= link_to"編集",edit_admin_customer_path(@customer.id),class:"btn btn-success" %>
+      </p>
+  </div>
 </div>

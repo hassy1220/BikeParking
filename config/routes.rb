@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources:customers,only:[:index,:show]
+    resources:customers,only:[:index,:show,:edit,:update]
     resources:parks,only:[:index,:show,:destroy]
   end
 

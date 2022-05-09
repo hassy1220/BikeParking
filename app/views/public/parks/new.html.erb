@@ -1,6 +1,7 @@
 <div class="container">
-
-  <input type="text" id="keyword"><button id="search">検索実行</button>
+  <div class="text-center">
+   <input type="text" id="keyword"><button id="search">検索実行</button>
+  </div>
 
   <div id="map" style="width:100%; height:600px"></div>
 
@@ -42,10 +43,8 @@
        <%= f.hidden_field :lat,value:"lat" %>
        <%= f.hidden_field :lng,value:"lng" %>
        <%= f.hidden_field :addressOutput,value:"address" %>
-    <tr>
-       <td><%= f.submit"送信" %></td>
-    </tr>
     </table>
+    <p class="text-center"><%= f.submit"送信",class:"btn btn-success" %></p>
   <% end %>
 
 </div>

@@ -1,0 +1,17 @@
+<div class="container">
+  <h3>会員情報編集</h3>
+  <%= form_with model: @customer,url: admin_customer_path(@customer.id) do |f| %>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %><br>
+    <%= f.label :description %><br>
+    <%= f.text_area :description,rows: 3 %><br>
+    <label>プロフィール画像</label><br>
+    <%= f.file_field :bike_image,accept:"image/jpg" %><br>
+    <label>会員ステータス</label><br>
+    <%= f.radio_button :is_deleted, :true %>
+    <%= f.label :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
+    <%= f.radio_button :is_deleted, :false %>
+    <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
+    <%= f.submit"変更" %>
+  <% end %>
+</div>
