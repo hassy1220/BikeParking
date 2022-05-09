@@ -31,8 +31,8 @@ protected
     return if !@customer
     ## 【処理内容2】 取得したアカウントのパスワードと入力されたパスワードが一致してるかを判別
     if @customer.valid_password?(params[:customer][:password])&& (@customer.is_deleted == true)
-      flash[:notice] = ["退会済みです新規登録をお願いします"]
-      redirect_to new_customer_registration_path
+      flash[:notice] = ["退会済みです.再度使用する場合は問い合わせページよりご連絡ください"]
+      redirect_to root_path
     end
 end
 
