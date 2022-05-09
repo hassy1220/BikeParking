@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-6">
+    <div class="col-md-6">
       <div id="map" style="width:100%; height:600px"></div>
     </div>
-    <div class="col-6 show_detail">
+    <div class="col-md-6 show_detail">
 
           <% if @park_area.get_image(150,150) %>
             <!--投稿画像がなかったら、サンプリ画像を表示-->
@@ -48,17 +48,17 @@
 
           <% if @park_area.customer == current_customer %>
             <%= link_to"削除",public_park_path(@park_area.id),method: :delete,class:"btn btn-danger delete_btn" %>
-            <%= link_to"編集",edit_public_park_path(@park_area.id),method: :get,class:"btn btn-success" %>
+            <%= link_to"編集",edit_public_park_path(@park_area.id),method: :get,class:"btn btn-success edit_btn" %>
           <% end %>
     </div>
   </div>
-
-      <div>
-        <div id="comment_btn">
-          <%= render "public/comments/comment",park_comment: @park_comment, park_comments: @park_comments, park_area: @park_area %>
+      <div class="mt-5">
+        <div>
+          <div id="comment_btn">
+            <%= render "public/comments/comment",park_comment: @park_comment, park_comments: @park_comments, park_area: @park_area %>
+          </div>
         </div>
       </div>
-    </div>
 </div>
 
 

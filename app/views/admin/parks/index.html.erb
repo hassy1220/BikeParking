@@ -1,8 +1,14 @@
 <div class="container">
+  <h1>投稿一覧</h1>
   <table class="table">
+    <tr>
+      <td style="width: 20%">駐車場名</td>
+      <td style="width: 50%">説明</td>
+      <td style="width: 30%">目的地</td>
+    </tr>
   <% @parks.each do |park| %>
     <tr>
-      <td>
+      <td >
         <%= link_to admin_park_path(park.id) do %>
          <%= park.name %>
         <% end %>

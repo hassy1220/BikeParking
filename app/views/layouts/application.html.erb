@@ -11,41 +11,43 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-info sticky-top">
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li class="nav-item active">
-                <%= link_to root_path,class:"navbar-brand" do %>
-                 <%= image_tag "cooltext410363261554561.png",size:"400x40" %>
-              <% end %>
-            </li>
-            </ul>
-            <ul class="nav navbar-nav ml-auto">
-              <% if customer_signed_in? %>
-                <li class="nav-item mr-5 "><%= link_to"ログアウト",destroy_customer_session_path,method: :delete, class:"nav-link active" %></li>
-                <li class="nav-item mr-5"><%= link_to"駐車場投稿",new_public_park_path, class:"nav-link active" %></li>
-                <li class="nav-item mr-5"><%= link_to"駐車場一覧",public_parks_path, class:"nav-link active" %></li>
-                <li class="nav-item mr-5"><%= link_to"ユーザー一覧",public_customers_path, class:"nav-link active" %></li>
-                <li class="nav-item mr-5"><%= link_to"マイページ",public_customer_path(current_customer.id), class:"nav-link active" %></li>
-                <li class="nav-item mr-5"><%= link_to"通知",public_notifications_path, class:"nav-link active" %></li>
-              <% end %>
-              <% unless customer_signed_in? %>
-                <% unless  admin_signed_in? %>
-                 <li class="nav-item"><%= link_to"新規登録",new_customer_registration_path, class:"nav-link active" %></li>
-                 <li class="nav-item"><%= link_to"サインイン",new_customer_session_path, class:"nav-link active" %></li>
-                 <li class="nav-item mr-5"><%= link_to"駐車場一覧",public_parks_path, class:"nav-link active" %></li>
-                 <li class="nav-item mr-5"><%= link_to"ゲストログイン",customers_guest_sign_in_path,method: :post, class:"nav-link active" %></li>
-                <% end %>
-              <% end %>
-              <% if admin_signed_in? %>
-                <li class="nav-item"><%= link_to"会員一覧",admin_customers_path, class:"nav-link active" %></li>
-                <li class="nav-item"><%= link_to"投稿一覧",admin_parks_path, class:"nav-link active" %></li>
-                <li class="nav-item"><%= link_to"ログアウト",destroy_admin_session_path,method: :delete, class:"nav-link active" %></li>
-              <% end %>
-
-            </ul>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top">
+        <%= link_to root_path,class:"navbar-brand" do %>
+          <%= image_tag "cooltext410363261554561.png",size:"400x40" %>
+        <% end %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                  <% if customer_signed_in? %>
+                    <li class="nav-item active"><%= link_to"ログアウト",destroy_customer_session_path,method: :delete, class:"nav-link active menu-list" %></li>
+                    <li class="nav-item"><%= link_to"駐車場投稿",new_public_park_path, class:"nav-link" %></li>
+                    <li class="nav-item"><%= link_to"駐車場一覧",public_parks_path, class:"nav-link active menu-list" %></li>
+                    <li class="nav-item"><%= link_to"ユーザー一覧",public_customers_path, class:"nav-link" %></li>
+                    <li class="nav-item"><%= link_to"マイページ",public_customer_path(current_customer.id), class:"nav-link" %></li>
+                    <li class="nav-item"><%= link_to"通知",public_notifications_path, class:"nav-link" %></li>
+                  <% end %>
+                  <% unless customer_signed_in? %>
+                    <% unless  admin_signed_in? %>
+                     <li class="nav-item"><%= link_to"新規登録",new_customer_registration_path, class:"nav-link" %></li>
+                     <li class="nav-item"><%= link_to"サインイン",new_customer_session_path, class:"nav-link" %></li>
+                     <li class="nav-item"><%= link_to"駐車場一覧",public_parks_path, class:"nav-link" %></li>
+                     <li class="nav-item"><%= link_to"ゲストログイン",customers_guest_sign_in_path,method: :post, class:"nav-link" %></li>
+                     </li>
+                    <% end %>
+                  <% end %>
+                  <% if admin_signed_in? %>
+                    <li class="nav-item"><%= link_to"会員一覧",admin_customers_path, class:"nav-link" %></li>
+                    <li class="nav-item"><%= link_to"投稿一覧",admin_parks_path, class:"nav-link" %></li>
+                    <li class="nav-item"><%= link_to"ログアウト",destroy_admin_session_path,method: :delete, class:"nav-link" %></li>
+                  <% end %>
+                </ul>
         </div>
     </nav>
+
+    </header>
     <main>
 
      <%= yield %>
@@ -62,7 +64,7 @@
         		  <p><i class="fa-solid fa-phone fa-fw"></i>xxx-xxxx-xxx</p>
           	  <p><i class="fa-solid fa-location-dot fa-fw"></i>〇〇県〇〇市〇〇町〇丁目</p>
             	<p><i class="fa-solid fa-envelope fa-fw"></i>naganocake@mail.com</p>
-            	<%= link_to"お問合せ",new_public_contact_path,class:"btn btn-success" %>
+            	<p><%= link_to"お問合せ",new_public_contact_path,class:"btn btn-success" %></p>
 
         	  </div>
     </div>

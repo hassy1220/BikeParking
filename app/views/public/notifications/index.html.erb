@@ -1,37 +1,51 @@
 <div class="container text-center box">
+  <div class="mb-3">
 <% unless @notification.blank? %>
-   <% @notification.each do |notification| %>
-   <div>
-      <%= link_to public_customer_path(notification.visitor), style: "font-weight: bold;" do %>
-        <i class="fa-regular fa-hand fa-fw"></i><%= notification.visitor.name %>
-      <% end %>
-        さんが
-      <% case notification.action %>
-        <% when 'follow' then %>
-         あなたをフォローしました<i class="fa-solid fa-phone fa-fw"></i>
-         <%= link_to"削除",public_notification_path(notification.id),method: :delete,class:"btn btn-danger" %>
+     <table class="table">
+       <% @notification.each do |notification| %>
+       <tr>
+         <td style="width: 50%">
+            <%= link_to public_customer_path(notification.visitor), style: "font-weight: bold;" do %>
+              <i class="fa-regular fa-hand fa-fw"></i><%= notification.visitor.name %>
+            <% end %>
+              さんが
+            <% case notification.action %>
+              <% when 'follow' then %>
+               あなたをフォローしました<i class="fa-solid fa-phone fa-fw"></i>
+         </td>
+         <td style="width: 50%">
+           <%= link_to"削除",public_notification_path(notification.id),method: :delete,class:"btn btn-danger" %>
+         </td>
 
-      <% when 'like' then %>
-        <%= link_to public_park_path(notification.park.id), style: "font-weight: bold;" do %>
-          <%= notification.park.name %>
-        <% end %>
-          にいいねしました<i class="fa-solid fa-phone fa-fw"></i>
-        <%= link_to"削除",public_notification_path(notification.id),method: :delete,class:"btn btn-danger" %>
+            <% when 'like' then %>
+              <%= link_to public_park_path(notification.park.id), style: "font-weight: bold;" do %>
+                <%= notification.park.name %>
+              <% end %>
+                にいいねしました<i class="fa-solid fa-phone fa-fw"></i>
+         </td>
+         <td style="width: 50%">
+           <%= link_to"削除",public_notification_path(notification.id),method: :delete,class:"btn btn-danger" %>
+         </td>
 
-      <% when 'comment' then %>
-        <% if notification.park.customer_id == notification.visited.id %>
-          <%= link_to public_park_path(notification.park.id), style: "font-weight: bold;" do %>
-            <%= notification.park.name %>
+            <% when 'comment' then %>
+              <% if notification.park.customer_id == notification.visited.id %>
+                <%= link_to public_park_path(notification.park.id), style: "font-weight: bold;" do %>
+                  <%= notification.park.name %>
+                <% end %>
+                にコメントしました<i class="fa-solid fa-phone fa-fw"></i>
+         </td>
+         <td style="width: 50%">
+           <%= link_to"削除️",public_notification_path(notification.id),method: :delete,class:"btn btn-danger" %>
+         </td>
+            <% else %>
+            <% end %>
           <% end %>
-          にコメントしました<i class="fa-solid fa-phone fa-fw"></i>
-          <%= link_to"削除️",public_notification_path(notification.id),method: :delete,class:"btn btn-danger" %>
+       <tr>
+       <% end %>
+     </table>
+    <% else %>
+    <p>通知はありません</p>
 
-        <% else %>
-        <% end %>
-      <% end %>
-   </div>
-   <% end %>
-<% else %>
-<p>通知はありません</p>
 <% end %>
+</div>
 </div>

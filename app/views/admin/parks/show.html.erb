@@ -60,10 +60,13 @@
 
 <script>
    function initMap() {
+
+      var lat =document.getElementById("park_area_lat").value
+    　var lng =document.getElementById("park_area_lng").value
       // /18行目が初期マップ位置の拡大状況・19行目が緯度経度で福岡市を表示させる様にしている/
       var opts = {
         zoom: 15,
-        center: new google.maps.LatLng(33.589815,130.412306),
+        center: new google.maps.LatLng(lat,lng),
         restriction: {
 		　   　latLngBounds: {
 		　   　	north: 33.600947,
