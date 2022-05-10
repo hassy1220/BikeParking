@@ -4,7 +4,7 @@
     <%= form_with url: public_parks_path,method: :get do |f| %>
     ▷<%= f.search_field :content,placeholder:"目的地or駐車場名" %><br>
     ▷<%= f.collection_radio_buttons :engine_spec, Park.specs_i18n, :first , :last %><br>
-    ▷<%= f.select :address,Park.addresses.keys.map {|k| [I18n.t("enums.park.address.#{k}"), k]},include_blank: true %><br>
+    ▷<%= f.search_field :address,placeholder:"住所" %><br>
     <%= f.submit"検索" %>
     <% end %>
 　</div>
