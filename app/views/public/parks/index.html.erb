@@ -41,7 +41,8 @@
                </tr>
                <% end %>
               </table>
-              <%= paginate @parks %>
+              <!---同じページにkaminari二つ使っており、片方次ページ送ったら、両方送られる為対策->-->
+              <%= paginate @parks, :param_name => 'index_page' %>
           </div>
         </div>
       </div>

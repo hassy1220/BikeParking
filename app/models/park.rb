@@ -76,4 +76,47 @@ class Park < ApplicationRecord
     notification.save if notification.valid?
   end
 
+  # def search(content,engine_spec,address)
+  #   # 目的地・駐車場名検索しているかどうか判定
+  #   if params[:content].blank?
+  #     # 目的地・駐車場名検索していないが、駐車可能条件検索しているか判定
+  #     if params[:engine_spec].blank?
+  #       # 住所を選択しているか
+  #       if params[:address].blank?
+  #         @park_area = Park.pluck(:lng, :lat, :name, :id)
+  #         @parks = Park.page(params[:index_page]).per(5)
+  #       else
+  #         @park_area = Park.where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
+  #         @parks = Park.where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:index_page]).per(5)
+  #       end
+  #     else
+  #       if params[:address].blank?
+  #         @park_area = Park.where(spec: params[:engine_spec]).pluck(:lng, :lat, :name, :id)
+  #         @parks = Park.where(spec: params[:engine_spec]).page(params[:index_page]).per(5)
+  #       else
+  #         @park_area = Park.where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
+  #         @parks = Park.where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:index_page]).per(5)
+  #       end
+  #     end
+  #   else
+  #     if params[:engine_spec].blank?
+  #       if params[:address].blank?
+  #         # 目的地か駐車場名から検索した場合の処理
+  #         @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).pluck(:lng, :lat, :name, :id)
+  #         @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").page(params[:index_page]).per(5)
+  #       else
+  #         @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
+  #         @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:index_page]).per(5)
+  #       end
+  #     else
+  #       @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
+  #       @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:index_page]).per(5)
+  #     end
+  #   end
+
+
+
+
+  # end
+
 end
