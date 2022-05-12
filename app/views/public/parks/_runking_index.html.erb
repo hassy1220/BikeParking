@@ -1,0 +1,17 @@
+<table class="table table-striped table-hover">
+  <tr>
+    <th>順位</th>
+    <th>駐車場名</th>
+  </tr>
+  <% like_park.each.with_index(start) do |park, i| %>
+  <tr>
+    <td><%= i %></td>
+    <td>
+      <%= link_to public_park_path(park.id) do %>
+        <%= park.name %>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<%= paginate like_park, remote: true %>

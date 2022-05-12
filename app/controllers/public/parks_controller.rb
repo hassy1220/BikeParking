@@ -20,41 +20,47 @@ class Public::ParksController < ApplicationController
     # いいね順で取得した配列をkaminariに適用させる。
     @like_park = Kaminari.paginate_array(like_park).page(params[:page]).per(5)
 
+
     # 目的地・駐車場名検索しているかどうか判定
     if params[:content].blank?
-      # 目的地・駐車場名検索していないが、駐車可能条件検索しているか判定
-      if params[:engine_spec].blank?
-        # 住所を選択しているか
-        if params[:address].blank?
-          @park_area = Park.pluck(:lng, :lat, :name, :id)
-          @parks = Park.page(params[:index_page]).per(5)
+        # 目的地・駐車場名検索していないが、駐車可能条件検索しているか判定
+        if params[:engine_spec].blank?
+          # 住所を選択しているか
+          if params[:address].blank?
+            @park_area = Park.pluck(:lng, :lat, :name, :id)
+            @parks = Park.page(params[:index_page]).per(5)
+          else
+            @park_area = Park.where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
+            @parks = Park.where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:index_page]).per(5)
+          end
         else
-          @park_area = Park.where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
-          @parks = Park.where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:index_page]).per(5)
+          if params[:address].blank?
+            @park_area = Park.where(spec: params[:engine_spec]).pluck(:lng, :lat, :name, :id)
+            @parks = Park.where(spec: params[:engine_spec]).page(params[:index_page]).per(5)
+          else
+            @park_area = Park.where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
+            @parks = Park.where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:index_page]).per(5)
+          end
         end
-      else
-        if params[:address].blank?
-          @park_area = Park.where(spec: params[:engine_spec]).pluck(:lng, :lat, :name, :id)
-          @parks = Park.where(spec: params[:engine_spec]).page(params[:index_page]).per(5)
-        else
-          @park_area = Park.where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
-          @parks = Park.where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:index_page]).per(5)
-        end
-      end
     else
-      if params[:engine_spec].blank?
-        if params[:address].blank?
-          # 目的地か駐車場名から検索した場合の処理
-          @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).pluck(:lng, :lat, :name, :id)
-          @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").page(params[:index_page]).per(5)
+        if params[:engine_spec].blank?
+          if params[:address].blank?
+            # 目的地か駐車場名から検索した場合の処理
+            @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).pluck(:lng, :lat, :name, :id)
+            @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").page(params[:index_page]).per(5)
+          else
+            @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
+            @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:index_page]).per(5)
+          end
         else
-          @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
-          @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:index_page]).per(5)
+          @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
+          @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:index_page]).per(5)
         end
-      else
-        @park_area = Park.where('purpose LIKE ?',"%#{params[:content]}%").or(Park.where('name LIKE ?',"%#{params[:content]}%")).where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").pluck(:lng, :lat, :name, :id)
-        @parks = Park.where('purpose LIKE ?',"%#{params[:content]}%").where(spec: params[:engine_spec]).where('addressOutput LIKE ?',"%#{params[:address]}%").page(params[:index_page]).per(5)
-      end
+    end
+# 　kaminariを非同期化するための記述index.js.erbを探しにいく
+    respond_to do |format|
+      format.html
+      format.js
     end
 
 

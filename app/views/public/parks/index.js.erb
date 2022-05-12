@@ -1,0 +1,4 @@
+$('#collapse1').html("<%= escape_javascript(render 'public/parks/index',parks: @parks ) %>");
+$('#collapse2').html("<%= escape_javascript(render 'public/parks/runking_index',like_park: @like_park,start: @start) %>");
+
+<!--<!-kaminariを非同期するための記述--->
