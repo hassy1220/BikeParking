@@ -55,134 +55,138 @@
 <input type="hidden" id="park_area" value='<%= @park_area %>'>
 
   <script>
-  function initMap() {
-    // /43行目が初期マップ位置の拡大状況・44行目が緯度経度で福岡市を表示させる様にしている/
-   var opts = {
-     zoom: 15,
-     center: new google.maps.LatLng(33.589815,130.412306),
-     restriction: {
-		　　latLngBounds: {
-		　　	north: 33.600747,
-		　　	south: 33.578963,
-		　　	west: 130.386021,
-		　　	east: 130.434000
-	　 },
-	　　	strictBounds: true
-　　 }
-   };
 
-   var map = new google.maps.Map(document.getElementById("map"), opts);
-   var infowindow = null;
+    function initMap() {
+      // /43行目が初期マップ位置の拡大状況・44行目が緯度経度で福岡市を表示させる様にしている/
+     var opts = {
+       zoom: 15,
+       center: new google.maps.LatLng(33.589815,130.412306),
+       restriction: {
+  		　　latLngBounds: {
+  		　　	north: 33.600747,
+  		　　	south: 33.578963,
+  		　　	west: 130.386021,
+  		　　	east: 130.434000
+  	　 },
+  	　　	strictBounds: true
+  　　 }
+     };
 
-   // 36行目のid=park_areaのValue値を取得
-   var date =document.getElementById("park_area").value
-   // 文字列っぽい配列を配列にする方法'[[aaa,aaa],[sss,sss],[sss,fff]]'→[aaa,aaa],[sss,sss],[sss,fff]に変換する
-   var date = JSON.parse(date)
-   // 配列を順番に繰り返し取り出し、マーカーを設置させる。
-   for(var i = 0; i < date.length; i ++ ){
-     var m_latlng = new google.maps.LatLng(date[i][1],date[i][0]);
-     const marker = new google.maps.Marker({
-   　 　 position: m_latlng,
-   　 　 map:map,
-     });
-   };
+     var map = new google.maps.Map(document.getElementById("map"), opts);
+     var infowindow = [];
 
-    map.addListener( "click", function ( event ) {
-      // 地図をクリックしたらf.hidden_field :lat,value:"lat"f.hidden_field :lng,value:"lng"のValue値変更
-    　document.getElementById("park_lat").value = event.latLng.lat();
-    　document.getElementById("park_lng").value = event.latLng.lng();
+     // 36行目のid=park_areaのValue値を取得
+     var date =document.getElementById("park_area").value
+     // 文字列っぽい配列を配列にする方法'[[aaa,aaa],[sss,sss],[sss,fff]]'→[aaa,aaa],[sss,sss],[sss,fff]に変換する
+     var date = JSON.parse(date)
+     // 配列を順番に繰り返し取り出し、マーカーを設置させる。
+     for(var i = 0; i < date.length; i ++ ){
+       var m_latlng = new google.maps.LatLng(date[i][1],date[i][0]);
+       const marker = new google.maps.Marker({
+     　 　 position: m_latlng,
+     　 　 map:map,
+       });
+     };
 
-      // 入力した緯度・経度を取得
-      var idoInput = document.getElementById("park_lat").value;
-      var keidoInput = document.getElementById("park_lng").value;
-      // 緯度・経度をLatLngクラスに変換
-      var latLngInput = new google.maps.LatLng(idoInput, keidoInput);
+      map.addListener( "click", function ( event ) {
+        // 地図をクリックしたらf.hidden_field :lat,value:"lat"f.hidden_field :lng,value:"lng"のValue値変更
+      　document.getElementById("park_lat").value = event.latLng.lat();
+      　document.getElementById("park_lng").value = event.latLng.lng();
 
-      //GoogleMapsAPIジオコーダ
-      var geocoder = new google.maps.Geocoder();
+        // 入力した緯度・経度を取得
+        var idoInput = document.getElementById("park_lat").value;
+        var keidoInput = document.getElementById("park_lng").value;
+        // 緯度・経度をLatLngクラスに変換
+        var latLngInput = new google.maps.LatLng(idoInput, keidoInput);
 
-      geocoder.geocode(
-        {
-          latLng: latLngInput
-        },
-        function(results, status) {
-          var address = "";
+        //GoogleMapsAPIジオコーダ
+        var geocoder = new google.maps.Geocoder();
 
-          if (status == google.maps.GeocoderStatus.OK) {
-          //取得が成功した場合
+        geocoder.geocode(
+          {
+            latLng: latLngInput
+          },
+          function(results, status) {
+            var address = "";
 
-            //住所を取得します。
-            address = results[0].formatted_address;
+            if (status == google.maps.GeocoderStatus.OK) {
+            //取得が成功した場合
 
-          } else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
-            alert("住所が見つかりませんでした。");
-          } else if (status == google.maps.GeocoderStatus.ERROR) {
-            alert("サーバ接続に失敗しました。");
-          } else if (status == google.maps.GeocoderStatus.INVALID_REQUEST) {
-            alert("リクエストが無効でした。");
-          } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
-            alert("リクエストの制限回数を超えました。");
-          } else if (status == google.maps.GeocoderStatus.REQUEST_DENIED) {
-            alert("サービスが使えない状態でした。");
-          } else if (status == google.maps.GeocoderStatus.UNKNOWN_ERROR) {
-            alert("原因不明のエラーが発生しました。");
-          }
+              //住所を取得します。
+              address = results[0].formatted_address;
 
-          //住所の結果表示をします。
-          document.getElementById('park_addressOutput').value = address;
-          var m_latlng = new google.maps.LatLng(idoInput,keidoInput);
-          var marke = new google.maps.Marker({
-         　  position: m_latlng,
-            map: map,
-        　});
-        　 // 　新しいところをクリックしたら、古いマーカーは消す
-        　map.addListener( "click", function ( event ) {
-           marke.setMap(null);
+            } else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+              alert("住所が見つかりませんでした。");
+            } else if (status == google.maps.GeocoderStatus.ERROR) {
+              alert("サーバ接続に失敗しました。");
+            } else if (status == google.maps.GeocoderStatus.INVALID_REQUEST) {
+              alert("リクエストが無効でした。");
+            } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+              alert("リクエストの制限回数を超えました。");
+            } else if (status == google.maps.GeocoderStatus.REQUEST_DENIED) {
+              alert("サービスが使えない状態でした。");
+            } else if (status == google.maps.GeocoderStatus.UNKNOWN_ERROR) {
+              alert("原因不明のエラーが発生しました。");
+            }
+
+            //住所の結果表示をします。
+            document.getElementById('park_addressOutput').value = address;
+            var m_latlng = new google.maps.LatLng(idoInput,keidoInput);
+            var marke = new google.maps.Marker({
+           　  position: m_latlng,
+              map: map,
+          　});
+          　 // 　新しいところをクリックしたら、古いマーカーは消す
+          　map.addListener( "click", function ( event ) {
+             marke.setMap(null);
+            });
           });
+  　　});
+
+    // 検索実行ボタンが押下されたとき(住所検索)GooglePlaceAPI
+      document.getElementById('search').addEventListener('click', function() {
+        // クリックイベントが発生する度に、infowindowの中身(配列)をfor文で取り出し全てcloseしている
+        for (var j=0; j<infowindow.length; j++) {
+              infowindow[j].close();
+            }
+
+        key = document.getElementById('keyword').value;
+    　　var service = new google.maps.places.PlacesService(map);
+
+        service.textSearch({
+        　　// location: 検索する場所の中心？radiusが範囲？よくわからん
+            location: new google.maps.LatLng(33.589815,130.412306),
+            query: key,
+            // radius: ,
+        }, function(results, status) {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                  var place = results[i];
+
+                  //情報ウィンドウを開く
+                  infowindow[i] = new google.maps.InfoWindow({
+                    content: place.name,
+                    position: place.geometry.location
+                  });
+                     infowindow[i].open(map);
+                };
+
+            } else if (status == google.maps.places.PlacesServiceStatus.UNKNOWN_ERROR) {
+              alert("原因不明のエラーが発生しました。");
+            } else if (status == google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {
+              alert("リクエストの制限回数を超えました。");
+            } else if (status == google.maps.places.PlacesServiceStatus.REQUEST_DENIED) {
+              alert("サービスが使えない状態でした。");
+            } else if (status == google.maps.places.PlacesServiceStatus.INVALID_REQUEST) {
+              alert("リクエストが無効でした。");
+            } else if (status == google.maps.places.PlacesServiceStatus.NOT_FOUND) {
+              alert("見つかりませんでした。");
+            } else if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+              alert("住所が見つかりませんでした。");
+            }
         });
-　　});
-
-  // 検索実行ボタンが押下されたとき(住所検索)GooglePlaceAPI
-    document.getElementById('search').addEventListener('click', function() {
-      if (infowindow !== null) {
-        infowindow.close();
-      };
-      key = document.getElementById('keyword').value;
-  　　var service = new google.maps.places.PlacesService(map);
-    　var LatLngFrom = (33.589815,130.412306);
-
-      service.textSearch({
-          location: new google.maps.LatLng(LatLngFrom),
-          query: key,
-          radius: 1100,
-      }, function(results, status) {
-          if (status == google.maps.places.PlacesServiceStatus.OK) {
-              for (var i = 0; i < results.length; i++) {
-                var place = results[i];
-
-                //情報ウィンドウを開く
-                infowindow = new google.maps.InfoWindow({
-                  content: place.name,
-                  position: place.geometry.location
-                });
-                   infowindow.open(map);
-              };
-
-          } else if (status == google.maps.places.PlacesServiceStatus.UNKNOWN_ERROR) {
-            alert("原因不明のエラーが発生しました。");
-          } else if (status == google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {
-            alert("リクエストの制限回数を超えました。");
-          } else if (status == google.maps.places.PlacesServiceStatus.REQUEST_DENIED) {
-            alert("サービスが使えない状態でした。");
-          } else if (status == google.maps.places.PlacesServiceStatus.INVALID_REQUEST) {
-            alert("リクエストが無効でした。");
-          } else if (status == google.maps.places.PlacesServiceStatus.NOT_FOUND) {
-            alert("見つかりませんでした。");
-          } else if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
-            alert("住所が見つかりませんでした。");
-          }
       });
-    });
 
-  };
+    };
+
  </script>
