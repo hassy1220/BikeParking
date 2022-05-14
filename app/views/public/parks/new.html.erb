@@ -1,4 +1,5 @@
 <div class="container">
+
   <div class="text-center">
    <input type="text" id="keyword"><button id="search" class="btn btn-info">検索実行</button>
   </div>
@@ -55,8 +56,8 @@
 <input type="hidden" id="park_area" value='<%= @park_area %>'>
 
   <script>
-
-    function initMap() {
+$(function(){
+  function initMap() {
       // /43行目が初期マップ位置の拡大状況・44行目が緯度経度で福岡市を表示させる様にしている/
      var opts = {
        zoom: 15,
@@ -167,8 +168,10 @@
                   infowindow[i] = new google.maps.InfoWindow({
                     content: place.name,
                     position: place.geometry.location
+
                   });
                      infowindow[i].open(map);
+                     console.log(infowindow[i]);
                 };
 
             } else if (status == google.maps.places.PlacesServiceStatus.UNKNOWN_ERROR) {
@@ -186,7 +189,8 @@
             }
         });
       });
-
-    };
-
+  };
+  // 上のfunction initMapは自分が勝手に定義しただけで、initmapを呼び出してあげないと、地図は表示されない
+　initMap();
+});
  </script>

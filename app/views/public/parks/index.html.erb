@@ -51,7 +51,7 @@
 
 
 <script>
-
+$(function(){
   var marker = [];
    function initMap() {
      var opts = {
@@ -91,7 +91,8 @@
         infowindow.open(map);
       };
     };
-
+  initMap();
+});
 
 
  </script>

@@ -67,6 +67,7 @@
 <input type="hidden" id="park_area_lng" value="<%= @park_area.lng %>">
 
 <script>
+$(function(){
    function initMap() {
      //変数lat/lngを宣言し、park_area_lat/lng(ID)のValue値を取得
       var lat =document.getElementById("park_area_lat").value
@@ -96,5 +97,7 @@
       　    map: map
       });
     }
+  initMap();
+});
 
  </script>
