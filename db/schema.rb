@@ -112,11 +112,11 @@ ActiveRecord::Schema.define(version: 2022_05_07_155518) do
     t.float "lng", default: 0.0, null: false
     t.string "name", default: "", null: false
     t.text "description"
-    t.integer "customer_id", null: false
+    t.integer "customer_id", default: 0, null: false
     t.integer "spec", default: 0, null: false
-    t.integer "price", null: false
+    t.integer "price", default: 0, null: false
     t.integer "parking_time", default: 0, null: false
-    t.string "addressOutput"
+    t.string "addressOutput", default: ""
     t.string "purpose", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
