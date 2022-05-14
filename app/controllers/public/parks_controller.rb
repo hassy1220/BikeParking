@@ -1,7 +1,7 @@
 class Public::ParksController < ApplicationController
-  before_action :authenticate_customer!
+  # before_action :authenticate_customer!
   before_action :correct_post,only: [:edit]
-  before_action :move_to_signed_in, except: [:index]
+  before_action :move_to_signed_in, except:[:index]
   def new
     @park = Park.new
     @park_areas = Park.all.pluck(:lat,:lng)
