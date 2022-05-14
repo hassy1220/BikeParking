@@ -1,5 +1,5 @@
 <div class="container">
-
+  <%= flash[notice] %>
   <div class="text-center">
    <input type="text" id="keyword"><button id="search" class="btn btn-info">検索実行</button>
   </div>
@@ -54,6 +54,8 @@
 <input type="hidden" id="park_areas" value="<%= @park_areas %>">
 <!--投稿ずみの場所にマーカーを設置する為に必要な情報-->
 <input type="hidden" id="park_area" value='<%= @park_area %>'>
+
+
 
   <script>
 $(function(){

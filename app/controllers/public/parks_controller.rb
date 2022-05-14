@@ -64,8 +64,6 @@ class Public::ParksController < ApplicationController
       format.html
       format.js
     end
-
-
   end
 
   def edit
@@ -74,8 +72,12 @@ class Public::ParksController < ApplicationController
 
   def update
    @park = Park.find(params[:id])
-   @park.update(park_params)
-   redirect_to public_park_path(@park.id)
+   if @park.update(park_params)
+     redirect_to public_park_path(@park.id)
+   else
+     flash[:danger]=@park.errors.full_messages
+     redirect_to edit_public_park_path
+   end
   end
 
   def create
