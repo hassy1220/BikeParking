@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 2022_05_07_155518) do
     t.float "lat", default: 0.0, null: false
     t.float "lng", default: 0.0, null: false
     t.string "name", default: "", null: false
-    t.text "description", default: ""
+    t.text "description"
     t.integer "customer_id", null: false
     t.integer "spec", default: 0, null: false
     t.integer "price", null: false
