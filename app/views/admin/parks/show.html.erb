@@ -59,6 +59,7 @@
 <input type="hidden" id="park_area_lng" value="<%= @park.lng %>">
 
 <script>
+$(function(){
    function initMap() {
 
       var lat =document.getElementById("park_area_lat").value
@@ -90,5 +91,6 @@
       　    map: map
       });
     }
-
+  initMap();
+});
  </script>
