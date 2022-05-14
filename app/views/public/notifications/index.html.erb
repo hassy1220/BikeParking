@@ -11,7 +11,7 @@
               さんが
             <% case notification.action %>
               <% when 'follow' then %>
-               あなたをフォローしました<i class="fa-solid fa-phone fa-fw"></i>
+               あなたをフォローしました<i class="fas fa-hand-paper fa-2x"></i>
          </td>
          <td style="width: 50%">
            <%= link_to"削除",public_notification_path(notification.id),method: :delete,class:"btn btn-danger" %>
@@ -21,7 +21,7 @@
               <%= link_to public_park_path(notification.park.id), style: "font-weight: bold;" do %>
                 <%= notification.park.name %>
               <% end %>
-                にいいねしました<i class="fa-solid fa-phone fa-fw"></i>
+                にいいねしました<i class="fas fa-thumbs-up fa-2x"></i>
          </td>
          <td style="width: 50%">
            <%= link_to"削除",public_notification_path(notification.id),method: :delete,class:"btn btn-danger" %>
@@ -32,7 +32,7 @@
                 <%= link_to public_park_path(notification.park.id), style: "font-weight: bold;" do %>
                   <%= notification.park.name %>
                 <% end %>
-                にコメントしました<i class="fa-solid fa-phone fa-fw"></i>
+                にコメントしました<i class="fas fa-comment fa-2x"></i>
          </td>
          <td style="width: 50%">
            <%= link_to"削除️",public_notification_path(notification.id),method: :delete,class:"btn btn-danger" %>

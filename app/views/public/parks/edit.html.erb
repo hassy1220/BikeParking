@@ -53,6 +53,7 @@
 <input type="hidden" id="serve_park_lng" value='<%= @park.lng %>'>
 
   <script>
+$(function(){
   function initMap() {
     // /43行目が初期マップ位置の拡大状況・44行目が緯度経度で福岡市を表示させる様にしている/
    var opts = {
@@ -140,4 +141,6 @@
         });
 　　});
   };
+ initMap();
+});
  </script>

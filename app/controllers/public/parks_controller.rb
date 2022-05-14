@@ -1,4 +1,6 @@
 class Public::ParksController < ApplicationController
+  before_action :authenticate_customer!
+  before_action :correct_post,only: [:edit]
   before_action :move_to_signed_in, except: [:index]
   def new
     @park = Park.new
@@ -72,7 +74,6 @@ class Public::ParksController < ApplicationController
 
   def update
    @park = Park.find(params[:id])
-
    @park.update(park_params)
    redirect_to public_park_path(@park.id)
   end
@@ -104,6 +105,14 @@ class Public::ParksController < ApplicationController
     unless customer_signed_in?
       #サインインしていないユーザーはログインページが表示される
       redirect_to new_customer_session_path
+    end
+  end
+
+  # URL直打ち他人の編集ページに活かせない
+  def correct_post
+        @park = Park.find(params[:id])
+    unless @park.customer.id == current_customer.id
+      redirect_to public_parks_path
     end
   end
 end
