@@ -108,8 +108,8 @@ ActiveRecord::Schema.define(version: 2022_05_07_155518) do
   end
 
   create_table "parks", force: :cascade do |t|
-    t.float "lat", null: false
-    t.float "lng", null: false
+    t.float "lat", default: 0.0, null: false
+    t.float "lng", default: 0.0, null: false
     t.string "name", default: "", null: false
     t.text "description", default: ""
     t.integer "customer_id", null: false
