@@ -36,7 +36,7 @@
 
 
 
-
+// TOPページのスライドショー(~58行目まで)
 .contena{
   height: 80vh;
 }
@@ -57,7 +57,14 @@
   width: 100%;
 }
 
-
+.top_text{
+  position: absolute;
+  top:50px;
+  left: 50%;
+  transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+}
 
 
 
