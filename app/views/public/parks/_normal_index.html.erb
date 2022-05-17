@@ -6,13 +6,13 @@
     </tr>
     <% parks.each do |park| %>
     <tr>
-      <td>
-        <%= link_to public_park_path(park.id) do %>
-          <%= park.name %>
-        <% end %>
-      </td>
-      <td><%= park.description %></td>
-      <td><%= park.purpose %></td>
+        <td>
+            <%= link_to public_park_path(park.id) do %>
+              <%= park.name %>
+            <% end %>
+        </td>
+        <td><%= park.description %></td>
+        <td><%= park.purpose %></td>
     </tr>
     <% end %>
   </table>

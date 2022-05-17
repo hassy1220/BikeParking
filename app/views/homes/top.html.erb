@@ -1,5 +1,16 @@
 <div class="container">
-  <%= notice %>
+  
+  <% if flash[:notice] %>
+    <div class="alert alert-info">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  <% if flash[:alert] %>
+    <div class="alert alert-danger">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
     <div class="contena">
       <div class="slider-image">
         <%= image_tag 'barn-g3a952b9bf_1920.jpg',class:"active_img top_img" %>

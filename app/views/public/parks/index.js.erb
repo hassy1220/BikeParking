@@ -1,4 +1,4 @@
-$('#collapse1').html("<%= escape_javascript(render 'public/parks/index',parks: @parks ) %>");
+$('#collapse1').html("<%= escape_javascript(render 'public/parks/normal_index',parks: @parks ) %>");
 $('#collapse2').html("<%= escape_javascript(render 'public/parks/runking_index',like_park: @like_park,start: @start) %>");
-
+$('#vicinity_button').html("<%= escape_javascript(render 'public/parks/vicinity_search',vicinity: @vicinity) %>");
 <!--<!-kaminariを非同期するための記述--->
