@@ -99,7 +99,6 @@ $(function(){
      for(var i = 0; i < date.length; i ++ ){
        var m_latlng = new google.maps.LatLng(date[i][1],date[i][0]);
        const marker = new google.maps.Marker({
-        // icon:"FF0000",
      　 　 position: m_latlng,
      　 　 map:map,
        });
@@ -150,11 +149,6 @@ $(function(){
                 document.getElementById('park_addressOutput').value = address;
                 var m_latlng = new google.maps.LatLng(idoInput,keidoInput);
                 var marke = new google.maps.Marker({
-                  icon: new google.maps.MarkerImage(
-
-                    new google.maps.Size(50,40),
-                    new google.maps.Point(0,0)
-                  ),
                　  position: m_latlng,
                   map: map,
               　});
