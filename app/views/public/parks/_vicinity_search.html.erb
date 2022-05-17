@@ -1,0 +1,8 @@
+<%= form_with url: public_parks_path,method: :get do |f| %>
+    <%= f.collection_radio_buttons :vicinity_ids,vicinity, :id,:vicinity_name, include_hidden: false %>
+    <%= paginate vicinity, :param_name => 'vicinity_page', remote: true %>
+    <%= f.collection_radio_buttons :engine_spec, Park.specs_i18n, :first , :last %>
+    <div class="text-center">
+      <%= f.submit"最寄り検索開始!!",class:"btn btn-success vicinity_btn" %>
+    </div>
+<% end %>
