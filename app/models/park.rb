@@ -77,7 +77,7 @@ class Park < ApplicationRecord
   end
 
   def sent_vicinity(vicinity,park)
-  # 現在保存してるデータ
+        # 現在保存してるデータ
         current_vicinity = Vicinity.pluck(:vicinity_name)
         # 今回初めて受け付けた名前
         new_vicinities = vicinity - current_vicinity
@@ -89,6 +89,26 @@ class Park < ApplicationRecord
         vicinity.each do |new|
           VicinityPark.create(vicinity_id: Vicinity.find_by(vicinity_name: new).id, park_id: park.id)
         end
+        # Vicinity.pluck(:vicinity_name) -
+  end
+
+
+  # 投稿内容編集するときのアップデート
+  def update_sent_vicinity(vicinity,park)
+        VicinityPark.where(park_id: park.id).destroy_all
+        # 現在保存してるデータ
+        current_vicinity = Vicinity.pluck(:vicinity_name)
+        # 今回初めて受け付けた名前
+        new_vicinities = vicinity - current_vicinity
+        # 今回初めて受け付けた名前をDBに保存
+        new_vicinities.each do |new|
+          Vicinity.create(vicinity_name: new)
+        end
+        vicinity.each do |new|
+          VicinityPark.create(vicinity_id: Vicinity.find_by(vicinity_name: new).id, park_id: park.id)
+        end
+        delete_vicinity = Vicinity.pluck(:id)-VicinityPark.pluck(:vicinity_id)
+        Vicinity.where(id: delete_vicinity).destroy_all
   end
 
 # 　目的地、住所、駐車可能条件検索

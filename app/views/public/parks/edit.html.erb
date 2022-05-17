@@ -39,7 +39,10 @@
       </tr>
            <%= f.hidden_field :lat,value: @park.lat %>
            <%= f.hidden_field :lng,value: @park.lng %>
-           <%= f.hidden_field :addressOutput,value: @park.address %>
+           <%= f.hidden_field :addressOutput,value: @park.addressOutput %>
+           <%= fields_for :vicinity do |f| %>
+             <%= f.hidden_field :vicinity_name,value: @park.park_vicinity.pluck(:vicinity_name) %>
+           <% end %>
       <tr>
            <td><%= f.submit"送信" %></td>
       </tr>
@@ -136,10 +139,35 @@ $(function(){
           document.getElementById('park_addressOutput').value = address;
         　 // 　新しいところをクリックしたら、古いマーカーは消す
         　map.addListener( "click", function ( event ) {
-           marke.setMap(null);
+            marke.setMap(null);
           });
         });
-　　});
+
+
+        service=new google.maps.places.PlacesService(map);
+          var request={
+             location: new google.maps.LatLng(idoInput,keidoInput),
+             radius:250, /* 指定した座標から半径1000m(1km)以内 */
+             types:['shopping_mall'],
+          };
+
+        service.search(request, callback);
+        function callback(results, status) {
+        document.getElementById("vicinity_vicinity_name").value = "";
+          if (status==google.maps.places.PlacesServiceStatus.OK && results.length>0){
+             for (var i=0; i<results.length; i++) {
+                var places=results[i];
+                console.log(results[i].name)
+                document.getElementById("vicinity_vicinity_name").value += `${results[i].name},`;
+             }
+          }else{
+            alert("このエリアでのスポット情報はありません。");
+          }
+        };
+
+
+
+　  　});
   };
  initMap();
 });

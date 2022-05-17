@@ -30,6 +30,7 @@ class Public::ParksController < ApplicationController
       @like_park = Kaminari.paginate_array(like_park).page(params[:page]).per(5)
       @vicinity = Vicinity.page(params[:vicinity_page]).per(7)
 
+
       if params[:vicinity_ids].present?or params[:engine_spec]
           # 最寄り検索した場合のメソッド
           @park_area,@parks = Park.search_for_vicinity(params[:vicinity_ids],params[:engine_spec],params[:index_page])
@@ -41,6 +42,8 @@ class Public::ParksController < ApplicationController
           @park_area = Park.pluck(:lng, :lat, :name, :id)
           @parks = Park.page(params[:index_page]).per(5)
       end
+
+
   # 　kaminariを非同期化するための記述index.js.erbを探しにいく
       respond_to do |format|
         format.html
@@ -52,12 +55,16 @@ class Public::ParksController < ApplicationController
 
   def edit
     @park = Park.find(params[:id])
+    @vicinity = @park.vicinity_parks
   end
 
 
   def update
      @park = Park.find(params[:id])
      if @park.update(park_params)
+         vicinity= Vicinity.new(vicinity_params)
+         @vicinity = vicinity.vicinity_name.split(",")
+          @park.update_sent_vicinity(@vicinity,@park)
          redirect_to public_park_path(@park.id)
      else
        flash[:danger]=@park.errors.full_messages
