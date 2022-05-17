@@ -14,6 +14,11 @@ class Public::ParksController < ApplicationController
       @park_area = Park.find(params[:id])
       @park_comment = Comment.new
       @park_comments = @park_area.comments.page(params[:page]).per(5)
+      # kaminariを非同期化するための記述show.js.erbを探しにいく
+      respond_to do |format|
+        format.html
+        format.js
+      end
   end
 
 
