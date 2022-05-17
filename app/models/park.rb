@@ -12,10 +12,12 @@ class Park < ApplicationRecord
   enum address: {zenniki: 0 ,Hakata: 1, Chuo: 2}
 
   validates :name,presence: true
-  validates :price,presence: true
   validates :purpose,presence: true
   validates :lat,length: { minimum: 4}
-
+  FILE_NUMBER_LIMIT = 3
+  validate :validate_number_of_files
+  PRICE_NUMBER_LIMIT = 0
+  validate :validate_number_of_price
 
   def get_image(width,height)
     unless images.attached?
@@ -149,7 +151,16 @@ class Park < ApplicationRecord
     end
   end
 
-
+  # 投稿できる画像を３枚までに制限する
+  def validate_number_of_files
+    return if images.length <= FILE_NUMBER_LIMIT
+    errors.add(:images, "に添付できる画像は#{FILE_NUMBER_LIMIT}件までです。")
+  end
+  # 金額を検証するメソッド(0円は拒否する)
+  def validate_number_of_price
+    return if price != PRICE_NUMBER_LIMIT
+    errors.add(:price, "を入力してください。")
+  end
 
 
 end

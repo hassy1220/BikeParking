@@ -1,8 +1,8 @@
 <div class="container">
   <div>
       <%= image_tag @customer.get_bike_image(400,400) %>
-    <p>名前<%= @customer.name %></p>
-    <p>自己紹介<%= @customer.description %></p>
+    <p>名前：<%= @customer.name %></p>
+    <p>自己紹介：<%= @customer.description %></p>
     <% if @customer == current_customer %>
       <p>
         <% if @customer.name != "guestuser" %>

@@ -30,6 +30,19 @@
           <td><%= @park.spec_i18n %></td>
         </tr>
       </table>
+
+      <div class="text-center">
+        <p>投稿者</p>
+        <% if @park.customer.is_deleted == false %>
+          <%=  image_tag @park.customer.get_bike_image(100,100) %>
+          <%= link_to public_customer_path( @park.customer.id) do %>
+            <%=  @park.customer.name %>
+          <% end %>
+        <% else %>
+          <p class="text-danger">退会済みです。何かありましたら、お問合わせページより問い合わせください</p>
+        <% end %>
+      </div>
+
       <%= link_to"削除",admin_park_path(@park.id),method: :delete,class:"btn btn-danger delete_btn" %>
     </div>
   </div>

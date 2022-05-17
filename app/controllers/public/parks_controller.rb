@@ -3,7 +3,7 @@ class Public::ParksController < ApplicationController
   before_action :correct_post,only: [:edit]
   before_action :move_to_signed_in, except:[:index]
   def new
-      @park = Park.new
+      @park = Park.new(session[:parks] || {})
       @park_areas = Park.all.pluck(:lat,:lng)
       @park_area = Park.pluck(:lng, :lat)
       @vicinity = Vicinity.new
@@ -72,9 +72,11 @@ class Public::ParksController < ApplicationController
       @park = Park.new(park_params)
       @park.customer_id = current_customer.id
       if @park.save
+         session[:parks] = nil
          @park.sent_vicinity(@vicinity,@park)
          redirect_to public_parks_path
       else
+        session[:parks] = @park.attributes.slice(*park_params.keys)
         flash[:danger]=@park.errors.full_messages
         redirect_to new_public_park_path
       end

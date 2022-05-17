@@ -4,14 +4,15 @@
       <div id="map" style="width:100%; height:600px"></div>
     </div>
     <div class="col-md-6 show_detail">
-
-          <% if @park_area.get_image(150,150) %>
-            <!--投稿画像がなかったら、サンプリ画像を表示-->
-          <% else %>
-             <% @park_area.images.each do |image| %>
-               <%= image_tag(image, width:150,height:150) %>
-             <% end %>
-          <% end %>
+          <div class="text-center mb-3">
+            <% if @park_area.get_image(150,150) %>
+              <!--投稿画像がなかったら、サンプリ画像を表示-->
+            <% else %>
+               <% @park_area.images.each do |image| %>
+                 <%= image_tag(image, width:150,height:150) %>
+               <% end %>
+            <% end %>
+          </div>
 
           <table class="table">
               <tr>
