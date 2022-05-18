@@ -1,78 +1,81 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <div id="map" style="width:100%; height:600px"></div>
-    </div>
-    <div class="col-md-6 show_detail">
-          <div class="text-center mb-3">
-            <% if @park_area.get_image(150,150) %>
-              <!--投稿画像がなかったら、サンプリ画像を表示-->
-            <% else %>
-               <% @park_area.images.each do |image| %>
-                 <%= image_tag(image, width:150,height:150) %>
+    <div class="row">
+        <div class="col-md-6">
+         　  <div id="map" style="width:100%; height:600px"></div>
+        </div>
+        <div class="col-md-6 show_detail">
+            <div class="text-center mb-3">
+               <% if @park_area.get_image(150,150) %>
+                  <!--投稿画像がなかったら、サンプリ画像を表示-->
+               <% else %>
+                  <% @park_area.images.each do |image| %>
+                    <%= image_tag(image, width:150,height:150) %>
+                  <% end %>
                <% end %>
-            <% end %>
-          </div>
+            </div>
+            <table class="table text-center table-striped">
+                <tr>
+                    <td style="width: 30%">駐車場名</td>
+                    <td style="width: 70%"><%= @park_area.name %></td>
+                </tr>
+                <tr>
+                    <td>説明</td>
+                    <td><%= @park_area.description %></td>
+                </tr>
+                <tr>
+                    <td>金額</td>
+                    <td><%= @park_area.price %>円 / <%= @park_area.parking_time %>時間</td>
+                </tr>
+                <tr>
+                    <td>駐車可能条件</td>
+                    <td><%= @park_area.spec_i18n %></td>
+                </tr>
+            </table>
+            <div id="favorite_btn_<%= @park_area.id %>">
+                <%= render "public/favorites/favorite",park_area: @park_area %>
+            </div>
+                <div class="text-center">
+                    <p>投稿者</p>
+                    <% if @park_area.customer.is_deleted == false %>
+                        <%=  image_tag @park_area.customer.get_bike_image(100,100) %>
+                        <%= link_to public_customer_path( @park_area.customer.id) do %>
+                           <%=  @park_area.customer.name %>
+                        <% end %>
+                    <% else %>
+                        <p class="text-danger">退会済みです。何かありましたら、お問合わせページより問い合わせください</p>
+                    <% end %>
+              </div>
 
-          <table class="table text-center">
-              <tr>
-                <td style="width: 30%">駐車場名</td>
-                <td style="width: 70%"><%= @park_area.name %></td>
-              </tr>
-              <tr>
-                <td>説明</td>
-                <td><%= @park_area.description %></td>
-              </tr>
-              <tr>
-                <td>金額</td>
-                <td><%= @park_area.price %>円 / <%= @park_area.parking_time %>時間</td>
-              </tr>
-              <tr>
-                <td>駐車可能条件</td>
-                <td><%= @park_area.spec_i18n %></td>
-              </tr>
-          </table>
-          <div id="favorite_btn_<%= @park_area.id %>">
-            <%= render "public/favorites/favorite",park_area: @park_area %>
-          </div>
-          <div class="text-center">
-            <p>投稿者</p>
-            <% if @park_area.customer.is_deleted == false %>
-              <%=  image_tag @park_area.customer.get_bike_image(100,100) %>
-              <%= link_to public_customer_path( @park_area.customer.id) do %>
-                <%=  @park_area.customer.name %>
+              <% if @park_area.customer == current_customer %>
+                  <%= link_to"削除",public_park_path(@park_area.id),method: :delete,class:"btn btn-danger delete_btn" %>
+                  <%= link_to"編集",edit_public_park_path(@park_area.id),method: :get,class:"btn btn-success edit_btn" %>
               <% end %>
-            <% else %>
-              <p class="text-danger">退会済みです。何かありましたら、お問合わせページより問い合わせください</p>
-            <% end %>
+        </div>
+    </div>
+  　<div class="row">
+    <div class="col" %>
+      <div class="panel-group mt-5">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title text-center">
+                <a data-toggle="collapse" href="#collapse3">▼コメント</a>
+              </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
+                <div id="comment_btn">
+                    <!--コメント一覧・投稿の共通レイアウト-->
+                    <%= render "public/comments/comment",park_comment: @park_comment, park_comments: @park_comments, park_area: @park_area %>
+                </div>
+                <div id="show_paginate">
+                    <!--kaminari共通レイアウト-->
+                    <%= render "public/comments/show_paginate",park_comments: @park_comments %>
+                </div>
+            </div>
           </div>
-
-          <% if @park_area.customer == current_customer %>
-            <%= link_to"削除",public_park_path(@park_area.id),method: :delete,class:"btn btn-danger delete_btn" %>
-            <%= link_to"編集",edit_public_park_path(@park_area.id),method: :get,class:"btn btn-success edit_btn" %>
-          <% end %>
+        </div>
     </div>
   </div>
-
-      <div class="mt-5">
-
-        <div>
-          <div id="comment_btn">
-            <!--コメント一覧・投稿の共通レイアウト-->
-            <%= render "public/comments/comment",park_comment: @park_comment, park_comments: @park_comments, park_area: @park_area %>
-          </div>
-
-        </div>
-        <div id="show_paginate">
-          <!--kaminari共通レイアウト-->
-           <%= render "public/comments/show_paginate",park_comments: @park_comments %>
-        </div>
-
-      </div>
-
 </div>
-
-
 
 <input type="hidden" id="park_area_lat" value="<%= @park_area.lat %>">
 <input type="hidden" id="park_area_lng" value="<%= @park_area.lng %>">
