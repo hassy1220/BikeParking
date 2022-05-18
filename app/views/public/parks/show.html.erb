@@ -14,7 +14,7 @@
             <% end %>
           </div>
 
-          <table class="table">
+          <table class="table text-center">
               <tr>
                 <td style="width: 30%">駐車場名</td>
                 <td style="width: 70%"><%= @park_area.name %></td>
@@ -53,13 +53,23 @@
           <% end %>
     </div>
   </div>
+
       <div class="mt-5">
+
         <div>
           <div id="comment_btn">
+            <!--コメント一覧・投稿の共通レイアウト-->
             <%= render "public/comments/comment",park_comment: @park_comment, park_comments: @park_comments, park_area: @park_area %>
           </div>
+
         </div>
+        <div id="show_paginate">
+          <!--kaminari共通レイアウト-->
+           <%= render "public/comments/show_paginate",park_comments: @park_comments %>
+        </div>
+
       </div>
+
 </div>
 
 

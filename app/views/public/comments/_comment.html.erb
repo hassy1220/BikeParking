@@ -1,19 +1,30 @@
 <h3>コメント</h3>
-    <table class="table text-center">
-    <% park_comments.each do |list| %>
-      <tr>
-        <% if list.customer.is_deleted == false %>
-          <td style="width: 20%">
-            <%= image_tag list.customer.get_bike_image(50,50) %><br>
-            <%= list.customer.name %>
-          </td>
-          <td style="width: 80%"><%= list.comment %></td>
-        <% end %>
-      </tr>
+
+<% flash.each do |message_type, messages| %>
+    <% if messages.class == Array %>
+      <% messages.each do |message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+    <% else %>
+        <div class="alert alert-<%= message_type %>"><%= messages %></div>
+  <% end %>
+<% end %>
+
+<table class="table text-center">
+<% park_comments.each do |list| %>
+  <tr>
+    <% if list.customer.is_deleted == false %>
+      <td style="width: 20%">
+        <%= image_tag list.customer.get_bike_image(50,50) %><br>
+        <%= list.customer.name %>
+      </td>
+      <td style="width: 80%"><%= list.comment %></td>
     <% end %>
-    </table>
-    <%= paginate park_comments,remote: true %>
-    <%= form_with model:  park_comment,url: public_park_comments_path(park_area.id),local: false do |f| %>
-      <%= f.text_field :comment,rows: 5 %>
-      <%= f.submit"送信" %>
-    <% end %>
+  </tr>
+<% end %>
+</table>
+<%= form_with model:  park_comment,url: public_park_comments_path(park_area.id),local: false do |f| %>
+  <%= f.text_field :comment,rows: 5 %>
+  <%= f.submit"送信",class:"btn btn-success" %>
+<% end %>
+

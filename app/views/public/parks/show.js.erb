@@ -1,1 +1,2 @@
-$('#comment_btn').html("<%= escape_javascript(render 'public/comments/comment',park_comment: @park_comment, park_comments: @park_comments, park_area: @park_area ) %>");
+$('#comment_btn').html("<%= escape_javascript(render 'public/comments/comment',park_comment: @park_comment,park_comments: @park_comments,park_area: @park_area ) %>");
+$('#show_paginate').html("<%= escape_javascript(render 'public/comments/show_paginate', park_comments: @park_comments) %>");
