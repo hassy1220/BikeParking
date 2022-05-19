@@ -111,9 +111,9 @@ class Park < ApplicationRecord
         Vicinity.where(id: delete_vicinity).destroy_all
   end
 
+  # 投稿削除した時に紐づいてる最寄りの施設が宙にuteいる場合、削除する
   def self.destroy_sent_vicinity
        delete_vicinity = Vicinity.pluck(:id)-VicinityPark.pluck(:vicinity_id)
-      # debugger
        Vicinity.where(id: delete_vicinity).destroy_all
   end
 
