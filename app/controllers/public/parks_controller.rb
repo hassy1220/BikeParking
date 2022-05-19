@@ -34,15 +34,14 @@ class Public::ParksController < ApplicationController
       if params[:vicinity_ids].present?or params[:engine_spec]
           # 最寄り検索した場合のメソッド
           @park_area,@parks = Park.search_for_vicinity(params[:vicinity_ids],params[:engine_spec],params[:index_page])
-      elsif params[:content].present?or params[:engine_spec].present?or params[:address].present?
+      elsif params[:address].present?||params[:engine_specs].present?||params[:address]
           # Parkモデルのsearch_forメソッドで検索(詳細検索)
-          @park_area,@parks = Park.search_for(params[:content],params[:engine_spec],params[:address],params[:index_page])
+          @park_area,@parks = Park.search_for(params[:content],params[:engine_specs],params[:address],params[:index_page])
       else
           # 何も検索していない時
           @park_area = Park.pluck(:lng, :lat, :name, :id)
           @parks = Park.page(params[:index_page]).per(5)
       end
-
 
   # 　kaminariを非同期化するための記述index.js.erbを探しにいく
       respond_to do |format|
@@ -62,13 +61,13 @@ class Public::ParksController < ApplicationController
   def update
      @park = Park.find(params[:id])
      if @park.update(park_params)
-         vicinity= Vicinity.new(vicinity_params)
-         @vicinity = vicinity.vicinity_name.split(",")
+          vicinity= Vicinity.new(vicinity_params)
+          @vicinity = vicinity.vicinity_name.split(",")
           @park.update_sent_vicinity(@vicinity,@park)
-         redirect_to public_park_path(@park.id)
+          redirect_to public_park_path(@park.id)
      else
-       flash[:danger]=@park.errors.full_messages
-       redirect_to edit_public_park_path
+          flash[:danger]=@park.errors.full_messages
+          redirect_to edit_public_park_path
      end
   end
 
@@ -81,11 +80,12 @@ class Public::ParksController < ApplicationController
       if @park.save
          session[:parks] = nil
          @park.sent_vicinity(@vicinity,@park)
+         flash[:notice]="投稿を保存しました"
          redirect_to public_parks_path
       else
-        session[:parks] = @park.attributes.slice(*park_params.keys)
-        flash[:danger]=@park.errors.full_messages
-        redirect_to new_public_park_path
+         session[:parks] = @park.attributes.slice(*park_params.keys)
+         flash[:danger]=@park.errors.full_messages
+         redirect_to new_public_park_path
       end
   end
 
@@ -93,6 +93,7 @@ class Public::ParksController < ApplicationController
   def destroy
        @park_area = Park.find(params[:id])
        @park_area.destroy
+       Park.destroy_sent_vicinity
        redirect_to public_parks_path
   end
 

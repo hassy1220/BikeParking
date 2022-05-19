@@ -6,7 +6,7 @@ class Public::CustomersController < ApplicationController
   end
   def show
     @customer = Customer.find(params[:id])
-    @customer_park = @customer.parks
+    @customer_park = @customer.parks.page(params[:page]).per(6)
   end
   def edit
     @customer = Customer.find(params[:id])

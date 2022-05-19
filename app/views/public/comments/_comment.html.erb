@@ -21,8 +21,10 @@
   </tr>
 <% end %>
 </table>
-<%= form_with model:  park_comment,url: public_park_comments_path(park_area.id),local: false do |f| %>
-  <%= f.text_field :comment,rows: 5 %>
-  <%= f.submit"送信",class:"btn btn-success" %>
-<% end %>
+<div class="text-center mb-3">
+  <%= form_with model:  park_comment,url: public_park_comments_path(park_area.id),local: false do |f| %>
+    <%= f.text_field :comment %>
+    <%= f.submit"送信",class:"btn btn-success" %>
+  <% end %>
+</div>
 

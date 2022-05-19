@@ -1,11 +1,14 @@
 <div class="container">
+
+　　<%= flash[:notice] %>
+
     <div class="row">
-      <div class="col-4">
+      <div class="col-3">
         <button type="button"class="btn btn-info" data-toggle="collapse" data-target="#demo">詳細検索▷</button>
         <div id="demo" class="collapse text-center">
           <%= form_with url: public_parks_path,method: :get do |f| %>
             <%= f.search_field :content,placeholder:"目的地or駐車場名",class:"form-control" %><br>
-            <%= f.collection_radio_buttons :engine_spec, Park.specs_i18n, :first , :last %><br>
+            <%= f.collection_radio_buttons :engine_specs, Park.specs_i18n, :first , :last %><br>
             <%= f.search_field :address,placeholder:"住所",class:"form-control" %>
             <div class="text-center mt-3">
           　  <%= f.submit"詳細検索開始!!",class:"btn btn-success" %>
@@ -19,11 +22,12 @@
       　   <%= render "public/parks/vicinity_search",vicinity: @vicinity %>
     　　  </div>
   　　  </div>
+  　　<div class="col-2 text-right">
+         <%= link_to"検索クリア",public_parks_path,class:"btn btn-info" %>
+  　　</div>
   　</div>
 
-    <div id="map" style="width:100%; height:600px">
-
-    </div>
+    <div id="map" style="width:100%; height:600px"></div>
 
     <div class="row">
       <div class="col-md-8">
@@ -89,12 +93,12 @@ $(function(){
 
      for(var i = 0; i < date.length; i ++ ){
       　var latlng = new google.maps.LatLng(date[i][1],date[i][0]);
-  
+
         var contentStr =
         // バッククォーテーション``で囲む中で${}を使えば式展開できる
         `<a href="/public/parks/${date[i][3]}">${date[i][2]}'</a>`
-  
-  
+
+
         // 情報ウインドウを表示させ、駐車場名を表示
           var infowindow = new google.maps.InfoWindow({
             content: contentStr,

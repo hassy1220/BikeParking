@@ -37,6 +37,10 @@ ja:
               blank: を入力してください
             name:
               blank: を入力してください
+        comment:
+          attributes:
+            comment:
+              blank: を入力してください
     attributes:
       park:
         name: 駐車場名
@@ -48,3 +52,5 @@ ja:
         password: パスワード
         name: 名前
         password_confirmation: 確認用パスワード
+      comment:
+        comment: コメント

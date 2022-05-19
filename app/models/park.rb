@@ -111,6 +111,12 @@ class Park < ApplicationRecord
         Vicinity.where(id: delete_vicinity).destroy_all
   end
 
+  def self.destroy_sent_vicinity
+       delete_vicinity = Vicinity.pluck(:id)-VicinityPark.pluck(:vicinity_id)
+      # debugger
+       Vicinity.where(id: delete_vicinity).destroy_all
+  end
+
 # 　目的地、住所、駐車可能条件検索
   def self.search_for(content,engine_spec,address,index_page)
     if content.blank?
@@ -123,9 +129,10 @@ class Park < ApplicationRecord
               else
                   @park_area = Park.where('addressOutput LIKE ?',"%#{address}%").pluck(:lng, :lat, :name, :id),
                   @parks = Park.where('addressOutput LIKE ?',"%#{address}%").page(index_page).per(5)
+
               end
           else
-              if params[:address].blank?
+              if address.blank?
                   @park_area = Park.where(spec: engine_spec).pluck(:lng, :lat, :name, :id),
                   @parks = Park.where(spec: engine_spec).page(index_page).per(5)
               else
