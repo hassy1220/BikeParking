@@ -34,13 +34,18 @@ class Public::ParksController < ApplicationController
       if params[:vicinity_ids].present?or params[:engine_spec]
           # 最寄り検索した場合のメソッド
           @park_area,@parks = Park.search_for_vicinity(params[:vicinity_ids],params[:engine_spec],params[:index_page])
+          if params[:vicinity_ids]
+            @vicinity_place = Vicinity.find_by(id: params[:vicinity_ids]).vicinity_name
+          end
       elsif params[:address].present?||params[:engine_specs].present?||params[:address]
           # Parkモデルのsearch_forメソッドで検索(詳細検索)
           @park_area,@parks = Park.search_for(params[:content],params[:engine_specs],params[:address],params[:index_page])
+          @vicinity_place
       else
           # 何も検索していない時
           @park_area = Park.pluck(:lng, :lat, :name, :id)
           @parks = Park.page(params[:index_page]).per(5)
+          @vicinity_place
       end
 
   # 　kaminariを非同期化するための記述index.js.erbを探しにいく

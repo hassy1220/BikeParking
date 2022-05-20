@@ -40,12 +40,10 @@ class Park < ApplicationRecord
         visited_id: customer_id,
         action: 'like'
       )
-      # 自分の投稿を良いねした場合の処理
-      if notification.visitor_id == notification.visited_id
-        notification.checked = true
+      # 自分の投稿を良いねしていなかったらセーブする
+      unless notification.visitor_id == notification.visited_id
+        notification.save if notification.valid?
       end
-      # もしバリデーションに引っ掛からなかったら。セーブする
-      notification.save if notification.valid?
     end
   end
 
@@ -71,9 +69,8 @@ class Park < ApplicationRecord
       )
       # 自分の投稿に対するコメントの場合は、通知済みとする
       if notification.visitor_id == notification.visited_id
-        notification.checked = true
+        notification.save if notification.valid?
       end
-      notification.save if notification.valid?
   end
 
   def sent_vicinity(vicinity,park)

@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-3">
         <button type="button"class="btn btn-info" data-toggle="collapse" data-target="#demo">詳細検索▷</button>
-        <div id="demo" class="collapse text-center">
+        <div id="demo" class="collapse text-center mb-3 mt-4">
           <%= form_with url: public_parks_path,method: :get do |f| %>
             <%= f.search_field :content,placeholder:"目的地or駐車場名",class:"form-control" %><br>
             <%= f.collection_radio_buttons :engine_specs, Park.specs_i18n, :first , :last %><br>
@@ -64,6 +64,7 @@
 
 <input type="hidden" id="park_area" value='<%= @park_area %>'>
 <input type="hidden" id="place" value='<%= @place %>'>
+<input type="hidden" id="vicinity_place" value='<%= @vicinity_place %>'>
 
 
 <script>
@@ -83,7 +84,30 @@ $(function(){
   	　　	strictBounds: true
   　　 }
      };
-     var map = new google.maps.Map(document.getElementById("map"), opts);
+　　var map = new google.maps.Map(document.getElementById("map"), opts);
+
+    if(document.getElementById('vicinity_place').value != ""){
+       key = document.getElementById('vicinity_place').value;
+       var service = new google.maps.places.PlacesService(map);
+       var request={
+          query: key
+       };
+       service.textSearch(request,callback);
+
+       function callback(results, status){
+         if (status == google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+                var place = results[i];
+                  var marke = new google.maps.Marker({
+               　    position: place.geometry.location,
+                    map: map,
+                  });
+            }
+         }else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+              alert("サーバ接続に失敗しました。");
+         };
+       }
+    };
 
      // 21行目のid=park_areaのValue値を取得
      var date =document.getElementById("park_area").value

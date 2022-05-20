@@ -12,9 +12,9 @@ Admin.create!(email:"test@test",password:111111
 
 Customer.create!(
   [
-    {email: 'olivia@test.com', name: '山田太郎', password: '111111', bike_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")},
-    {email: 'james@test.com', name: '令和太郎', password: '111111', bike_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")},
-    {email: 'lucas@test.com', name: '平成太郎', password: '111111', bike_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")}
+    {email: 'yamada@test.com', name: '山田太郎', password: '111111', bike_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")},
+    {email: 'reiwa@test.com', name: '令和太郎', password: '111111', bike_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")},
+    {email: 'heisei@test.com', name: '平成太郎', password: '111111', bike_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")}
   ]
 )
 
@@ -59,5 +59,21 @@ VicinityPark.create!(
     {vicinity_id: 11,park_id: 2},
     {vicinity_id: 12,park_id: 2},
     {vicinity_id: 13,park_id: 2},
+  ]
+)
+
+Comment.create!(
+  [
+    {comment: "この駐車場めっちゃ便利ですね！",customer_id: 1,park_id: 2},
+    {comment: "５台くらいしか止めれないです。。。",customer_id: 2,park_id: 3},
+    {comment: "天神地下街にも近くて最高ですよ！！",customer_id: 3,park_id: 1},
+  ]
+)
+
+Favorite.create!(
+  [
+    {customer_id: 1,park_id: 2},
+    {customer_id: 2,park_id: 3},
+    {customer_id: 3,park_id: 1},
   ]
 )

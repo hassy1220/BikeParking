@@ -1,9 +1,11 @@
 <% if park_area.user_favorite_by(current_customer) %>
-    <%= link_to public_park_favorites_path(park_area.id),method: :delete,remote: true do %>
-      💖いいね<%= park_area.favorite_user.count %>件
+    <%= link_to public_park_favorites_path(park_area.id),method: :delete,class: 'text-danger',remote: true do %>
+      <i class="fas fa-thumbs-up mr-3 fa-2x"></i>
     <% end %>
+    いいね<%= park_area.favorite_user.count %>件
 <% else %>
-    <%= link_to public_park_favorites_path(park_area.id),method: :post,remote: true do %>
-      💛良いね<%= park_area.favorite_user.count %>件
+    <%= link_to public_park_favorites_path(park_area.id),method: :post,class: 'text-info',remote: true do %>
+      <i class="fas fa-thumbs-up mr-3 fa-2x"></i>
     <% end %>
+    いいね<%= park_area.favorite_user.count %>件
 <% end %>
