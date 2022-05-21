@@ -88,3 +88,11 @@ header {
 footer {
   width: 100%;
 }
+
+// ^-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.user_backimage{
+  background-image: url("../../assets/images/road.jpg");
+  background-size:cover;
+  object-position: 80% 20%;
+}

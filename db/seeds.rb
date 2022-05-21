@@ -18,13 +18,30 @@ Customer.create!(
   ]
 )
 
-Park.create!(
+park = Park.create!(
   [
-    {lat: 33.589766,lng: 130.402241,name: "天神中央公園駐輪場",description: "天神地下街にも近くアクセス最高です",customer_id: 1,spec: 2,price: 200, parking_time: 2,addressOutput: "福岡県福岡市中央区天神１丁目３",purpose: "天神地下街",images: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-park1.jpg"), filename:"sample-park1.jpg")},
-    {lat: 33.588617,lng: 130.419416,name: "博多駅前駐輪場",description: "博多駅の真前で、すぐにわかると思います！",customer_id: 2,spec: 1,price: 300, parking_time: 1,addressOutput: "福岡県福岡市博多区博多駅中央街９",purpose: "博多駅",images: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-park2.jpg"), filename:"sample-park2.jpg")},
-    {lat: 33.594903,lng: 130.403780,name: "博多駐輪場",description: "アンパンマンミュージアムの近くです！",customer_id: 3,spec: 3,price: 100, parking_time: 1,addressOutput: "福岡県福岡市博多区中洲５丁目６",purpose: "アンパンマンミュージアム",images: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-park3.jpg"), filename:"sample-park3.jpg")},
+    {lat: 33.589766,lng: 130.402241,name: "天神中央公園駐輪場",description: "天神地下街にも近くアクセス最高です",customer_id: 1,spec: 2,price: 200, parking_time: 2,addressOutput: "福岡県福岡市中央区天神１丁目３",purpose: "天神地下街"},
+    {lat: 33.588617,lng: 130.419416,name: "博多駅前駐輪場",description: "博多駅の真前で、すぐにわかると思います！",customer_id: 2,spec: 1,price: 300, parking_time: 1,addressOutput: "福岡県福岡市博多区博多駅中央街９",purpose: "博多駅"},
+    {lat: 33.594903,lng: 130.403780,name: "博多駐輪場",description: "アンパンマンミュージアムの近くです！",customer_id: 3,spec: 3,price: 100, parking_time: 1,addressOutput: "福岡県福岡市博多区中洲５丁目６",purpose: "アンパンマンミュージアム"},
   ]
 )
+park.each do |park|
+  if park.id == 1
+    park.images.attach(io: File.open("#{Rails.root}/db/fixtures/sample-park1.jpg"), filename:"sample-park1.jpg")
+    park.images.attach(io: File.open("#{Rails.root}/db/fixtures/sample-park2.jpg"), filename:"sample-park2.jpg")
+    park.images.attach(io: File.open("#{Rails.root}/db/fixtures/sample-park3.jpg"), filename:"sample-park3.jpg")
+  elsif park.id == 2
+    park.images.attach(io: File.open("#{Rails.root}/db/fixtures/sample-park4.jpg"), filename:"sample-park4.jpg")
+    park.images.attach(io: File.open("#{Rails.root}/db/fixtures/sample-park5.jpg"), filename:"sample-park5.jpg")
+    park.images.attach(io: File.open("#{Rails.root}/db/fixtures/sample-park6.jpg"), filename:"sample-park6.jpg")
+  elsif park.id == 3
+    park.images.attach(io: File.open("#{Rails.root}/db/fixtures/sample-park7.jpg"), filename:"sample-park7.jpg")
+    park.images.attach(io: File.open("#{Rails.root}/db/fixtures/sample-park8.jpg"), filename:"sample-park8.jpg")
+    park.images.attach(io: File.open("#{Rails.root}/db/fixtures/sample-park9.jpg"), filename:"sample-park9.jpg")
+  end
+end
+
+
 
 Vicinity.create!(
   [
@@ -65,8 +82,23 @@ VicinityPark.create!(
 Comment.create!(
   [
     {comment: "この駐車場めっちゃ便利ですね！",customer_id: 1,park_id: 2},
-    {comment: "５台くらいしか止めれないです。。。",customer_id: 2,park_id: 3},
-    {comment: "天神地下街にも近くて最高ですよ！！",customer_id: 3,park_id: 1},
+    {comment: "場所ちょっとわかりづらいですね",customer_id: 2,park_id: 2},
+    {comment: "博多駅行く時重宝してます！",customer_id: 3,park_id: 2},
+    {comment: "停めやすい！！",customer_id: 2,park_id: 2},
+    {comment: "駐車料金変わってましたよー！",customer_id: 1,park_id: 2},
+    {comment: "ここはおすすめですね！！",customer_id: 3,park_id: 2},
+    {comment: "５台くらいしか止めれないです。。。",customer_id: 2,park_id: 1},
+    {comment: "狭すぎーーーー",customer_id: 3,park_id: 1},
+    {comment: "狭いけど利便性は最高！！",customer_id: 1,park_id: 1},
+    {comment: "ここって場所わかりやすいですか？",customer_id: 2,park_id: 1},
+    {comment: "わかりやすいですよ！横通ればすぐわかると思います",customer_id: 3,park_id: 1},
+    {comment: "ありがとうがざいます！",customer_id: 2,park_id: 1},
+    {comment: "アンパンマンミュージアム行く時便利ですよ！",customer_id: 1,park_id: 3},
+    {comment: "アンパンミュージアム行かない、、、、",customer_id: 2,park_id: 3},
+    {comment: "確かに笑",customer_id: 1,park_id: 3},
+    {comment: "バイク乗りでアンパンマンミュージアム行く人いる？。。。。笑",customer_id: 3,park_id: 3},
+    {comment: "絶対おらん、、、笑",customer_id: 1,park_id: 3},
+    {comment: "ここって治安どんなですか？",customer_id: 2,park_id: 3},
   ]
 )
 
