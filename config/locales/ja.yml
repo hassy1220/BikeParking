@@ -17,6 +17,8 @@ ja:
         unauthorizes_user: 不正ユーザー
   activerecord:
     errors:
+      messages:
+        record_invalid: "バリデーションに失敗しました: %{errors}"
       models:
         park:
           attributes:
