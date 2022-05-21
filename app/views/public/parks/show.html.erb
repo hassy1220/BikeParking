@@ -31,43 +31,42 @@
                     <td><%= @park_area.spec_i18n %></td>
                 </tr>
                 <tr>
-                  <td>最寄りの施設</td>
+                  <td>投稿者</td>
                   <td>
-                    <% @park_area.park_vicinity.each do |vicinity| %>
-                      <%= vicinity.vicinity_name %><br>
+                    <% if @park_area.customer.is_deleted == false %>
+                      <%= link_to public_customer_path( @park_area.customer.id) do %>
+                        <%=  @park_area.customer.name %>
+                      <% end %>
+                      <%=  image_tag @park_area.customer.get_bike_image(100,100) %>
+
+                      <% else %>
+                       <p class="text-danger">退会済みです。何かありましたら、お問合わせページより問い合わせください</p>
                     <% end %>
                   </td>
                 </tr>
             </table>
-            <div id="favorite_btn_<%= @park_area.id %>" class="text-right">
+            <div id="favorite_btn_<%= @park_area.id %>" class="text-center">
                 <%= render "public/favorites/favorite",park_area: @park_area %>
             </div>
-
-
               <% if @park_area.customer == current_customer %>
                   <%= link_to"削除",public_park_path(@park_area.id),method: :delete,class:"btn btn-danger delete_btn" %>
                   <%= link_to"編集",edit_public_park_path(@park_area.id),method: :get,class:"btn btn-success edit_btn" %>
               <% end %>
         </div>
     </div>
-    <div class="row mt-3">
-      <div class="col user_backimage">
-         <div class="text-center pb-3">
-            <p>投稿者</p>
-                <% if @park_area.customer.is_deleted == false %>
-                    <%=  image_tag @park_area.customer.get_bike_image(100,100) %>
-                      <%= link_to public_customer_path( @park_area.customer.id) do %>
-                          <%=  @park_area.customer.name %>
-                      <% end %>
-                <% else %>
-                     <p class="text-danger">退会済みです。何かありましたら、お問合わせページより問い合わせください</p>
-                <% end %>
-         </div>
-       </div>
+
+    <div class="row mt-5">
+      <div class="col">
+        <h4>最寄りの施設</h4>
+        <% @park_area.park_vicinity.each do |vicinity| %>
+            <span class="bg-secondary rounded-pill text-white"><%= vicinity.vicinity_name %></span>
+        <% end %>
+      </div>
     </div>
+
   　<div class="row">
-    <div class="col" %>
-      <div class="panel-group mt-5">
+    <div class="col">
+      <div class="panel-group">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title text-center">
