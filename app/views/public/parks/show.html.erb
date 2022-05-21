@@ -15,23 +15,27 @@
             </div>
             <table class="table text-center table-striped">
                 <tr>
-                    <td style="width: 30%">駐車場名</td>
+                    <th style="width: 30%">駐車場名</th>
                     <td style="width: 70%"><%= @park_area.name %></td>
                 </tr>
                 <tr>
-                    <td>説明</td>
+                    <th>説明</th>
                     <td><%= @park_area.description %></td>
                 </tr>
                 <tr>
-                    <td>金額</td>
+                    <th>金額</th>
                     <td><%= @park_area.price %>円 / <%= @park_area.parking_time %>時間</td>
                 </tr>
                 <tr>
-                    <td>駐車可能条件</td>
+                    <th>駐車可能条件</th>
                     <td><%= @park_area.spec_i18n %></td>
                 </tr>
                 <tr>
-                  <td>投稿者</td>
+                    <th>目的地</th>
+                    <td><%= @park_area.purpose %></td>
+                </tr>
+                <tr>
+                  <th>投稿者</th>
                   <td>
                     <% if @park_area.customer.is_deleted == false %>
                       <%= link_to public_customer_path( @park_area.customer.id) do %>

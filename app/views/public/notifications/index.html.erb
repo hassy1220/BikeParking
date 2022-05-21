@@ -28,7 +28,7 @@
          </td>
 
             <% when 'comment' then %>
-              <% unless notification.park.customer_id == notification.visited.id %>
+              <% if notification.park.customer_id == notification.visited.id or notification.park.customer_id != current_customer.id %>
                 <%= link_to public_park_path(notification.park.id), style: "font-weight: bold;" do %>
                   <%= notification.park.name %>
                 <% end %>

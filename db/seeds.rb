@@ -109,3 +109,30 @@ Favorite.create!(
     {customer_id: 3,park_id: 1},
   ]
 )
+
+Notification.create!(
+  [
+    {visitor_id: 1,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+    {visitor_id: 3,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+    {visitor_id: 1,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+    {visitor_id: 3,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+    {visitor_id: 3,visited_id: 2,park_id: 2,action: "like"},
+    {visitor_id: 1,visited_id: 2,park_id: 2,action: "like"},
+    {visitor_id: 1,visited_id: 2,action: "follow"},
+    {visitor_id: 3,visited_id: 2,action: "follow"},
+
+    {visitor_id: 1,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+    {visitor_id: 2,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+    {visitor_id: 3,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+    {visitor_id: 2,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+    {visitor_id: 1,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+    {visitor_id: 3,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+    
+    {visitor_id: 1,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+    {visitor_id: 2,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+    {visitor_id: 3,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+    {visitor_id: 2,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+    {visitor_id: 1,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+    {visitor_id: 3,visited_id: 2,park_id: 1,comment_id: 3,action: "comment"},
+  ]
+)

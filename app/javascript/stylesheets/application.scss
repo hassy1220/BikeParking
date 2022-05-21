@@ -29,8 +29,8 @@
 }
 
 .container{
-  margin-top: 80px;
-  margin-bottom: 10px;
+  padding-top: 80px;
+  // margin-bottom: 10px;
   // height: 80vh;
 }
 
@@ -89,8 +89,7 @@ footer {
   width: 100%;
 }
 
-// ^-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+//背景画像
 .user_backimage{
   background-image: url("../../assets/images/road.jpg");
   background-size:cover;
@@ -98,9 +97,14 @@ footer {
 }
 
 
-// 。。。。。。。。。。。。。。。。。。。。。。。。。。。。
+//Par showページの最寄り一覧の装飾
 span {
   display: inline-block;
   margin-bottom: 10px;
   padding: 10px;
+}
+
+//背景色
+.content{
+  background-color: #EEFFFF;
 }
