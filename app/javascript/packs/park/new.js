@@ -138,6 +138,11 @@ $(function(){
            if (status == google.maps.places.PlacesServiceStatus.OK) {
              for (var i = 0; i < results.length; i++) {
                 var place = results[i];
+                if(place.formatted_address.search('福岡') === -1){
+                  alert("検索範囲外です");
+                  return;
+                };
+
                 infowindow[i] = new google.maps.InfoWindow({
                   content: place.name,
                   position: place.geometry.location,
