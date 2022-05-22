@@ -12,9 +12,9 @@ class Public::CommentsController < ApplicationController
        if @park.customer.is_deleted == false
          # app/mailers/comment_mailer.rb内のsend_commentメソッドに内容を送信
          CommentMailer.with(customer: @park.customer.id,park: @park.id).send_comment.deliver_now
+         @park_comment = Comment.new
        end
     else
-      @park_comment = Comment.new
       flash.now[:danger]=@comment.errors.full_messages
     end
   end
