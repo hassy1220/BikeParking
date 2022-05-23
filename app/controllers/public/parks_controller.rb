@@ -82,6 +82,7 @@ class Public::ParksController < ApplicationController
       @vicinity = vicinity.vicinity_name.split(",")
       @park = Park.new(park_params)
       @park.customer_id = current_customer.id
+
       if @park.save
          session[:parks] = nil
          @park.sent_vicinity(@vicinity,@park)
@@ -96,9 +97,11 @@ class Public::ParksController < ApplicationController
 
 
   def destroy
-       @park_area = Park.find(params[:id])
-       @park_area.destroy
-       Park.destroy_sent_vicinity
+      if Park.exists?(id: Park.find(params[:id]).id)
+         @park_area = Park.find(params[:id])
+         @park_area.destroy
+         Park.destroy_sent_vicinity
+      end
        redirect_to public_parks_path
   end
 
