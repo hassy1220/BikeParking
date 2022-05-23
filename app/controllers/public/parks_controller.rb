@@ -99,9 +99,12 @@ class Public::ParksController < ApplicationController
   def destroy
     park = params[:id]
     parks = current_customer.parks.ids
+    # debugger
     if parks.include?(park.to_i)
-      @park_area = Park.find(params[:id])
-      @park_area.destroy
+      # debugger
+      park_area = Park.find(park)
+      debugger
+      park_area.destroy
       Park.destroy_sent_vicinity
     end
       redirect_to public_parks_path
