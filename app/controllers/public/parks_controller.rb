@@ -103,7 +103,7 @@ class Public::ParksController < ApplicationController
     if parks.include?(park.to_i)
       # debugger
       park_area = Park.find(park)
-      debugger
+
       park_area.destroy
       Park.destroy_sent_vicinity
     end
