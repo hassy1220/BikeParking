@@ -16,14 +16,21 @@
         <%= image_tag list.customer.get_bike_image(50,50) %><br>
         <%= list.customer.name %>
       </td>
-      <td style="width: 80%"><%= list.comment %></td>
+      <td style="width: 60%"><%= list.comment %></td>
+      <td>
+        <% if list.customer == current_customer %>
+          <%= link_to public_park_comment_path(list.park.id,list.id),method: :delete,class:"btn btn-danger" do %>
+               削除
+          <% end %>
+        <% end %>
+      </td>
     <% end %>
   </tr>
 <% end %>
 </table>
 <div class="text-center mb-3">
   <%= form_with model: [park_area,park_comment],url: public_park_comments_path(park_area.id),local: false do |f| %>
-    <%= f.text_field :comment %>
+    <%= f.text_field :comment,class:"form-control" %>
     <%= f.submit"送信",class:"btn btn-success" %>
   <% end %>
 </div>

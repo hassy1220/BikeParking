@@ -18,7 +18,6 @@ $(function(){
      var map = new google.maps.Map(document.getElementById("map"), opts);
      var infowindow = [];
 
-
      // 36行目のid=park_areaのValue値を取得
      var date =document.getElementById("park_area").value
      // 文字列っぽい配列を配列にする方法'[[aaa,aaa],[sss,sss],[sss,fff]]'→[aaa,aaa],[sss,sss],[sss,fff]に変換する
@@ -31,6 +30,27 @@ $(function(){
      　 　 map:map,
        });
      };
+
+    navigator.geolocation.getCurrentPosition(function(pos) {
+        // gps 取得成功
+    // google map 初期化
+      // var gmap = new google.maps.Map($('#gmap').get(0), {
+      //     // center: new google.maps.LatLng(35, 135),
+      //       mapTypeId: google.maps.MapTypeId.ROADMAP,
+      //     zoom: 17
+      //   });
+
+    // // 現在位置にピンをたてる
+      var currentPos = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+    　   var currentMarker = new google.maps.Marker({
+            position: currentPos
+        });
+        currentMarker.setMap(gmap);
+    });
+
+
+
+
 
       map.addListener( "click", function ( event ) {
         // 地図をクリックしたらf.hidden_field :lat,value:"lat"f.hidden_field :lng,value:"lng"のValue値変更
