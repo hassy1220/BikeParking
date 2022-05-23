@@ -97,7 +97,7 @@ class Public::ParksController < ApplicationController
 
 
   def destroy
-      if Park.exists?(id: Park.find(params[:id]))
+      if current_user.parks.exists?(id: Park.find(params[:id]))
          @park_area = Park.find(params[:id])
          @park_area.destroy
          Park.destroy_sent_vicinity
