@@ -11,20 +11,13 @@ class Park < ApplicationRecord
   enum spec: { small: 0, mideam: 1, big: 2, medeamorbig: 3 }
   enum address: {zenniki: 0 ,Hakata: 1, Chuo: 2}
 
-  validates :name,presence: true
+  validates :name, presence: true, length: {maximum: 15}
   validates :purpose,presence: true
   validates :lat,length: { minimum: 4}
   FILE_NUMBER_LIMIT = 3
   validate :validate_number_of_files
   PRICE_NUMBER_LIMIT = 0
   validate :validate_number_of_price
-
-  def get_image(width,height)
-    unless images.attached?
-      file_path = Rails.root.join("app/assets/images/parking-space-g37442e9c0_1280.jpg")
-      images.attach(io:File.open(file_path),filename:"default-image.jpg",content_type:"image/jpeg")
-    end
-  end
 
    #そのユーザーが良いねしているか判定
   def user_favorite_by(user)

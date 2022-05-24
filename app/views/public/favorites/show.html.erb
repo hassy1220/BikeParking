@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h4>いいねしているユーザー</h4>
+      <table class="table text-center table-borderless">
+        <% @like_user.each do |customer| %>
+        <tr>
+           <td><%= image_tag customer.get_bike_image(100,100) %></td>
+           <th><%= customer.name %></th>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

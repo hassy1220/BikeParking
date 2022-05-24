@@ -6,18 +6,27 @@ class Public::RelationshipsController < ApplicationController
     relationship.follower_id = @customer.id
     relationship.save
     @customer.create_notification_follow!(current_customer)
+
+    @customers = Customer.where(is_deleted: false)
+    @follow_customer = current_customer.follow_user
+    @follower_customer = current_customer.follower_user
+
   end
   def destroy
     @customer = Customer.find(params[:customer_id])
     relationship = Relationship.find_by(follow_id: current_customer.id,follower_id: @customer.id)
     relationship.destroy
 
+    @customers = Customer.where(is_deleted: false)
+    @follow_customer = current_customer.follow_user
+    @follower_customer = current_customer.follower_user
+
   end
 
   def show
     @key = params[:key]
     customer = Customer.find(params[:customer_id])
-    @follow_customer = customer.relationships
-    @follower_customer = customer.reverse_of_relationships
+    @follow_customer = customer.follow_user
+    @follower_customer = customer.follower_user
   end
 end

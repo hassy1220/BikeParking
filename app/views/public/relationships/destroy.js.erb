@@ -1,2 +1,4 @@
 $('#relationship_btn').html("<%= j(render 'public/relationships/relationship',customer: @customer) %>");
-$('#index_relationship_btn_<%= @customer.id %>').html("<%= j(render "public/relationships/index_relationship",customer: @customer) %>");
+$('#index_relationship_btn').html("<%= j(render "public/relationships/index_relationship",customers: @customers) %>");
+$('#index_relationship_btn2').html("<%= j(render "public/relationships/follow_relationship",follow_user: @follow_customer) %>");
+$('#index_relationship_btn3').html("<%= j(render "public/relationships/follow_relationship",follow_user: @follower_customer) %>");

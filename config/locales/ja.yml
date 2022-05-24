@@ -24,6 +24,7 @@ ja:
           attributes:
             name:
               blank: を入力してください
+              too_long: １５文字以内に納めてください
             purpose:
               blank: を入力してください
             lat:

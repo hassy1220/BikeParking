@@ -1,54 +1,64 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-lg-6 d-flex justify-content-center align-items-center">
          　  <div id="map" style="width:100%; height:600px"></div>
         </div>
-        <div class="col-md-6 show_detail mt-4">
-            <div class="text-center mb-3">
-               <% if @park_area.get_image(150,150) %>
+        <div class="col-lg-6 show_detail pt-4">
+          <div id="show_image">
+            <%# binding.pry %>
+               <% if @park_area.images.attached? %>
+               　  　<% @park_area.images.each do |image| %>
+               　  　
+                      <%= image_tag(image, width:150,height:150) %>
+                    
+                    <% end %>
                   <!--投稿画像がなかったら、サンプリ画像を表示-->
                <% else %>
-                  <% @park_area.images.each do |image| %>
-                    <%= image_tag(image, width:150,height:150) %>
-                  <% end %>
+                  <%= image_tag 'parking-space-g37442e9c0_1280.jpg',size: '150x150' %>
                <% end %>
-            </div>
-            <table class="table text-center table-striped">
-                <tr>
-                    <th style="width: 30%">駐車場名</th>
-                    <td style="width: 70%"><%= @park_area.name %></td>
-                </tr>
-                <tr>
-                    <th>説明</th>
-                    <td><%= @park_area.description %></td>
-                </tr>
-                <tr>
-                    <th>金額</th>
-                    <td><%= @park_area.price %>円 / <%= @park_area.parking_time %>時間</td>
-                </tr>
-                <tr>
-                    <th>駐車可能条件</th>
-                    <td><%= @park_area.spec_i18n %></td>
-                </tr>
-                <tr>
-                    <th>目的地</th>
-                    <td><%= @park_area.purpose %></td>
-                </tr>
-                <tr>
-                  <th>投稿者</th>
-                  <td>
-                    <% if @park_area.customer.is_deleted == false %>
-                      <%= link_to public_customer_path( @park_area.customer.id) do %>
-                        <%=  @park_area.customer.name %>
-                      <% end %>
-                      <%=  image_tag @park_area.customer.get_bike_image(100,100) %>
+           </div>
+            <div>
+              <table class="table text-center table-striped">
+                  <tr>
+                      <th style="width: 20%">駐車場名</th>
+                      <td style="width: 80%"><%= @park_area.name %></td>
+                  </tr>
+                  <tr>
+                      <th>説明</th>
+                      <td><%= @park_area.description %></td>
+                  </tr>
+                  <tr>
+                    <th>住所</th>
+                    <td><%= @park_area.addressOutput %></td>
+                  </tr>
+                  <tr>
+                      <th>駐車可能条件</th>
+                      <td><%= @park_area.spec_i18n %></td>
+                  </tr>
+                  <tr>
+                      <th>金額</th>
+                      <td><%= @park_area.price %>円 / <%= @park_area.parking_time %>時間</td>
+                  </tr>
+                  <tr>
+                      <th>目的地</th>
+                      <td><%= @park_area.purpose %></td>
+                  </tr>
+                  <tr>
+                    <th>投稿者</th>
+                    <td>
+                      <% if @park_area.customer.is_deleted == false %>
+                        <%= link_to public_customer_path( @park_area.customer.id) do %>
+                          <%=  @park_area.customer.name %>
+                        <% end %>
+                        <%=  image_tag @park_area.customer.get_bike_image(100,100) %>
 
-                      <% else %>
-                       <p class="text-danger">退会済みです。何かありましたら、お問合わせページより問い合わせください</p>
-                    <% end %>
-                  </td>
-                </tr>
-            </table>
+                        <% else %>
+                         <p class="text-danger">退会済みです。何かありましたら、お問合わせページより問い合わせください</p>
+                      <% end %>
+                    </td>
+                  </tr>
+              </table>
+            </div>
             <div id="favorite_btn_<%= @park_area.id %>" class="text-center">
                 <%= render "public/favorites/favorite",park_area: @park_area %>
             </div>

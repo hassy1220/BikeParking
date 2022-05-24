@@ -2,10 +2,16 @@
     <%= link_to public_park_favorites_path(park_area.id),method: :delete,class: 'text-danger',remote: true do %>
       <i class="fas fa-thumbs-up mr-3 fa-2x"></i>
     <% end %>
-    いいね<%= park_area.favorite_user.count %>件
+    いいね
+    <%= link_to public_park_favorites_path(park_area.id) do %>
+      <%= park_area.favorite_user.count %>件
+    <% end %>
 <% else %>
     <%= link_to public_park_favorites_path(park_area.id),method: :post,class: 'text-info',remote: true do %>
       <i class="fas fa-thumbs-up mr-3 fa-2x"></i>
     <% end %>
-    いいね<%= park_area.favorite_user.count %>件
+    いいね
+    <%= link_to public_park_favorites_path(park_area.id) do %>
+      <%= park_area.favorite_user.count %>件
+    <% end %>
 <% end %>

@@ -99,11 +99,8 @@ class Public::ParksController < ApplicationController
   def destroy
     park = params[:id]
     parks = current_customer.parks.ids
-    # debugger
     if parks.include?(park.to_i)
-      # debugger
       park_area = Park.find(park)
-
       park_area.destroy
       Park.destroy_sent_vicinity
     end

@@ -2,23 +2,8 @@
  <div class="row">
   <div class="col-md-5">
      <h1>ユーザー一覧</h1>
-     <table class="table table-borderless text-center">
-       <tr>
-        <td>ユーザー名</td>
-        <td>フォロー</td>
-       </tr>
-       <% @customers.each do |customer| %>
-       <tr>
-         <td>
-          <%= link_to public_customer_path(customer.id) do %>
-            <%= customer.name %>
-          <% end %>
-         </td>
-         <td id="index_relationship_btn_<%= customer.id %>" class="text-center">
-          <%= render "public/relationships/index_relationship",customer: customer %>
-         </td>
-       </tr>
-       <% end %>
+     <table class="table table-borderless text-center" id = "index_relationship_btn">
+       <%= render "public/relationships/index_relationship",customers: @customers %>
      </table>
    </div>
  </div>

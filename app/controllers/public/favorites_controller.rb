@@ -18,4 +18,9 @@ class Public::FavoritesController < ApplicationController
     else
     end
   end
+  def show
+    @like_user = Park.find(params[:park_id]).favorite_user
+  end
+
+
 end

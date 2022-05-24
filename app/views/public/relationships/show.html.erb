@@ -1,25 +1,18 @@
 <div class="container">
-  <% if @key == "follow" %>
-    <h1>フォロー一覧</h1>
-    <table class="table">
-      <% @follow_customer.each do |customer| %>
-      <tr>
-        <% if customer.follower.is_deleted == false %>
-          <td><%= customer.follower.name %></td>
+  <div class="row">
+    <div class="col-md-4 text-center">
+        <% if @key == "follow" %>
+          <h1>フォロー一覧</h1>
+            <table class="table table-borderless text-center" id = "index_relationship_btn2">
+                 <%= render "public/relationships/follow_relationship",follow_user: @follow_customer %>
+            </table>
+
+        <% elsif @key == "follower" %>
+        <h1>フォロワー一覧</h1>
+           <table class="table table-borderless text-center" id = "index_relationship_btn3">
+                <%= render "public/relationships/index_relationship",customers: @follower_customer %>
+           </table>
         <% end %>
-      </tr>
-      <% end %>
-    </table>
-  <% elsif @key == "follower" %>
-  <h1>フォロワー一覧</h1>
-    <table class="table">
-      <% @follower_customer.each do |customer| %>
-      <tr>
-        <% if customer.follow.is_deleted == false %>
-          <td><%= customer.follow.name %></td>
-        <% end %>
-      </tr>
-      <% end %>
-    </table>
-  <% end %>
+    </div>
+  </div>
 </div>
