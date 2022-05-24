@@ -63,3 +63,7 @@ $(function(){
     };
   initMap();
 });
+
+$(function(){
+  
+});

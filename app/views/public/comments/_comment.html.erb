@@ -30,7 +30,7 @@
 </table>
 <div class="text-center mb-3">
   <%= form_with model: [park_area,park_comment],url: public_park_comments_path(park_area.id),local: false do |f| %>
-    <%= f.text_field :comment,class:"form-control" %>
+    <%= f.text_field :comment,class:"form-control mb-3",placeholder:"コメントはここに" %>
     <%= f.submit"送信",class:"btn btn-success" %>
   <% end %>
 </div>
