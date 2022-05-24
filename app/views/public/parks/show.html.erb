@@ -4,14 +4,12 @@
          　  <div id="map" style="width:100%; height:600px"></div>
         </div>
         <div class="col-lg-6 show_detail pt-4">
-          <div id="show_image">
+          <div id="show_image" class="mb-3">
             <%# binding.pry %>
                <% if @park_area.images.attached? %>
-               　  　<% @park_area.images.each do |image| %>
-               　  　
+                  <% @park_area.images.each do |image| %>
                       <%= image_tag(image, width:150,height:150) %>
-                    
-                    <% end %>
+                  <% end %>
                   <!--投稿画像がなかったら、サンプリ画像を表示-->
                <% else %>
                   <%= image_tag 'parking-space-g37442e9c0_1280.jpg',size: '150x150' %>

@@ -13,7 +13,7 @@
             <%= f.search_field :address,placeholder:"住所",class:"form-control" %>
             <div class="text-center mt-3">
           　  <%= f.submit"詳細検索開始!!",class:"btn btn-success" %>
-          　</div>
+            </div>
           <% end %>
         </div>
       </div>
@@ -22,11 +22,11 @@
         <div id="vicinity_button" class="collapse text-center">
       　   <%= render "public/parks/vicinity_search",vicinity: @vicinity %>
     　　  </div>
-  　　  </div>
-  　　<div class="col-md-2">
+      </div>
+      <div class="col-md-3 text-right">
          <%= link_to"検索クリア",public_parks_path,class:"btn btn-info" %>
-  　　</div>
-  　</div>
+      </div>
+    </div>
 
     <div id="map" style="width:100%; height:600px"></div>
 
