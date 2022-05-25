@@ -10,13 +10,29 @@ ActiveStorage::PurgeJob.queue_adapter = :inline
 Admin.create!(email:"test@test",password:111111
   )
 
-Customer.create!(
+customer = Customer.create!(
   [
     {email: 'yamada@test.com', name: '山田太郎', password: '111111', bike_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")},
     {email: 'reiwa@test.com', name: '令和太郎', password: '111111', bike_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")},
     {email: 'heisei@test.com', name: '平成太郎', password: '111111', bike_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")}
   ]
 )
+
+customer.each do |bike|
+  if customer.id = 1
+    bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike01.jpg"), filename:"my_bike01.jpg")
+    bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike02.jpg"), filename:"my_bike02.jpg")
+    bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike03.jpg"), filename:"my_bike03.jpg")
+  elsif customer.id = 2
+    bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike04.jpg"), filename:"my_bike04.jpg")
+    bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike05.jpg"), filename:"my_bike05.jpg")
+    bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike06.jpg"), filename:"my_bike06.jpg")
+  elsif customer.id = 3
+    bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike07.jpg"), filename:"my_bike07.jpg")
+    bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike08.jpg"), filename:"my_bike08.jpg")
+    bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike09.jpg"), filename:"my_bike09.jpg")
+  end
+end
 
 park = Park.create!(
   [

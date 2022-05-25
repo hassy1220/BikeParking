@@ -7,7 +7,6 @@ class Public::CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
     @customer_park = @customer.parks.page(params[:page]).per(6)
-    @my_bike_phote = Park.new
   end
   def edit
     @customer = Customer.find(params[:id])

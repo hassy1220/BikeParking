@@ -1,0 +1,15 @@
+
+[1mFrom:[0m /home/ec2-user/environment/bike_parking/app/views/public/customers/show.html.erb:28 #<Class:0x00007f3ce4071a98>#_app_views_public_customers_show_html_erb__3094268289862878120_69949750219120:
+
+    [1;34m23[0m:               <% @customer.my_bike_images.each_with_index do |image,i| %>
+    [1;34m24[0m:                  <%= image_tag(image, width:150,height:150,class: "avatar#{i+1}") %>
+    [1;34m25[0m:               <% end %>
+    [1;34m26[0m:               <%= f.file_field :my_bike_images,multiple:true,accept:"image/jpg",class:"uploader",style: "display:none" %>
+    [1;34m27[0m:                 <% if @customer.my_bike_images.length == 1 %>
+ => [1;34m28[0m:                 <%= binding.pry %>
+    [1;34m29[0m:                   <%= image_tag('icon.png',size: "150x150", class: 'avatar2') %>
+    [1;34m30[0m:                 　<%= image_tag('icon.png',size: "150x150", class: 'avatar3') %>
+    [1;34m31[0m:                 　<%= f.file_field :my_bike_images,multiple:true,accept:"image/jpg",class:"uploader",style: "display:none" %>
+    [1;34m32[0m:                 <% elsif @customer.my_bike_images.length == 2 %>
+    [1;34m33[0m: 
+
