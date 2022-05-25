@@ -29,6 +29,12 @@
   // }
 }
 
+.my_bike{
+  display: flex;
+  justify-content: space-around;
+
+}
+
 .delete_btn{
   position: absolute;
     right: 0;
@@ -51,7 +57,7 @@
 
 // TOPページのスライドショー(~58行目まで)
 .contena{
-  height: 80vh;
+  height: 60vh;
 }
 
 .slider-image {
