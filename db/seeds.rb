@@ -19,15 +19,15 @@ customer = Customer.create!(
 )
 
 customer.each do |bike|
-  if customer.id = 1
+  if bike.id = 1
     bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike01.jpg"), filename:"my_bike01.jpg")
     bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike02.jpg"), filename:"my_bike02.jpg")
     bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike03.jpg"), filename:"my_bike03.jpg")
-  elsif customer.id = 2
+  elsif bike.id = 2
     bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike04.jpg"), filename:"my_bike04.jpg")
     bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike05.jpg"), filename:"my_bike05.jpg")
     bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike06.jpg"), filename:"my_bike06.jpg")
-  elsif customer.id = 3
+  elsif bike.id = 3
     bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike07.jpg"), filename:"my_bike07.jpg")
     bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike08.jpg"), filename:"my_bike08.jpg")
     bike.my_bike_images.attach(io: File.open("#{Rails.root}/db/fixtures/my_bike09.jpg"), filename:"my_bike09.jpg")
