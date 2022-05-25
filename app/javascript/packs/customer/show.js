@@ -1,24 +1,15 @@
 window.addEventListener('load', () => {
-    console.log("ok");
     const uploader = document.querySelector('.uploader');
-    console.log(uploader);
     uploader.addEventListener('change', (e) => {
       const file1 = uploader.files[0];
-      // alert(file1);
       const file2 = uploader.files[1];
-      // console.log(file2);
       if(file2 == undefined){
         document.querySelector('.avatar2').setAttribute('src', '../../assets/icon.png');
-        // alert("aa");
       }
-      // alert(file2);
       const file3 = uploader.files[2];
       if(file3 == undefined){
         document.querySelector('.avatar3').setAttribute('src', '../../assets/icon.png');
-        // alert("aa");
       };
-      // alert(file3);
-
 
       const reader1 = new FileReader();
       reader1.readAsDataURL(file1);
@@ -33,7 +24,6 @@ window.addEventListener('load', () => {
         const image = reader2.result;
         document.querySelector('.avatar2').setAttribute('src', image);
       }
-
 
       const reader3 = new FileReader();
       reader3.readAsDataURL(file3);

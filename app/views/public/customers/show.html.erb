@@ -1,9 +1,13 @@
 <div class="container">
-  <div class="row">
+  <div class="row ">
     <div class="col-md-6">
-      <%= image_tag(@customer.bike_image,class:"customer_image") %>
+      <% if @customer.bike_image.attached? %>
+        <%= image_tag(@customer.bike_image,class:"customer_image") %>
+      <% else %>
+        <%= image_tag('harley-g79ab8bdd0_1920.jpg', class: 'customer_image') %>
+      <% end %>
     </div>
-    <div class="col-md-6 customer_profile d-flex justify-content-center align-items-center">
+    <div class="col-md-6 customer_profile d-flex justify-content-center align-items-center" >
       <table class="table text-center">
         <tr>
           <th>名前</th>
@@ -34,7 +38,7 @@
     </div>
   </div>
 
-  <div class="text-center mt-5">
+  <div class="text-center mt-5 mb-5">
       <%= render "layouts/error" %>
       <% if @customer == current_customer %>
         <h5>お気に入りの画像を公開しよう！(！！3枚まで)</h5>

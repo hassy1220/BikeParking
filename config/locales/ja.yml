@@ -54,6 +54,7 @@ ja:
         email: メールアドレス
         password: パスワード
         name: 名前
+        description: 説明
         password_confirmation: 確認用パスワード
       comment:
         comment: コメント

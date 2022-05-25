@@ -1,22 +1,25 @@
-
-
-  <% flash.each do |message_type, messages| %>
-    <% if messages.class == Array %>
-      <% messages.each do |message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
+<div class="container">
+  <div class="row text-center">
+    <div class="col-md-6 offset-md-3">
+      <% flash.each do |message_type, messages| %>
+        <% if messages.class == Array %>
+          <% messages.each do |message| %>
+            <div class="alert alert-<%= message_type %>"><%= message %></div>
+          <% end %>
+        <% else %>
+            <div class="alert alert-<%= message_type %>"><%= messages %></div>
+        <% end %>
       <% end %>
-    <% else %>
-        <div class="alert alert-<%= message_type %>"><%= messages %></div>
-    <% end %>
-  <% end %>
 
-  <%= form_with model: @customer,url: public_customer_path(@customer.id) do |f| %>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %><br>
-    <%= f.label :description %><br>
-    <%= f.text_area :description,rows: 3 %><br>
-    <label>プロフィール画像</label><br>
-    <%= f.file_field :bike_image,accept:"image/jpg" %><br>
-    <%= f.submit"変更" %>
-  <% end %>
+      <%= form_with model: @customer,url: public_customer_path(@customer.id) do |f| %>
+        <%= f.label :name %><br>
+        <%= f.text_field :name,class:"form-control" %><br>
+        <%= f.label :description %><br>
+        <%= f.text_area :description,rows: 3,class:"form-control" %><br>
+        <label>プロフィール画像</label><br>
+        <%= f.file_field :bike_image,accept:"image/jpg" %><br>
+        <%= f.submit"変更",class:"btn btn-success mt-3" %>
+      <% end %>
+    </div>
+  </div>
 </div>
