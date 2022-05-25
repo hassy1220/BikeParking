@@ -7,6 +7,7 @@ class Public::CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
     @customer_park = @customer.parks.page(params[:page]).per(6)
+    @my_bike_phote = Park.new
   end
   def edit
     @customer = Customer.find(params[:id])
@@ -33,7 +34,7 @@ class Public::CustomersController < ApplicationController
 
   private
   def customer_params
-    params.require(:customer).permit(:name,:description,:bike_image)
+    params.require(:customer).permit(:name,:description,:bike_image,my_bike_images: [])
   end
 
   # URL直打ちしたら、マイページに飛ばす(編集、更新、退会)

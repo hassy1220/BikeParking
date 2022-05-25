@@ -34,13 +34,13 @@ $(function(){
     navigator.geolocation.getCurrentPosition(function(pos) {
         // gps 取得成功
     // google map 初期化
-      // var gmap = new google.maps.Map($('#gmap').get(0), {
-      //     // center: new google.maps.LatLng(35, 135),
-      //       mapTypeId: google.maps.MapTypeId.ROADMAP,
-      //     zoom: 17
-      //   });
+      var gmap = new google.maps.Map($('#gmap').get(0), {
+          // center: new google.maps.LatLng(35, 135),
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          zoom: 17
+      });
 
-    // // 現在位置にピンをたてる
+    // 現在位置にピンをたてる
       var currentPos = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
     　   var currentMarker = new google.maps.Marker({
             position: currentPos
@@ -149,19 +149,35 @@ $(function(){
 
 　　　　var service = new google.maps.places.PlacesService(map);
         var request={
-            　locationBias: {north: 33.600747, south: 33.578963, east: -130.434000, west: -130.386021},
-            　query: key
+            　location: new google.maps.LatLng(33.589815,130.412306),
+            // 　{north: 33.600747, south: 33.578963, east: 130.434000, west: 130.386021},
+            //
+            　radius: 2000,
+            　query: key,
+            // 　type:[],
         };
         service.textSearch(request,callback);
 
         function callback(results, status){
            if (status == google.maps.places.PlacesServiceStatus.OK) {
+            // var places = [];
+            // for (var i = 0; i < results.length; i++) {
+            //     places.push(results[i].formatted_address);
+            // }
+            // console.log(places);
+            // if(places.indexOf("福岡")){
+            //   alert("福岡県ないです");
+            // }else{
+            //   return
+            // };
+
              for (var i = 0; i < results.length; i++) {
                 var place = results[i];
-                if(place.formatted_address.search('福岡') === -1){
-                  alert("検索範囲外です");
-                  return;
-                };
+                // if(place.formatted_address.search('福岡') === -1){
+                //   alert(place.formatted_address);
+                //   alert("検索範囲外です");
+                //   return;
+                // };
 
                 infowindow[i] = new google.maps.InfoWindow({
                   content: place.name,

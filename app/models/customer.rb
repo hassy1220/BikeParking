@@ -29,6 +29,7 @@ class Customer < ApplicationRecord
   has_many:follower_user,through: :reverse_of_relationships,source: :follow
 
   has_one_attached:bike_image
+  has_many_attached :my_bike_images
   validates :name,presence: true
 
   def self.guest
