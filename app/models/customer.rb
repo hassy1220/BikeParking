@@ -13,11 +13,6 @@ class Customer < ApplicationRecord
   # 相手もたくさんの通知を持っている
   has_many:passive_notifications,class_name: :"Notification",foreign_key: :visited_id,dependent: :destroy
 
-  # is_deletedがfalseならtrueを返すようにしている
-  def active_for_authentication?
-    super && (is_deleted == false)
-  end
-
   # フォロー本人目線
   has_many:relationships,class_name: "Relationship",foreign_key: "follow_id",dependent: :destroy
   # フォローされた人目線
@@ -31,6 +26,8 @@ class Customer < ApplicationRecord
   has_one_attached:bike_image
   has_many_attached :my_bike_images
   validates :name,presence: true
+  FILE_NUMBER_LIMIT = 3
+  validate :validate_number_of_files
 
   def self.guest
     find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |customer|
@@ -38,6 +35,12 @@ class Customer < ApplicationRecord
       customer.name = "guestuser"
     end
   end
+
+  # is_deletedがfalseならtrueを返すようにしている
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
+
 
   # カスタマーのプロフィール画像を表示させるメソッド
   def get_bike_image(width,height)
@@ -72,5 +75,10 @@ class Customer < ApplicationRecord
     end
   end
 
+  # 投稿できる画像を３枚までに制限する
+  def validate_number_of_files
+    return if my_bike_images.length <= FILE_NUMBER_LIMIT
+    errors.add(:images, "に添付できる画像は#{FILE_NUMBER_LIMIT}件までです。")
+  end
 
 end

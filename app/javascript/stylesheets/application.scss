@@ -18,6 +18,10 @@
   width: 100%;
 }
 
+.customer_profile{
+  position: relative;
+}
+
 #show_image{
   display: flex;
   justify-content: space-around;
@@ -31,7 +35,10 @@
 .my_bike{
   display: flex;
   justify-content: space-around;
+}
 
+.customer_image{
+  width: 100%;
 }
 
 .delete_btn{
@@ -44,6 +51,12 @@
   position: absolute;
     left: 0;
     bottom: 0;
+}
+
+.customer_fix{
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 
 .container{

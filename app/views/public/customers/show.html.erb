@@ -1,48 +1,110 @@
 <div class="container">
-  <div class="text-center">
-      <%= image_tag @customer.get_bike_image(400,400) %>
-    <p>名前：<%= @customer.name %></p>
-    <p>自己紹介：<%= @customer.description %></p>
-    <% if @customer == current_customer %>
-      <p>
-        <% if @customer.name != "guestuser" %>
-          <%= link_to"編集",edit_public_customer_path(current_customer.id),class:"btn btn-success" %>
-          <%= link_to"退会",unsubscribe_path(@customer.id),class:"btn btn-danger" %>
-        <% end %>
-      </p>
-    <% end %>
-    <div id="relationship_btn">
-      <%= render "public/relationships/relationship",customer: @customer %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= image_tag(@customer.bike_image,class:"customer_image") %>
     </div>
-    <div>
-      <h5>お気に入りの画像を公開しよう！(！！3枚まで)</h5>
-      <p>※一度に複数選択することで、複数画像選択することができます</p>
-      <div class="my_bike">
-        <%= form_with model: @customer,url: public_customer_path(@customer.id),method: :patch do |f| %>
-            <%= f.label :my_bike_images do %>
-              <%= f.file_field :my_bike_images,multiple:true,accept:"image/jpg",class:"uploader",style: "display:none" %>
-              <% if @customer.my_bike_images.attached? %>
-                <% @customer.my_bike_images.each_with_index do |image,i| %>
-                   <%= image_tag(image, width:150,height:150,class: "avatar#{i+1}") %>
-                <% end %>
-                <% if @customer.my_bike_images.length == 1 %>
-                  <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar2') %>
-                　<%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar3') %>
-                <% elsif @customer.my_bike_images.length == 2 %>
-                  <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar3') %>
-                <% end %>
-              <% else %>
-              　<%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar1') %>
-              　<%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar2') %>
-              　<%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar3') %>
-              <% end %>
-            <% end %>
-            <%= f.hidden_field :name %>
-            <%= f.submit"変更" %>
-        <% end %>
-      </div>
+    <div class="col-md-6 customer_profile d-flex justify-content-center align-items-center">
+      <table class="table text-center">
+        <tr>
+          <th>名前</th>
+          <td><%= @customer.name %></td>
+        </tr>
+        <tr>
+          <th>自己紹介</th>
+          <td><%= @customer.description %></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td>
+            <div id="relationship_btn">
+              <%= render "public/relationships/relationship",customer: @customer %>
+            </div>
+          </td>
+        </tr>
+      </table>
 
+      <% if @customer == current_customer %>
+        <p class="customer_fix">
+          <% if @customer.name != "guestuser" %>
+            <%= link_to"編集",edit_public_customer_path(current_customer.id),class:"btn btn-success" %>
+            <%= link_to"退会",unsubscribe_path(@customer.id),class:"btn btn-danger" %>
+          <% end %>
+        </p>
+      <% end %>
     </div>
+  </div>
+
+  <div class="text-center mt-5">
+      <%= render "layouts/error" %>
+      <% if @customer == current_customer %>
+        <h5>お気に入りの画像を公開しよう！(！！3枚まで)</h5>
+        <p>※一度に複数選択することで、複数画像選択することができます</p>
+
+          <%= form_with model: @customer,url: public_customer_path(@customer.id),method: :patch do |f| %>
+          <div class="my_bike">
+                <%= f.file_field :my_bike_images,multiple:true,accept:"image/jpg",class:"uploader",style: "display:none" %>
+                <% if @customer.my_bike_images.attached? %>
+                    <% @customer.my_bike_images.each_with_index do |image,i| %>
+                       <%= f.label :my_bike_images,class:"my_bike_label" do %>
+                         <%= image_tag(image, width:150,height:150,class: "avatar#{i+1}") %>
+                       <% end %>
+                    <% end %>
+
+                    <% if @customer.my_bike_images.length == 1 %>
+                      <%= f.label :my_bike_images,class:"my_bike_label" do %>
+                        <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar2') %>
+                      <% end %>
+                      <%= f.label :my_bike_images,class:"my_bike_label" do %>
+                      　<%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar3') %>
+                      <% end %>
+
+                    <% elsif @customer.my_bike_images.length == 2 %>
+                      <%= f.label :my_bike_images,class:"my_bike_label" do %>
+                        <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar3') %>
+                      <% end %>
+                    <% end %>
+
+                <% else %>
+
+                　<%= f.label :my_bike_images,class:"my_bike_label" do %>
+                　　<%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar1') %>
+                　<% end %>
+                　<%= f.label :my_bike_images,class:"my_bike_label" do %>
+                　　<%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar2') %>
+                　<% end %>
+                　<%= f.label :my_bike_images,class:"my_bike_label" do %>
+                　　<%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar3') %>
+                　<% end %>
+
+                <% end %>
+              <%= f.hidden_field :name %>
+         </div>
+              <br><%= f.submit"保存",class:"btn btn-success" %>
+          <% end %>
+
+      <% else %>
+
+
+         <div class="my_bike">
+           <% if @customer.my_bike_images.attached? %>
+              <% @customer.my_bike_images.each do |image| %>
+                <%= image_tag(image, width:150,height:150) %>
+              <% end %>
+                <% if @customer.my_bike_images.length == 1 %>
+                  <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
+                  <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
+                <% elsif @customer.my_bike_images.length == 2 %>
+                  <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
+                  <% end %>
+           <% else %>
+              <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
+              <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
+              <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
+           <% end %>
+         </div>
+
+      <% end %>
+
   </div>
 
   <div class="pb-4">
@@ -103,4 +165,7 @@
   </div>
 </div>
 
-<%= javascript_pack_tag 'customer/show' %>
+<% if @customer == current_customer %>
+  <p>aaa</p>
+  <%= javascript_pack_tag 'customer/show' %>
+<% end %>
