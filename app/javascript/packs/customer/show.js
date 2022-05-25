@@ -1,5 +1,7 @@
 window.addEventListener('load', () => {
+    console.log("ok");
     const uploader = document.querySelector('.uploader');
+    console.log(uploader);
     uploader.addEventListener('change', (e) => {
       const file1 = uploader.files[0];
       // alert(file1);

@@ -24,12 +24,20 @@
           </p>
         </div>
       </div>
-
     </div>
 
+    <div class="mt-3">
+      <p class="text-center ">みんなのバイク</p>
+      <div class="top_images">
+        <% @customer.my_bike_images.each do |bike| %>
+          <div class="image"><%= image_tag(bike,width: 150,height: 150) %></div>
+        <% end %>
+      </div>
+    </div>
 </div>
 
 <%= javascript_pack_tag 'home' %>
+
 
 
 

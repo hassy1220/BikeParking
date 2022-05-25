@@ -20,13 +20,12 @@
 
 #show_image{
   display: flex;
-  // justify-content: center;
-  // margin-right: 2rem;
-  // margin-bottom: 10px;
   justify-content: space-around;
-  // &_park{
-  //   margin-right: 1vw;
-  // }
+}
+
+.top_images{
+  display: flex;
+  justify-content: space-around;
 }
 
 .my_bike{
@@ -49,8 +48,6 @@
 
 .container{
   padding-top: 80px;
-  // margin-bottom: 10px;
-  // height: 80vh;
 }
 
 
