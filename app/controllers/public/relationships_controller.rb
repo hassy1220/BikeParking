@@ -6,10 +6,9 @@ class Public::RelationshipsController < ApplicationController
     relationship.follower_id = @customer.id
     relationship.save
     @customer.create_notification_follow!(current_customer)
-
     @customers = Customer.where(is_deleted: false)
-    @follow_customer = current_customer.follow_user
-    @follower_customer = current_customer.follower_user
+    @follow_customer = current_customer
+    @follower_customer = current_customer
 
   end
   def destroy
@@ -18,15 +17,15 @@ class Public::RelationshipsController < ApplicationController
     relationship.destroy
 
     @customers = Customer.where(is_deleted: false)
-    @follow_customer = current_customer.follow_user
-    @follower_customer = current_customer.follower_user
+    @follow_customer = current_customer
+    @follower_customer = current_customer
 
   end
 
   def show
     @key = params[:key]
-    customer = Customer.find(params[:customer_id])
-    @follow_customer = customer.follow_user
-    @follower_customer = customer.follower_user
+    @customer = Customer.find(params[:customer_id])
+    @follow_customer = @customer.follow_user
+    @follower_customer = @customer.follower_user
   end
 end

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-3">
   <div class="row ">
     <div class="col-md-6">
       <% if @customer.bike_image.attached? %>
@@ -7,7 +7,7 @@
         <%= image_tag('harley-g79ab8bdd0_1920.jpg', class: 'customer_image') %>
       <% end %>
     </div>
-    <div class="col-md-6 customer_profile d-flex justify-content-center align-items-center" >
+    <div class="col-md-6 customer_profile pb-3" >
       <table class="table text-center">
         <tr>
           <th>名前</th>
@@ -18,8 +18,8 @@
           <td><%= @customer.description %></td>
         </tr>
         <tr>
-          <th></th>
-          <td>
+
+          <td colspan="2">
             <div id="relationship_btn">
               <%= render "public/relationships/relationship",customer: @customer %>
             </div>

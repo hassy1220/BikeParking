@@ -9,7 +9,7 @@
       <%= flash[:alert] %>
     </div>
   <% end %>
-  <div class="text-center">
+  <div class="text-center mt-3">
    <input type="text" id="keyword"><button id="search" class="btn btn-info">検索実行</button>
   </div>
 
@@ -20,27 +20,38 @@
 
   <%= form_with model: @park,url: public_parks_path do |f| %>
   <table class="table">
+      <tr><div class="text-center">投稿する画像を選択してください(３枚まで)<br>※一度に複数選択することで、複数画像選択することができます</div></tr>
       <tr>
-          <td>Choose file</td>
-          <td><%= f.file_field :images,multiple:true,accept:"image/jpg" %></td>
+          <div class="my_bike">
+            <%= f.label :images,class:"image_label" do %>
+              <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar1') %>
+            <% end %>
+            <%= f.label :images,class:"image_label" do %>
+             <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar2') %>
+            <% end %>
+            <%= f.label :images,class:"image_label" do %>
+             <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar3') %>
+            <% end %>
+          </div>
+          <%= f.file_field :images,multiple:true,accept:"image/jpg",class:"uploader" ,style: "display:none" %>
       <tr>
-           <td>駐輪場名</td>
+           <td class="text-center">駐輪場名</td>
            <td><%= f.text_field :name,class:"form-control",placeholder:"駐車場名がわからない場合は(〜市駐車場等)" %></td>
       </tr>
       <tr>
-           <td>説明事項</td>
+           <td class="text-center">説明事項</td>
            <td><%= f.text_area :description,class:"form-control",placeholder:"広さ、目的地へのアクセスの良さ等" %></td>
       </tr>
       <tr>
-           <td>駐車可能条件</td>
+           <td class="text-center">駐車可能条件</td>
            <td><%= f.collection_radio_buttons :spec, Park.specs_i18n, :first , :last %></td>
       </tr>
       <tr>
-           <td>目的地</td>
+           <td class="text-center">目的地</td>
            <td><%= f.text_field :purpose,class:"form-control",placeholder:"例）キャナルシティ" %></td>
       </tr>
       <tr>
-           <td>金額</td>
+           <td class="text-center">金額</td>
            <td><%= f.text_field :price %> / <%= f.select :parking_time,*[1..24] %>時間</td>
       </tr>
        <%= f.hidden_field :lat,value:"lat" %>

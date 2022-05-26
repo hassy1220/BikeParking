@@ -87,7 +87,7 @@ class Public::ParksController < ApplicationController
          session[:parks] = nil
          @park.sent_vicinity(@vicinity,@park)
          flash[:notice]="投稿を保存しました"
-         redirect_to public_parks_path
+         redirect_to public_park_path(@park.id)
       else
          session[:parks] = @park.attributes.slice(*park_params.keys)
          flash[:danger]=@park.errors.full_messages
