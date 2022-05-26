@@ -40,7 +40,7 @@ class Public::CustomersController < ApplicationController
   def correct_customer
     @customer = Customer.find(params[:id])
     unless @customer == current_customer
-      redirect_to public_customer_path(current_customer.id)
+      redirect_to public_customer_path(current_customer.id), notice: '他人のプロフィール編集画面へ遷移できません。'
     end
   end
 

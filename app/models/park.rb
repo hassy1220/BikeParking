@@ -14,6 +14,7 @@ class Park < ApplicationRecord
   validates :name, presence: true, length: {maximum: 15}
   validates :purpose,presence: true
   validates :lat,length: { minimum: 4}
+  validates :parking_time,presence: true
   FILE_NUMBER_LIMIT = 3
   validate :validate_number_of_files
   PRICE_NUMBER_LIMIT = 0

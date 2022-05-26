@@ -35,24 +35,35 @@
           </div>
           <%= f.file_field :images,multiple:true,accept:"image/jpg",class:"uploader" ,style: "display:none" %>
       <tr>
-           <td class="text-center">駐輪場名</td>
+           <td class="text-center align-middle">駐輪場名</td>
            <td><%= f.text_field :name,class:"form-control",placeholder:"駐車場名がわからない場合は(〜市駐車場等)" %></td>
       </tr>
       <tr>
-           <td class="text-center">説明事項</td>
+           <td class="text-center align-middle">説明事項</td>
            <td><%= f.text_area :description,class:"form-control",placeholder:"広さ、目的地へのアクセスの良さ等" %></td>
       </tr>
       <tr>
-           <td class="text-center">駐車可能条件</td>
+           <td class="text-center align-middle">駐車可能条件</td>
            <td><%= f.collection_radio_buttons :spec, Park.specs_i18n, :first , :last %></td>
       </tr>
       <tr>
-           <td class="text-center">目的地</td>
+           <td class="text-center align-middle">目的地</td>
            <td><%= f.text_field :purpose,class:"form-control",placeholder:"例）キャナルシティ" %></td>
       </tr>
       <tr>
-           <td class="text-center">金額</td>
-           <td><%= f.text_field :price %> / <%= f.select :parking_time,*[1..24] %>時間</td>
+           <td class="text-center align-middle">金額</td>
+           <td>
+             <div class="row">
+               <div class="col-3">
+                 <%= f.text_field :price,class:"form-control" %>
+               </div>
+               円/
+               <div class="col-2">
+                   <%= f.select :parking_time,*[1..24],{include_blank: true},class:"form-control" %>
+               </div>
+               時間
+             </div>
+           </td>
       </tr>
        <%= f.hidden_field :lat,value:"lat" %>
        <%= f.hidden_field :lng,value:"lng" %>

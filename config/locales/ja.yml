@@ -29,6 +29,8 @@ ja:
               blank: を入力してください
             lat:
               too_short: をマップ上でクリックしてください
+            parking_time:
+              blank: の時間を入力してください
             price:
               blank: を入力してください
         customer:
@@ -48,6 +50,7 @@ ja:
       park:
         name: 駐車場名
         price: 金額
+        parking_time: パーキングエリア
         purpose: 目的地
         lat: 投稿する駐車場の位置
       customer:
