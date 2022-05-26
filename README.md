@@ -18,6 +18,9 @@
 
 ## 設計書
   https://drive.google.com/file/d/1vToUX5JmQvmqBzKf4NNCLfSWldwJtOfc/view?usp=sharing
+  
+## ER図
+　![BikeParking ER図](https://user-images.githubusercontent.com/99014620/170477455-fdcc4a0c-fb19-45b5-9a58-8359ed3a234f.png)
 
 ## 開発環境
 - OS：Linux(CentOS)

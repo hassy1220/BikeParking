@@ -117,14 +117,6 @@ footer {
   width: 100%;
 }
 
-//背景画像
-// .user_backimage{
-//   background-image: url("../../assets/images/road.jpg");
-//   background-size:cover;
-//   object-position: 80% 20%;
-// }
-
-
 //Par showページの最寄り一覧の装飾
 .tag {
   display: inline-block;
@@ -134,24 +126,14 @@ footer {
 
 //背景色
 .content{
-  // background-attachment: fixed;
   background-image: url("../../assets/images/top_image03.jpg");
   background-size: cover;
-  // background-position: center center;
-  // background-repeat: no-repeat;
-  // position: relative;
 }
 
-// .content::before {
-//   background: inherit;
-//   content: '';
-//   filter: blur(5px);
-//   position: absolute;
-//   top: -5px;
-//   right: -5px;
-//   bottom: -5px;
-//   left: -5px;
-// }
-// .container{
-//
-// }
+.navbar{
+  background-color: #bdb888;
+}
+
+footer{
+  background-color: #bdb888;
+}

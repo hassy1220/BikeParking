@@ -68,6 +68,7 @@
               <%= list.customer.name %>
             </td>
              <td><%= list.comment %></td>
+             <td><%= link_to"削除",admin_park_comment_path(list.park.id,list.id),method: :delete,class:"btn btn-danger" %></td>
           <% end %>
         </tr>
       <% end %>

@@ -17,7 +17,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources:customers,only:[:index,:show,:edit,:update]
-    resources:parks,only:[:index,:show,:destroy]
+    resources:parks,only:[:index,:show,:destroy] do
+      resources:comments,only:[:destroy]
+    end
   end
 
   namespace :public do
