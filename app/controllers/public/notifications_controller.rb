@@ -7,8 +7,8 @@ class Public::NotificationsController < ApplicationController
     # notifications.where(checked: false).each do |notification|
     #   notification.update(checked: true)
     # end
-
   end
+
   def destroy
     notification = Notification.find(params[:id])
     notification.destroy
@@ -17,14 +17,14 @@ class Public::NotificationsController < ApplicationController
 
   # 一週間以降のものは削除する(自分の)
   private
+
   def delete_message
     message = current_customer.passive_notifications.all.where.not(created_at: 1.week.ago.beginning_of_day..Time.zone.now.end_of_day)
     message.each do |list|
-    debugger
+      debugger
       unless list.park.customer == current_customer
         list.destroy
       end
     end
   end
-
 end

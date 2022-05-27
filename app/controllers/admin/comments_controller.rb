@@ -5,8 +5,8 @@ class Admin::CommentsController < ApplicationController
     park_comment = park.comments.ids
     if park_comment.include?(comment.to_i)
       # debugger
-       comment = Comment.find(comment)
-       comment.destroy
+      comment = Comment.find(comment)
+      comment.destroy
     end
     redirect_to request.referer
   end
