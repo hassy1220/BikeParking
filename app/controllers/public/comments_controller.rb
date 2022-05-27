@@ -1,11 +1,9 @@
 class Public::CommentsController < ApplicationController
   def create
-    # @new_comment = Comment.new
     @park = Park.find(params[:park_id])
     @comment = Comment.new(comment_params)
     @comment.park_id = @park.id
     @comment.customer_id = current_customer.id
-    @park_comments = @park.comments.page(params[:page]).per(5)
     if @comment.save
       # park.rbのcreate_notification_comment!(current_customer, comment_id)メソッドを実行
       @park.create_notification_comment!(current_customer, @comment.id)
@@ -17,19 +15,44 @@ class Public::CommentsController < ApplicationController
     else
       flash.now[:danger] = @comment.errors.full_messages
     end
+    @park_comments = @park.comments.page(params[:page]).per(5)
+
   end
 
   def destroy
     # ダブルクリック回避方法
-    park = Park.find(params[:park_id])
+    @park = Park.find(params[:park_id])
     comment = params[:id]
-    park_comment = park.comments.ids
+    park_comment = @park.comments.ids
     if park_comment.include?(comment.to_i)
       # debugger
       comment = Comment.find(comment)
       comment.destroy
     end
-    redirect_to request.referer
+    @park_comment = Comment.new
+    @park_comments = @park.comments.page(params[:page]).per(5)
+
+    # redirect_to request.referer
+  end
+
+  def index
+    @park_comment = Comment.new
+    @park = Park.find(params[:park_id])
+    @park_comments = @park.comments.page(params[:page]).per(5)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def show
+    @park_comment = Comment.new
+    @park = Park.find(params[:park_id])
+    @park_comments = @park.comments.page(params[:page]).per(5)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   private

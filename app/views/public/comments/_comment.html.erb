@@ -19,7 +19,7 @@
       <td style="width: 60%"><%= list.comment %></td>
       <td>
         <% if list.customer == current_customer %>
-          <%= link_to public_park_comment_path(list.park.id,list.id),method: :delete,class:"btn btn-danger" do %>
+          <%= link_to public_park_comment_path(list.park.id,list.id),method: :delete,remote: true,class: "btn btn-danger" do %>
                削除
           <% end %>
         <% end %>
