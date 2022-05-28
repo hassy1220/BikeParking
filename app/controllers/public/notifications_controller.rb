@@ -21,7 +21,6 @@ class Public::NotificationsController < ApplicationController
   def delete_message
     message = current_customer.passive_notifications.all.where.not(created_at: 1.week.ago.beginning_of_day..Time.zone.now.end_of_day)
     message.each do |list|
-      debugger
       unless list.park.customer == current_customer
         list.destroy
       end

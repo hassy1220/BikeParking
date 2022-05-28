@@ -4,11 +4,11 @@ window.addEventListener('load', () => {
       const file1 = uploader.files[0];
       const file2 = uploader.files[1];
       if(file2 == undefined){
-        document.querySelector('.avatar2').setAttribute('src', '../../assets/icon.png');
+        document.querySelector('.avatar2').setAttribute('src', '../../assets/girl-gcf2ba2e1b_1280.png');
       }
       const file3 = uploader.files[2];
       if(file3 == undefined){
-        document.querySelector('.avatar3').setAttribute('src', '../../assets/icon.png');
+        document.querySelector('.avatar3').setAttribute('src', '../../assets/girl-gcf2ba2e1b_1280.png');
       };
 
       const reader1 = new FileReader();

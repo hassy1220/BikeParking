@@ -1,4 +1,4 @@
-  <% customers.each do |customer| %>
+<% customers.each do |customer| %>
     <tr>
       <td>
         <%= link_to public_customer_path(customer.id) do %>
@@ -8,9 +8,9 @@
       <td>
         <% unless customer == current_customer %>
           <% if customer.follow_user_by(current_customer) %>
-            <%= link_to"解除",public_customer_relationships_path(customer.id),method: :delete,remote: true,class:"btn btn-danger" %>
+            <%= link_to"解除",public_customer_relationships_path(customer.id,list: search),method: :delete,remote: true,class:"btn btn-danger" %>
           <% else %>
-            <%= link_to"フォロー",public_customer_relationships_path(customer.id),method: :post,remote: true,class:"btn btn-success" %>
+            <%= link_to"フォロー",public_customer_relationships_path(customer.id,list: search),method: :post,remote: true,class:"btn btn-success" %>
           <% end %>
         <% end %>
       </td>

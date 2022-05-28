@@ -23,20 +23,27 @@ class Public::ParksController < ApplicationController
   def index
     par_page = 5
     @start = ((params[:page] || 1).to_i - 1) * par_page + 1
-    like_park = @posts = Park.includes(:favorite_user).sort { |a, b| b.favorite_user.size <=> a.favorite_user.size }
+    @posts = Park.includes(:favorite_user).sort { |a, b| b.favorite_user.size <=> a.favorite_user.size }
     # いいね順で取得した配列をkaminariに適用させる。
-    @like_park = Kaminari.paginate_array(like_park).page(params[:page]).per(5)
+    @like_park = Kaminari.paginate_array(@posts).page(params[:page]).per(5)
     @vicinity = Vicinity.page(params[:vicinity_page]).per(7)
 
     if params[:vicinity_ids].present? || params[:engine_spec]
       # 最寄り検索した場合のメソッド
-      @park_area, @parks = Park.search_for_vicinity(params[:vicinity_ids], params[:engine_spec], params[:index_page])
+      vicinity = params[:vicinity_ids]
+      engine_spec = params[:engine_spec]
+      index_page = params[:index_page]
+      @park_area, @parks = Park.search_for_vicinity(vicinity, engine_spec, index_page)
       if params[:vicinity_ids]
-        @vicinity_place = Vicinity.find_by(id: params[:vicinity_ids]).vicinity_name
+        @vicinity_place = Vicinity.find_by(id: vicinity).vicinity_name
       end
     elsif params[:address].present? || params[:engine_specs].present? || params[:address]
       # Parkモデルのsearch_forメソッドで検索(詳細検索)
-      @park_area, @parks = Park.search_for(params[:content], params[:engine_specs], params[:address], params[:index_page])
+      content = params[:content]
+      engine_spec = params[:engine_specs]
+      address = params[:address]
+      index_page = params[:index_page]
+      @park_area, @parks = Park.search_for(content, engine_spec, address, index_page)
       @vicinity_place
     else
       # 何も検索していない時
@@ -112,7 +119,7 @@ class Public::ParksController < ApplicationController
   def move_to_signed_in
     unless customer_signed_in?
       # サインインしていないユーザーはログインページが表示される
-      redirect_to new_customer_session_path
+      redirect_to new_customer_session_path, notice: 'ログインしてください！'
     end
   end
 

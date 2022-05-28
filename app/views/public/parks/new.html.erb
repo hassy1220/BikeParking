@@ -25,13 +25,13 @@
           <tr>
               <div class="my_bike">
                 <%= f.label :images,class:"image_label" do %>
-                  <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar1') %>
+                  <%= image_tag('new_park.png',size: "150x150", class: 'avatar1') %>
                 <% end %>
                 <%= f.label :images,class:"image_label" do %>
-                 <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar2') %>
+                 <%= image_tag('new_park.png',size: "150x150", class: 'avatar2') %>
                 <% end %>
                 <%= f.label :images,class:"image_label" do %>
-                 <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar3') %>
+                 <%= image_tag('new_park.png',size: "150x150", class: 'avatar3') %>
                 <% end %>
               </div>
               <%= f.file_field :images,multiple:true,accept:"image/jpg",class:"uploader" ,style: "display:none" %>
@@ -50,10 +50,6 @@
           <tr>
                <td class="text-center align-middle">目的地</td>
                <td><%= f.text_field :purpose,class:"form-control",placeholder:"例）キャナルシティ" %></td>
-          </tr>
-          <tr>
-            <td class="text-center align-middle">住所</td>
-            <td><%= f.text_field :addressOutput,class:"form-control" %></td>
           </tr>
           <tr>
                <td class="text-center align-middle">金額</td>

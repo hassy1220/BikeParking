@@ -5,7 +5,11 @@
           <%= image_tag customers.get_bike_image(100,100) %>
         <% end %>
       </td>
-      <td><%= customers.name %></td>
+      <td>
+        <%= link_to public_customer_path(customers.id) do %>
+          <%= customers.name %>
+        <% end %>
+      </td>
       <td>
         <% if customer == current_customer %>
           <% if customers.follow_user_by(current_customer) %>

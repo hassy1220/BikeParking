@@ -68,7 +68,7 @@
 
 // TOPページのスライドショー(~58行目まで)
 .contena{
-  height: 60vh;
+  height: 50vh;
 }
 
 .slider-image {
@@ -89,7 +89,7 @@
 
 .top_text{
   position: absolute;
-  top:50px;
+  top:10px;
   left: 50%;
   transform: translateX(-50%);
     -webkit-transform: translateX(-50%);
@@ -125,7 +125,7 @@ footer {
 }
 
 //背景色
-.content{
+body{
   background-image: url("../../assets/images/top_image03.jpg");
   background-size: cover;
 }

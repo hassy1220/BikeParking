@@ -1,8 +1,17 @@
 class Public::CustomersController < ApplicationController
   before_action :correct_customer, only: [:edit, :update, :unsubscribe, :withdrawal]
   before_action :ensure_guest_customer, only: [:edit]
+  before_action :move_to_signed_in
   def index
-    @customers = Customer.where(is_deleted: false)
+    if params[:key]
+      @search = params[:key]
+      # @customers = Customer.where(is_deleted: false).where(['name: LIKE ?', "%#{search}%"])
+      @customers = Customer.where(is_deleted: false).where('name LIKE ?', "%#{@search}%")
+    else
+      @customers = Customer.where(is_deleted: false)
+    end
+
+
   end
 
   def show
@@ -53,4 +62,12 @@ class Public::CustomersController < ApplicationController
       redirect_to public_customer_path(current_customer), notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
     end
   end
+
+  def move_to_signed_in
+    unless customer_signed_in?
+      # サインインしていないユーザーはログインページが表示される
+      redirect_to new_customer_session_path, notice: 'ログインしてみんなのお気に入りバイクを見よう！！'
+    end
+  end
+
 end
