@@ -16,10 +16,9 @@
 
   <div id="map" style="width:100%; height:600px"></div>
 
-  <%= render "layouts/error" %>
   <div class="row">
     <div class="col-md-10 offset-md-1">
-      <%= form_with model: @park,url: public_parks_path do |f| %>
+      <%= form_with model: @park,url: public_parks_path,local: false do |f| %>
       <table class="table">
           <tr><div class="text-center">投稿する画像を選択してください(３枚まで)<br>※一度に複数選択することで、複数画像選択することができます</div></tr>
           <tr>
@@ -73,6 +72,9 @@
               <%= f.hidden_field :vicinity_name,value:"aaaa" %>
            <% end %>
         </table>
+        <div id="parks-error">
+            <%= render 'layouts/error' %>
+        </div>
         <p class="text-center"><%= f.submit"送信",class:"btn btn-success" %></p>
       <% end %>
     </div>

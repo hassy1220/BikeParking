@@ -9,7 +9,7 @@ class Public::ContactsController < ApplicationController
       ContactMailer.send_mail(@contact).deliver_now
       redirect_to root_path
     else
-      render :new
+      render :error
     end
   end
 

@@ -86,12 +86,12 @@
               </h4>
             </div>
             <div id="collapse3" class="panel-collapse collapse">
-              　<div id="comments-error">
-                  <%= render 'layouts/error' %>
-                </div>
                 <div id="comment_btn">
                     <!--コメント一覧・投稿の共通レイアウト-->
                     <%= render "public/comments/comment",park_comment: @park_comment, park_comments: @park_comments, park_area: @park_area %>
+                </div>
+                <div id="comments-error">
+                  <%= render 'layouts/error' %>
                 </div>
                 <div id="show_paginate">
                     <!--kaminari共通レイアウト-->

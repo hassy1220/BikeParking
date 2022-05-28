@@ -2,8 +2,10 @@ class Public::ParksController < ApplicationController
   # before_action :authenticate_customer!
   before_action :correct_post, only: [:edit]
   before_action :move_to_signed_in, except: [:index]
+  include AjaxHelper
   def new
-    @park = Park.new(session[:parks] || {})
+    @park = Park.new
+    # (session[:parks] || {})
     @park_areas = Park.all.pluck(:lat, :lng)
     @park_area = Park.pluck(:lng, :lat)
     @vicinity = Vicinity.new
@@ -88,11 +90,11 @@ class Public::ParksController < ApplicationController
       session[:parks] = nil
       @park.sent_vicinity(@vicinity, @park)
       flash[:notice] = "投稿を保存しました"
-      redirect_to public_park_path(@park.id)
+      respond_to do |format|
+        format.js { render ajax_redirect_to(public_park_path(@park.id)) }
+      end
     else
-      session[:parks] = @park.attributes.slice(*park_params.keys)
-      flash[:danger] = @park.errors.full_messages
-      redirect_to new_public_park_path
+      render :error
     end
   end
 
