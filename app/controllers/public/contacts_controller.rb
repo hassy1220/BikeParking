@@ -1,4 +1,5 @@
 class Public::ContactsController < ApplicationController
+  include AjaxHelper
   def new
     @contact = Contact.new
   end
@@ -7,7 +8,9 @@ class Public::ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
     if @contact.save
       ContactMailer.send_mail(@contact).deliver_now
-      redirect_to root_path
+      respond_to do |format|
+        format.js { render ajax_redirect_to(root_path) }
+      end
     else
       render :error
     end

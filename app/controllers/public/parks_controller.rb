@@ -87,9 +87,7 @@ class Public::ParksController < ApplicationController
     @park.customer_id = current_customer.id
 
     if @park.save
-      session[:parks] = nil
       @park.sent_vicinity(@vicinity, @park)
-      flash[:notice] = "投稿を保存しました"
       respond_to do |format|
         format.js { render ajax_redirect_to(public_park_path(@park.id)) }
       end
