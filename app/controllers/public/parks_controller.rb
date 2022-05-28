@@ -23,7 +23,8 @@ class Public::ParksController < ApplicationController
   def index
     par_page = 5
     @start = ((params[:page] || 1).to_i - 1) * par_page + 1
-    @posts = Park.includes(:favorite_user).sort { |a, b| b.favorite_user.size <=> a.favorite_user.size }
+    @posts = Park.includes(:favorite_user).
+      sort { |a, b| b.favorite_user.size <=> a.favorite_user.size }
     # いいね順で取得した配列をkaminariに適用させる。
     @like_park = Kaminari.paginate_array(@posts).page(params[:page]).per(5)
     @vicinity = Vicinity.page(params[:vicinity_page]).per(7)
@@ -109,7 +110,9 @@ class Public::ParksController < ApplicationController
   private
 
   def park_params
-    params.require(:park).permit(:lat, :lng, :name, :description, :spec, :price, :purpose, :addressOutput, :parking_time, images: [])
+    params.require(:park).permit(:lat, :lng, :name, :description, :spec,
+                                 :price, :purpose, :addressOutput, :parking_time,
+                                 images: [])
   end
 
   def vicinity_params

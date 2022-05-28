@@ -35,7 +35,7 @@ class Public::SessionsController < Devise::SessionsController
       flash[:notice] = ["退会済みです.再度使用する場合は問い合わせページよりご連絡ください"]
       redirect_to root_path
     end
-end
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

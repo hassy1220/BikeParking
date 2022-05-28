@@ -13,10 +13,9 @@ class Public::CommentsController < ApplicationController
       end
       @park_comment = Comment.new
     else
-      flash.now[:danger] = @comment.errors.full_messages
+      render :error
     end
     @park_comments = @park.comments.page(params[:page]).per(5)
-
   end
 
   def destroy
@@ -32,7 +31,7 @@ class Public::CommentsController < ApplicationController
     @park_comment = Comment.new
     @park_comments = @park.comments.page(params[:page]).per(5)
 
-    # redirect_to request.referer
+
   end
 
   def index

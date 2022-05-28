@@ -1,6 +1,8 @@
 class Park < ApplicationRecord
   has_many_attached :images
   has_many :comments, dependent: :destroy
+  # 新しい順番に表示させる
+  has_many :comments, -> { order("created_at desc") }
   belongs_to :customer
   has_many :favorites, dependent: :destroy
   has_many :favorite_user, through: :favorites, source: :customer
@@ -20,16 +22,25 @@ class Park < ApplicationRecord
   PRICE_NUMBER_LIMIT = 0
   validate :validate_number_of_price
 
+  # scope関連
+  scope :filter_address, ->(address) { where('addressOutput LIKE ?', "%#{address}%") }
+  scope :filter_content, ->(content) { where('purpose LIKE ?', "%#{content}%") }
+  scope :filter_spec, ->(spec) { where(spec: spec) }
+  scope :filter_name, ->(content) { where('name LIKE ?', "%#{content}%") }
+  # scope(pluck[:lng, :lat, :name, :id]に変換)
+  scope :plucks, -> { pluck(:lng, :lat, :name, :id) }
+
   # そのユーザーが良いねしているか判定
   def user_favorite_by(user)
     favorite_user.exists?(id: user.id)
   end
 
-  def create_notification_like!(current_customer)
+  def create_notification_like!(user)
     # すでに「いいね」されているか検索
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and park_id = ? and action = ? ", current_customer.id, customer_id, id, 'like'])
+    temp = Notification.where(visitor_id: user.id, visited_id: customer_id,
+                              park_id: id, action: 'like')
     if temp.blank?
-      notification = current_customer.active_notifications.new(
+      notification = user.active_notifications.new(
         park_id: id,
         visited_id: customer_id,
         action: 'like'
@@ -43,7 +54,8 @@ class Park < ApplicationRecord
 
   def create_notification_comment!(current_customer, comment_id)
     # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
-    temp_ids = Comment.select(:customer_id).where(park_id: id).where.not(customer_id: current_customer.id).distinct
+    temp_ids = Comment.select(:customer_id).where(park_id: id).
+      where.not(customer_id: current_customer.id).distinct
     temp_ids.each do |temp_id|
       save_notification_comment!(current_customer, comment_id, temp_id['customer_id'])
     end
@@ -78,7 +90,6 @@ class Park < ApplicationRecord
     vicinity.each do |new|
       VicinityPark.create(vicinity_id: Vicinity.find_by(vicinity_name: new).id, park_id: park.id)
     end
-    # Vicinity.pluck(:vicinity_name) -
   end
 
   # 投稿内容編集するときのアップデート
@@ -105,74 +116,87 @@ class Park < ApplicationRecord
     Vicinity.where(id: delete_vicinity).destroy_all
   end
 
-  # 　目的地、住所、駐車可能条件検索
-  def self.search_for(content, engine_spec, address, index_page)
+  # 詳細検索
+  def self.search_for(content, spec, address, index)
     if content.blank?
-      # 目的地・駐車場名検索していないが、駐車可能条件検索しているか判定
-      if engine_spec.blank?
-        # 住所を選択しているか
-        if address.blank?
-          @park_area =
-            Park.pluck(:lng, :lat, :name, :id),
-            @parks = Park.page(index_page).per(5)
-        else
-          @park_area =
-            Park.where('addressOutput LIKE ?', "%#{address}%").pluck(:lng, :lat, :name, :id),
-            @parks = Park.where('addressOutput LIKE ?', "%#{address}%").page(index_page).per(5)
-
-        end
-      else
-        if address.blank?
-          @park_area =
-            Park.where(spec: engine_spec).pluck(:lng, :lat, :name, :id),
-            @parks = Park.where(spec: engine_spec).page(index_page).per(5)
-        else
-          @park_area =
-            Park.where(spec: engine_spec).where('addressOutput LIKE ?', "%#{address}%").pluck(:lng, :lat, :name, :id),
-            @parks = Park.where(spec: engine_spec).where('addressOutput LIKE ?', "%#{address}%").page(index_page).per(5)
-        end
-      end
+      filter_place_search(spec, address, index)
     else
-      if engine_spec.blank?
-        if address.blank?
-          # 目的地か駐車場名から検索した場合の処理
-          @park_area =
-            Park.where('purpose LIKE ?', "%#{content}%").or(Park.where('name LIKE ?', "%#{content}%")).pluck(:lng, :lat, :name, :id),
-            @parks = Park.where('purpose LIKE ?', "%#{content}%").page(index_page).per(5)
-        else
-          @park_area =
-            Park.where('purpose LIKE ?', "%#{content}%").or(Park.where('name LIKE ?', "%#{content}%")).where('addressOutput LIKE ?', "%#{address}%").pluck(:lng, :lat, :name, :id),
-            @parks = Park.where('purpose LIKE ?', "%#{content}%").where('addressOutput LIKE ?', "%#{address}%").page(index_page).per(5)
-        end
+      filter_detail_search(content, spec, address, index)
+    end
+  end
+
+  # 　詳細検索でcontentがからだった場合の処理
+  def self.filter_place_search(spec, address, index)
+    if spec.blank?
+      if address.blank?
+        @park_area =
+          Park.plucks,
+          @parks = Park.page(index).per(5)
       else
         @park_area =
-          Park.where('purpose LIKE ?', "%#{content}%").or(Park.where('name LIKE ?', "%#{content}%")).where(spec: engine_spec).where('addressOutput LIKE ?', "%#{address}%").pluck(:lng, :lat, :name, :id),
-          @parks = Park.where('purpose LIKE ?', "%#{content}%").where(spec: engine_spec).where('addressOutput LIKE ?', "%#{address}%").page(index_page).per(5)
+          Park.filter_address(address).plucks,
+          @parks = Park.filter_address(address).page(index).per(5)
+      end
+    else
+      if address.blank?
+        @park_area =
+          Park.filter_spec(spec).plucks,
+          @parks = Park.filter_spec(spec).page(index).per(5)
+      else
+        @park_area =
+          Park.filter_spec(spec).filter_address(address).plucks,
+          @parks = Park.filter_spec(spec).filter_address(address).page(index).per(5)
       end
     end
   end
 
-  # 最寄り検索した場合のメソッド
-  def self.search_for_vicinity(vicinity_ids, engine_spec, index_page)
-    if vicinity_ids.blank?
-      if engine_spec.blank?
+  # 詳細検索でcontentがあった場合の処理
+  def self.filter_detail_search(content, spec, address, index)
+    if spec.blank?
+      if address.blank?
         @park_area =
-          Park.pluck(:lng, :lat, :name, :id),
-          @parks = Park.page(index_page).per(5)
+          Park.filter_content(content).or(Park.filter_name(content)).plucks,
+          @parks = Park.filter_content(content).page(index).per(5)
       else
         @park_area =
-          Park.where(spec: engine_spec).pluck(:lng, :lat, :name, :id),
-          @parks = Park.where(spec: engine_spec).page(index_page).per(5)
+          Park.filter_content(content).or(Park.filter_name(content)).filter_address(address).
+            plucks,
+          @parks = Park.filter_content(content).filter_address(address).page(index).per(5)
       end
     else
-      if engine_spec.blank?
+      @park_area =
+        Park.filter_content(content).or(Park.filter_name(content)).filter_spec(spec).
+          filter_address(address).
+          plucks,
+        @parks = Park.filter_content(content).
+          filter_spec(engine_spec).
+          filter_address(address).
+          page(index).per(5)
+    end
+  end
+
+  # 最寄り検索した場合のメソッド
+  def self.search_for_vicinity(vicinity_ids, spec, index)
+    if vicinity_ids.blank?
+      if spec.blank?
         @park_area =
-          Vicinity.find_by(id: vicinity_ids).vicinity_park.pluck(:lng, :lat, :name, :id),
-          @parks = Vicinity.find_by(id: vicinity_ids).vicinity_park.page(index_page).per(5)
+          Park.plucks,
+          @parks = Park.page(index).per(5)
       else
         @park_area =
-          Vicinity.find_by(id: vicinity_ids).vicinity_park.where(spec: engine_spec).pluck(:lng, :lat, :name, :id),
-          @parks = Vicinity.find_by(id: vicinity_ids).vicinity_park.where(spec: engine_spec).page(index_page).per(5)
+          Park.where(spec: spec).plucks,
+          @parks = Park.where(spec: spec).page(index).per(5)
+      end
+    else
+      if spec.blank?
+        @park_area =
+          Vicinity.find_by(id: vicinity_ids).vicinity_park.plucks,
+          @parks = Vicinity.find_by(id: vicinity_ids).vicinity_park.page(index).per(5)
+      else
+        @park_area =
+          Vicinity.find_by(id: vicinity_ids).vicinity_park.where(spec: spec).plucks,
+          @parks = Vicinity.find_by(id: vicinity_ids).vicinity_park.
+            where(spec: spec).page(index).per(5)
       end
     end
   end

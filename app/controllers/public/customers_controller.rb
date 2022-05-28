@@ -10,8 +10,6 @@ class Public::CustomersController < ApplicationController
     else
       @customers = Customer.where(is_deleted: false)
     end
-
-
   end
 
   def show
@@ -69,5 +67,4 @@ class Public::CustomersController < ApplicationController
       redirect_to new_customer_session_path, notice: 'ログインしてみんなのお気に入りバイクを見よう！！'
     end
   end
-
 end

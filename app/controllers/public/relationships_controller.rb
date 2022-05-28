@@ -28,7 +28,6 @@ class Public::RelationshipsController < ApplicationController
     if @search.presence
       @customers = Customer.where(is_deleted: false).where('name LIKE ?', "%#{@search}%")
     end
-
   end
 
   def show

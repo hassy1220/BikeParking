@@ -9,14 +9,18 @@ class Customer < ApplicationRecord
   has_many :favorite_park, through: :favorites, source: :park
 
   # 　自分はたくさんの通知を持っている
-  has_many :active_notifications, class_name: :Notification, foreign_key: :visitor_id, dependent: :destroy
+  has_many :active_notifications, class_name: :Notification,
+                                  foreign_key: :visitor_id, dependent: :destroy
   # 相手もたくさんの通知を持っている
-  has_many :passive_notifications, class_name: :Notification, foreign_key: :visited_id, dependent: :destroy
+  has_many :passive_notifications, class_name: :Notification,
+                                   foreign_key: :visited_id, dependent: :destroy
 
   # フォロー本人目線
-  has_many :relationships, class_name: "Relationship", foreign_key: "follow_id", dependent: :destroy
+  has_many :relationships, class_name: "Relationship",
+                           foreign_key: "follow_id", dependent: :destroy
   # フォローされた人目線
-  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :reverse_of_relationships, class_name: "Relationship",
+                                      foreign_key: "follower_id", dependent: :destroy
 
   # フォロー本人目線でフォローしている人一覧
   has_many :follow_user, through: :relationships, source: :follower
@@ -45,7 +49,7 @@ class Customer < ApplicationRecord
   def get_bike_image(width, height)
     unless bike_image.attached?
       file_path = Rails.root.join("app/assets/images/harley-g79ab8bdd0_1920.jpg")
-      bike_image.attach(io: File.open(file_path), filename: "default-image.jpg", content_type: "image/jpeg")
+      bike_image.attach(io: File.open(file_path), filename: "image.jpg", content_type: "image/jpeg")
     end
     bike_image.variant(resize_to_limit: [width, height]).processed
   end
@@ -64,7 +68,7 @@ class Customer < ApplicationRecord
   end
 
   def create_notification_follow!(current_customer)
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ", current_customer.id, id, 'follow'])
+    temp = Notification.where(visitor_id: current_customer.id, visited_id: id, action: 'follow')
     if temp.blank?
       notification = current_customer.active_notifications.new(
         visited_id: id,
