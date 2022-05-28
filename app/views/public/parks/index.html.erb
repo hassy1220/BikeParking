@@ -5,7 +5,7 @@
 
     <div class="row">
       <div class="col-3">
-        <button type="button"class="btn btn-info" data-toggle="collapse" data-target="#demo">詳細検索▷</button>
+        <button type="button"class="btn btn-primary" data-toggle="collapse" data-target="#demo">詳細検索▷</button>
         <div id="demo" class="collapse text-center mb-3 mt-4">
           <%= form_with url: public_parks_path,method: :get do |f| %>
             <%= f.search_field :content,placeholder:"目的地or駐車場名",class:"form-control" %><br>
