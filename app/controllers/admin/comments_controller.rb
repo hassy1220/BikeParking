@@ -8,6 +8,17 @@ class Admin::CommentsController < ApplicationController
       comment = Comment.find(comment)
       comment.destroy
     end
-    redirect_to request.referer
+    # redirect_to request.referer
+    @park_comments = park.comments.page(params[:page]).per(5)
   end
+
+  def show
+    park = Park.find(params[:park_id])
+    @park_comments = park.comments.page(params[:page]).per(5)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
 end

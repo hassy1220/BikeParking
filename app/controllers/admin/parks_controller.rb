@@ -6,6 +6,11 @@ class Admin::ParksController < ApplicationController
   def show
     @park = Park.find(params[:id])
     @park_comments = @park.comments.page(params[:page]).per(5)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def destroy

@@ -1,0 +1,2 @@
+$('#comment_btn').html("<%= escape_javascript(render 'admin/comments/comment',park_comments: @park_comments ) %>");
+$('#show_paginate').html("<%= escape_javascript(render 'admin/comments/show_pagenate', park_comments: @park_comments) %>");

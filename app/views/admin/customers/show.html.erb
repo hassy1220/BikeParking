@@ -1,12 +1,20 @@
 <div class="container">
-  <div>
-      <%= image_tag @customer.get_bike_image(400,400) %>
-    <p>名前：<%= @customer.name %></p>
-    <p>自己紹介：<%= @customer.description %></p>
-    <p>会員ステータス：<%= @customer.customer_status %></p>
+  <div class="row ">
+    <div class="col-md-6">
+      <% if @customer.bike_image.attached? %>
+        <%= image_tag(@customer.bike_image,class:"customer_image") %>
+      <% else %>
+        <%= image_tag('my_page.jpg', class: 'customer_image') %>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <p>名前：<%= @customer.name %></p>
+      <p>自己紹介：<%= @customer.description %></p>
+      <p>会員ステータス：<%= @customer.customer_status %></p>
       <p>
         <%= link_to"編集",edit_admin_customer_path(@customer.id),class:"btn btn-success" %>
       </p>
+    </div>
   </div>
   <div>
     <h3>投稿一覧</h3>
@@ -17,7 +25,7 @@
          <th style="width: 30%">目的地(商業施設等)</th>
        </tr>
        <% if @customer.parks.present? %>
-       <% @customer_park.each do |park| %>
+       <% @customer.parks.each do |park| %>
        <tr>
          <td>
            <%= link_to public_park_path(park.id) do %>

@@ -1,0 +1,16 @@
+<table class="table text-center">
+  <% park_comments.each do |list| %>
+    <tr>
+      <% if list.customer.is_deleted == false %>
+        <td style="width: 20%">
+          <%= image_tag list.customer.get_bike_image(50,50) %><br>
+          <%= list.customer.name %>
+        </td>
+        <td style="width: 60%"><%= list.comment %></td>
+        <td style="width: 20%">
+          <%= link_to"削除",admin_park_comment_path(list.park.id,list.id),method: :delete,remote: true,class:"btn btn-danger" %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

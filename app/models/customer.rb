@@ -48,7 +48,7 @@ class Customer < ApplicationRecord
   # カスタマーのプロフィール画像を表示させるメソッド
   def get_bike_image(width, height)
     unless bike_image.attached?
-      file_path = Rails.root.join("app/assets/images/harley-g79ab8bdd0_1920.jpg")
+      file_path = Rails.root.join("app/assets/images/my_page.jpg")
       bike_image.attach(io: File.open(file_path), filename: "image.jpg", content_type: "image/jpeg")
     end
     bike_image.variant(resize_to_limit: [width, height]).processed

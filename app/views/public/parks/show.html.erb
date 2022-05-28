@@ -48,8 +48,7 @@
                         <%= link_to public_customer_path( @park_area.customer.id) do %>
                           <%=  @park_area.customer.name %>
                         <% end %>
-                        <%=  image_tag @park_area.customer.get_bike_image(100,100) %>
-
+                         <%=  image_tag(@park_area.customer.bike_image, width:50,height:50) %>
                         <% else %>
                          <p class="text-danger">退会済みです。何かありましたら、お問合わせページより問い合わせください</p>
                       <% end %>
