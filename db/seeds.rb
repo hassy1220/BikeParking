@@ -12,9 +12,9 @@ Admin.create!(email:"test@test",password:111111
 
 customer = Customer.create!(
   [
-    {email: 'yamada@test.com', name: '山田太郎', password: '111111', bike_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")},
-    {email: 'reiwa@test.com', name: '令和太郎', password: '111111', bike_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")},
-    {email: 'heisei@test.com', name: '平成太郎', password: '111111', bike_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")}
+    {email: 'yamada@example.com', name: '山田太郎', password: '111111', bike_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")},
+    {email: 'reiwa@example.com', name: '令和太郎', password: '111111', bike_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")},
+    {email: 'heisei@example.com', name: '平成太郎', password: '111111', bike_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")}
   ]
 )
 
