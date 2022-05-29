@@ -49,14 +49,14 @@
                <td class="text-center align-middle">金額</td>
                <td>
                  <div class="row">
-                   <div class="col-3">
+                   <div class="col-6">
                      <%= f.text_field :price,class:"form-control" %>
                    </div>
-                   円/
-                   <div class="col-2">
+                   <span>円/</span>
+                   <div class="col-4">
                        <%= f.select :parking_time,*[1..24],{include_blank: true},class:"form-control" %>
                    </div>
-                   時間
+                   時
                  </div>
                </td>
           </tr>

@@ -72,7 +72,18 @@
           </tr>
           <tr>
             <td class="text-center">金額</td>
-            <td><%= f.text_field :price %> / <%= f.select :parking_time,*[1..24] %>時間</td>
+            <td>
+                 <div class="row">
+                   <div class="col-6">
+                     <%= f.text_field :price,class:"form-control" %>
+                   </div>
+                   <span>円/</span>
+                   <div class="col-4">
+                       <%= f.select :parking_time,*[1..24],{include_blank: true},class:"form-control" %>
+                   </div>
+                   時
+                 </div>
+               </td>
           </tr>
             <%= f.hidden_field :lat,value: @park.lat %>
             <%= f.hidden_field :lng,value: @park.lng %>
