@@ -187,13 +187,27 @@ window.addEventListener('load', () => {
     uploader.addEventListener('change', (e) => {
       const file1 = uploader.files[0];
       const file2 = uploader.files[1];
-      if(file2 == undefined){
-        document.querySelector('.avatar2').setAttribute('src', "/assets/new_park.png");
-      }
       const file3 = uploader.files[2];
-      if(file3 == undefined){
-        document.querySelector('.avatar3').setAttribute('src', 'url(<%= "new_park.png" %>)');
-      };
+      if(file1 !== undefined){
+        document.querySelector('.avatar4').style.display = "none";
+        document.querySelector('.avatar1').style.display = "block";
+      }
+
+      if(file2 !== undefined){
+        document.querySelector('.avatar5').style.display = "none";
+        document.querySelector('.avatar2').style.display = "block";
+      }else{
+          document.querySelector('.avatar5').style.display = "block";
+          document.querySelector('.avatar2').style.display = "none";
+      }
+
+      if(file3 !== undefined){
+        document.querySelector('.avatar6').style.display = "none";
+        document.querySelector('.avatar3').style.display = "block";
+      }else{
+          document.querySelector('.avatar6').style.display = "block";
+          document.querySelector('.avatar3').style.display = "none";
+      }
 
       const reader1 = new FileReader();
       reader1.readAsDataURL(file1);

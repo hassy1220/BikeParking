@@ -15,31 +15,39 @@
                 <% @park.images.each_with_index do |image,i| %>
                   <%= f.label :images,class:"my_bike_label" do %>
                     <%= image_tag(image, width:150,height:150,class: "avatar#{i+1}") %>
+                    <%= image_tag('new_park.png',size: "150x150", class: "avatar#{i+4}",style: "display: none") %>
                   <% end %>
                 <% end %>
 
                 <% if @park.images.length == 1 %>
                   <%= f.label :images,class:"my_bike_label" do %>
                     <%= image_tag('new_park.png',size: "150x150", class: 'avatar2') %>
+                    <%= image_tag('new_park.png',size: "150x150", class: 'avatar5',style: "display: none") %>
+
                 <% end %>
                 <%= f.label :images,class:"my_bike_label" do %>
                   <%= image_tag('new_park.png',size: "150x150", class: 'avatar3') %>
+                  <%= image_tag('new_park.png',size: "150x150", class: 'avatar6',style: "display: none") %>
                 <% end %>
 
                 <% elsif @park.images.length == 2 %>
                   <%= f.label :images,class:"my_bike_label" do %>
                     <%= image_tag('new_park.png',size: "150x150", class: 'avatar3') %>
+                    <%= image_tag('new_park.png',size: "150x150", class: 'avatar6',style: "display: none") %>
                   <% end %>
                 <% end %>
               <% else %>
                 <%= f.label :images,class:"my_bike_label" do %>
                   <%= image_tag('new_park.png',size: "150x150", class: 'avatar1') %>
+                  <%= image_tag('new_park.png',size: "150x150", class: 'avatar4',style: "display: none") %>
                 <% end %>
                 <%= f.label :images,class:"my_bike_label" do %>
                   <%= image_tag('new_park.png',size: "150x150", class: 'avatar2') %>
+                  <%= image_tag('new_park.png',size: "150x150", class: 'avatar5',style: "display: none") %>
                 <% end %>
                 <%= f.label :images,class:"my_bike_label" do %>
                   <%= image_tag('new_park.png',size: "150x150", class: 'avatar3') %>
+                  <%= image_tag('new_park.png',size: "150x150", class: 'avatar6',style: "display: none") %>
                 <% end %>
               <% end %>
             </div>
