@@ -28,7 +28,7 @@
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
-- 外部API :Google Maps JavaScript API
+- 外部API :Google Maps JavaScript API,Google Place API,Geocoding API
 
 ## 使用素材
 - 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。

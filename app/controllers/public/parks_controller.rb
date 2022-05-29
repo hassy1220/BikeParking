@@ -73,6 +73,7 @@ class Public::ParksController < ApplicationController
       vicinity = Vicinity.new(vicinity_params)
       @vicinity = vicinity.vicinity_name.split(",")
       @park.update_sent_vicinity(@vicinity, @park)
+      flash[:notice] = "編集完了しました"
       redirect_to public_park_path(@park.id)
     else
       flash[:danger] = @park.errors.full_messages
@@ -88,6 +89,7 @@ class Public::ParksController < ApplicationController
 
     if @park.save
       @park.sent_vicinity(@vicinity, @park)
+      flash[:notice] = "投稿が完了しました"
       respond_to do |format|
         format.js { render ajax_redirect_to(public_park_path(@park.id)) }
       end

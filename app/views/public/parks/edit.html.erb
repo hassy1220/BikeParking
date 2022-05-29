@@ -6,76 +6,76 @@
   
   <div class="row">
     <div class="col-md-10 offset-md-1">
-        <%= form_with model: @park,url: public_park_path(@park.id),method: :patch do |f| %>
+      <%= form_with model: @park,url: public_park_path(@park.id),method: :patch do |f| %>
         <table class="table">
-            <tr>
-              <p class="text-center">画像をクリックすると画像が選択できます(！！3枚まで)<br>※一度に複数選択することで、複数画像選択することができます</p>
-              <div class="my_bike">
-                <% if @park.images.attached? %>
-                  <% @park.images.each_with_index do |image,i| %>
-                    <%= f.label :images,class:"my_bike_label" do %>
-                        <%= image_tag(image, width:150,height:150,class: "avatar#{i+1}") %>
-                    <% end %>
-                  <% end %>
-
-                  <% if @park.images.length == 1 %>
-                    <%= f.label :images,class:"my_bike_label" do %>
-                      <%= image_tag('new_park.png',size: "150x150", class: 'avatar2') %>
-                    <% end %>
-                    <%= f.label :images,class:"my_bike_label" do %>
-                    　<%= image_tag('new_park.png',size: "150x150", class: 'avatar3') %>
-                    <% end %>
-
-                  <% elsif @park.images.length == 2 %>
-                    <%= f.label :images,class:"my_bike_label" do %>
-                      <%= image_tag('new_park.png',size: "150x150", class: 'avatar3') %>
-                    <% end %>
-                  <% end %>
-                <% else %>
+          <tr>
+            <p class="text-center">画像をクリックすると画像が選択できます(！！3枚まで)<br>※一度に複数選択することで、複数画像選択することができます</p>
+            <div class="my_bike">
+              <% if @park.images.attached? %>
+                <% @park.images.each_with_index do |image,i| %>
                   <%= f.label :images,class:"my_bike_label" do %>
-                    <%= image_tag('new_park.png',size: "150x150", class: 'avatar3') %>
+                    <%= image_tag(image, width:150,height:150,class: "avatar#{i+1}") %>
                   <% end %>
+                <% end %>
+
+                <% if @park.images.length == 1 %>
                   <%= f.label :images,class:"my_bike_label" do %>
-                    <%= image_tag('new_park.png',size: "150x150", class: 'avatar3') %>
-                  <% end %>
+                    <%= image_tag('new_park.png',size: "150x150", class: 'avatar2') %>
+                <% end %>
+                <%= f.label :images,class:"my_bike_label" do %>
+                  <%= image_tag('new_park.png',size: "150x150", class: 'avatar3') %>
+                <% end %>
+
+                <% elsif @park.images.length == 2 %>
                   <%= f.label :images,class:"my_bike_label" do %>
                     <%= image_tag('new_park.png',size: "150x150", class: 'avatar3') %>
                   <% end %>
                 <% end %>
-               </div>
-                <%= f.file_field :images,multiple:true,accept:"image/jpg",class:"uploader",style: "display:none" %>
-            <tr>
-                 <td class="text-center">駐輪場名</td>
-                 <td><%= f.text_field :name,class:"form-control" %></td>
-            </tr>
-            <tr>
-                 <td class="text-center">説明事項</td>
-                 <td><%= f.text_area :description,class:"form-control" %></td>
-            </tr>
-            <tr>
-                 <td class="text-center">駐車可能条件</td>
-                 <td><%= f.collection_radio_buttons :spec, Park.specs_i18n, :first , :last %></td>
-            </tr>
-            <tr>
-                <td class="text-center">目的地</td>
-                <td><%= f.text_field :purpose,class:"form-control" %></td>
-            </tr>
-            <tr>
-                 <td class="text-center">金額</td>
-                 <td><%= f.text_field :price %> / <%= f.select :parking_time,*[1..24] %>時間</td>
-            </tr>
-                 <%= f.hidden_field :lat,value: @park.lat %>
-                 <%= f.hidden_field :lng,value: @park.lng %>
-                 <%= f.hidden_field :addressOutput,value: @park.addressOutput %>
-                 <%= fields_for :vicinity do |f| %>
-                   <%= f.hidden_field :vicinity_name,value: @park.park_vicinity.pluck(:vicinity_name) %>
-                 <% end %>
-          </table>
-          <div class="text-center">
-                 <%= f.submit"送信",class:"btn btn-success" %>
-          </div>
-        <% end %>
-      </div>
+              <% else %>
+                <%= f.label :images,class:"my_bike_label" do %>
+                  <%= image_tag('new_park.png',size: "150x150", class: 'avatar3') %>
+                <% end %>
+                <%= f.label :images,class:"my_bike_label" do %>
+                  <%= image_tag('new_park.png',size: "150x150", class: 'avatar3') %>
+                <% end %>
+                <%= f.label :images,class:"my_bike_label" do %>
+                  <%= image_tag('new_park.png',size: "150x150", class: 'avatar3') %>
+                <% end %>
+              <% end %>
+            </div>
+              <%= f.file_field :images,multiple:true,accept:"image/jpg",class:"uploader",style: "display:none" %>
+          <tr>
+            <td class="text-center">駐輪場名</td>
+            <td><%= f.text_field :name,class:"form-control" %></td>
+          </tr>
+          <tr>
+            <td class="text-center">説明事項</td>
+            <td><%= f.text_area :description,class:"form-control" %></td>
+          </tr>
+          <tr>
+            <td class="text-center">駐車可能条件</td>
+            <td><%= f.collection_radio_buttons :spec, Park.specs_i18n, :first , :last %></td>
+          </tr>
+          <tr>
+            <td class="text-center">目的地</td>
+            <td><%= f.text_field :purpose,class:"form-control" %></td>
+          </tr>
+          <tr>
+            <td class="text-center">金額</td>
+            <td><%= f.text_field :price %> / <%= f.select :parking_time,*[1..24] %>時間</td>
+          </tr>
+            <%= f.hidden_field :lat,value: @park.lat %>
+            <%= f.hidden_field :lng,value: @park.lng %>
+            <%= f.hidden_field :addressOutput,value: @park.addressOutput %>
+            <%= fields_for :vicinity do |f| %>
+              <%= f.hidden_field :vicinity_name,value: @park.park_vicinity.pluck(:vicinity_name) %>
+            <% end %>
+        </table>
+        <div class="text-center">
+          <%= f.submit"送信",class:"btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
     </div>
 </div>
 

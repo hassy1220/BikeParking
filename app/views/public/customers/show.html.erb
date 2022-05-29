@@ -1,5 +1,4 @@
 <div class="container mt-3">
-  <%= notice %>
   <div class="row ">
     <div class="col-md-6">
       <% if @customer.bike_image.attached? %>
@@ -19,7 +18,6 @@
           <td><%= @customer.description %></td>
         </tr>
         <tr>
-
           <td colspan="2">
             <div id="relationship_btn">
               <%= render "public/relationships/relationship",customer: @customer %>
@@ -40,132 +38,127 @@
   </div>
 
   <div class="text-center mt-5 mb-5">
-      <%= render "layouts/error" %>
-      <% if @customer == current_customer %>
-        <h5>お気に入りの画像を公開しよう！(！！3枚まで)</h5>
-        <p>※一度に複数選択することで、複数画像選択することができます</p>
+    <%= render "layouts/error" %>
+    <% if @customer == current_customer %>
+      <h5>お気に入りの画像を公開しよう！(！！3枚まで)</h5>
+      <p>※一度に複数選択することで、複数画像選択することができます</p>
 
-          <%= form_with model: @customer,url: public_customer_path(@customer.id),method: :patch do |f| %>
-          <div class="my_bike">
-                <%= f.file_field :my_bike_images,multiple:true,accept:"image/jpg",class:"uploader",style: "display:none" %>
-                <% if @customer.my_bike_images.attached? %>
-                    <% @customer.my_bike_images.each_with_index do |image,i| %>
-                       <%= f.label :my_bike_images,class:"my_bike_label" do %>
-                         <%= image_tag(image, width:150,height:150,class: "avatar#{i+1}") %>
-                       <% end %>
-                    <% end %>
-
-                    <% if @customer.my_bike_images.length == 1 %>
-                      <%= f.label :my_bike_images,class:"my_bike_label" do %>
-                        <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar2') %>
-                      <% end %>
-                      <%= f.label :my_bike_images,class:"my_bike_label" do %>
-                      　<%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar3') %>
-                      <% end %>
-
-                    <% elsif @customer.my_bike_images.length == 2 %>
-                      <%= f.label :my_bike_images,class:"my_bike_label" do %>
-                        <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar3') %>
-                      <% end %>
-                    <% end %>
-
-                <% else %>
-
+      <%= form_with model: @customer,url: public_customer_path(@customer.id),method: :patch do |f| %>
+        <div class="my_bike">
+          <%= f.file_field :my_bike_images,multiple:true,accept:"image/jpg",class:"uploader",style: "display:none" %>
+            <% if @customer.my_bike_images.attached? %>
+              <% @customer.my_bike_images.each_with_index do |image,i| %>
                 <%= f.label :my_bike_images,class:"my_bike_label" do %>
-                 <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar1') %>
+                  <%= image_tag(image, width:150,height:150,class: "avatar#{i+1}") %>
                 <% end %>
-                <%= f.label :my_bike_images,class:"my_bike_label" do %>
-                 <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar2') %>
-                <% end %>
-                <%= f.label :my_bike_images,class:"my_bike_label" do %>
-                 <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar3') %>
-                <% end %>
-
-                <% end %>
-              <%= f.hidden_field :name %>
-         </div>
-              <br><%= f.submit"保存",class:"btn btn-success" %>
-          <% end %>
-
-      <% else %>
-
-         <h4><%= @customer.name %>さんのお気に入り写真</h4>
-         <div class="my_bike">
-           <% if @customer.my_bike_images.attached? %>
-              <% @customer.my_bike_images.each do |image| %>
-                <%= image_tag(image, width:150,height:150) %>
               <% end %>
-                <% if @customer.my_bike_images.length == 1 %>
-                  <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
-                  <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
-                <% elsif @customer.my_bike_images.length == 2 %>
-                  <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
-                  <% end %>
-           <% else %>
-              <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
-              <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
-              <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
-           <% end %>
-         </div>
 
+              <% if @customer.my_bike_images.length == 1 %>
+                <%= f.label :my_bike_images,class:"my_bike_label" do %>
+                  <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar2') %>
+                <% end %>
+                <%= f.label :my_bike_images,class:"my_bike_label" do %>
+                  <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar3') %>
+                <% end %>
+
+              <% elsif @customer.my_bike_images.length == 2 %>
+                <%= f.label :my_bike_images,class:"my_bike_label" do %>
+                  <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar3') %>
+                <% end %>
+              <% end %>
+
+            <% else %>
+              <%= f.label :my_bike_images,class:"my_bike_label" do %>
+                <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar1') %>
+              <% end %>
+              <%= f.label :my_bike_images,class:"my_bike_label" do %>
+                <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar2') %>
+              <% end %>
+              <%= f.label :my_bike_images,class:"my_bike_label" do %>
+                <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150", class: 'avatar3') %>
+              <% end %>
+            <% end %>
+          <%= f.hidden_field :name %>
+        </div>
+        <br><%= f.submit"保存",class:"btn btn-success" %>
       <% end %>
 
+    <% else %>
+      <h4><%= @customer.name %>さんのお気に入り写真</h4>
+      <div class="my_bike">
+        <% if @customer.my_bike_images.attached? %>
+          <% @customer.my_bike_images.each do |image| %>
+            <%= image_tag(image, width:150,height:150) %>
+          <% end %>
+          <% if @customer.my_bike_images.length == 1 %>
+            <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
+            <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
+          <% elsif @customer.my_bike_images.length == 2 %>
+            <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
+          <% end %>
+        <% else %>
+          <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
+          <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
+          <%= image_tag('girl-gcf2ba2e1b_1280.png',size: "150x150") %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 
   <div class="pb-4">
     <h3>いいね一覧</h3>
     <table class="table table-striped table-hover text-center">
-         <tr>
-           <th style="width: 20%">駐車場名</th>
-           <th style="width: 50%">説明</th>
-           <th style="width: 30%">目的地(商業施設等)</th>
-         </tr>
-         <% if @customer.favorite_park.present? %>
-           <% @customer.favorite_park.each do |park| %>
-           <tr>
-             <td>
-               <%= link_to public_park_path(park.id) do %>
-                 <%= park.name %>
-               <% end %>
-             </td>
-             <td><%= park.description %></td>
-             <td><%= park.purpose %></td>
-           </tr>
-           <% end %>
-         <% else %>
-           <tr>
-             <td class="text-center">いいねなし</td>
-           </tr>
-         <% end %>
-      </table>
+      <tr>
+        <th style="width: 20%">駐車場名</th>
+        <th style="width: 50%">説明</th>
+        <th style="width: 30%">目的地(商業施設等)</th>
+      </tr>
+      <% if @customer.favorite_park.present? %>
+        <% @customer.favorite_park.each do |park| %>
+          <tr>
+            <td>
+              <%= link_to public_park_path(park.id) do %>
+                <%= park.name %>
+              <% end %>
+            </td>
+            <td><%= park.description %></td>
+            <td><%= park.purpose %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td class="text-center">いいねなし</td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 
   <div>
     <h3>投稿一覧</h3>
     <table class="table table-striped table-hover text-center">
-       <tr>
-         <th style="width: 20%">駐車場</th>
-         <th style="width: 50%">説明</th>
-         <th style="width: 30%">目的地(商業施設等)</th>
-       </tr>
-       <% if @customer.parks.present? %>
-       <% @customer_park.each do |park| %>
-       <tr>
-         <td>
-           <%= link_to public_park_path(park.id) do %>
-             <%= park.name %>
-           <% end %>
-         </td>
-         <td><%= park.description %></td>
-         <td><%= park.purpose %></td>
-       </tr>
-       <% end %>
-       <% else %>
-           <tr>
-             <td class="text-center">投稿なし</td>
-           </tr>
-         <% end %>
-      </table>
+      <tr>
+        <th style="width: 20%">駐車場</th>
+        <th style="width: 50%">説明</th>
+        <th style="width: 30%">目的地(商業施設等)</th>
+      </tr>
+      <% if @customer.parks.present? %>
+        <% @customer_park.each do |park| %>
+          <tr>
+            <td>
+              <%= link_to public_park_path(park.id) do %>
+                <%= park.name %>
+              <% end %>
+            </td>
+            <td><%= park.description %></td>
+            <td><%= park.purpose %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td class="text-center">投稿なし</td>
+        </tr>
+      <% end %>
+    </table>
       <%= paginate @customer_park %>
   </div>
 </div>

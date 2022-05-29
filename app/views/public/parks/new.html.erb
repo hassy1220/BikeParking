@@ -1,14 +1,4 @@
 <div class="container pb-3">
-  <% if flash[:notice] %>
-    <div class="alert alert-info">
-      <%= flash[:notice] %>
-    </div>
-  <% end %>
-  <% if flash[:alert] %>
-    <div class="alert alert-danger">
-      <%= flash[:alert] %>
-    </div>
-  <% end %>
   <div class="text-center mt-3">
    <input type="text" id="keyword"><button id="search" class="btn btn-info">検索実行</button>
   </div>
