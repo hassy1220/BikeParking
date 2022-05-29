@@ -188,11 +188,11 @@ window.addEventListener('load', () => {
       const file1 = uploader.files[0];
       const file2 = uploader.files[1];
       if(file2 == undefined){
-        document.querySelector('.avatar2').setAttribute('src', '/assets/images/new_park.png');
+        document.querySelector('.avatar2').setAttribute('src', "/assets/new_park.png");
       }
       const file3 = uploader.files[2];
       if(file3 == undefined){
-        document.querySelector('.avatar3').setAttribute('src', '/assets/images/new_park.png');
+        document.querySelector('.avatar3').setAttribute('src', 'url(<%= "new_park.png" %>)');
       };
 
       const reader1 = new FileReader();
