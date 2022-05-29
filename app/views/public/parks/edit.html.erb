@@ -6,10 +6,12 @@
 
   <div class="row">
     <div class="col-md-10 offset-md-1">
+      <h5 class="font-weight-bold text-center text-danger">見つけた駐車場の場所をマップ上でクリックしてください</h5>
       <%= form_with model: @park,url: public_park_path(@park.id),method: :patch do |f| %>
         <table class="table">
           <tr>
-            <p class="text-center">画像をクリックすると画像が選択できます(！！3枚まで)<br>※一度に複数選択することで、複数画像選択することができます</p>
+            <p class="text-center">画像をクリックすると画像が選択できます(！！3枚まで)<br>※一度に複数選択することで、複数画像選択することができます
+            <br>画像をクリックすることで選択できます</p>
             <div class="my_bike">
               <% if @park.images.attached? %>
                 <% @park.images.each_with_index do |image,i| %>

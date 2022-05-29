@@ -41,7 +41,7 @@
     <%= render "layouts/error" %>
     <% if @customer == current_customer %>
       <h5>お気に入りの画像を公開しよう！(！！3枚まで)</h5>
-      <p>※一度に複数選択することで、複数画像選択することができます</p>
+      <p>※一度に複数選択することで、複数画像選択することができます<br>(画像をクリックしてください)</p>
 
       <%= form_with model: @customer,url: public_customer_path(@customer.id),method: :patch do |f| %>
         <div class="my_bike">
