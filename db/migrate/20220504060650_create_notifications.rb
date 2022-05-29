@@ -6,7 +6,6 @@ class CreateNotifications < ActiveRecord::Migration[6.1]
       t.integer :park_id
       t.integer :comment_id
       t.string :action,default: '',null: false
-      t.boolean :checked,default: false,null: false
       t.timestamps
     end
     add_index :notifications, :visitor_id
