@@ -112,21 +112,29 @@
     <% end %>
   </div>
 
-  <div class="pb-4">
-    <h3>いいね一覧</h3>
-    <div id="customer_parks_like_btn">
-      <%= render "public/customers/like_park", customer_park: @like_park %>
-    </div>
 
-  </div>
+　<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a href="#like" class="nav-link active btn btn-success" data-toggle="tab">いいね一覧</a>
+    </li>
+    <li class="nav-item">
+      <a href="#park" class="nav-link btn btn-info" data-toggle="tab">投稿一覧</a>
+    </li>
+  </ul>
 
-  <div>
-    <h3>投稿一覧</h3>
-    <div id="customer_parks_btn">
-      <%= render "public/customers/park_index", customer_park: @customer_park %>
+      <!-- 写真部分 -->
+  <div class="tab-content">
+    <div id="like" class="tab-pane active">
+      <div id="customer_parks_like_btn">
+        <%= render "public/customers/like_park", customer_park: @like_park %>
+      </div>
+    </div>
+    <div id="park" class="tab-pane">
+      <div id="customer_parks_btn">
+        <%= render "public/customers/park_index", customer_park: @customer_park %>
+      </div>
     </div>
   </div>
-</div>
 
 <% if @customer == current_customer %>
   <%= javascript_pack_tag 'customer/show' %>

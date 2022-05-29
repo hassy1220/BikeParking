@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 ActiveStorage::AnalyzeJob.queue_adapter = :inline
 ActiveStorage::PurgeJob.queue_adapter = :inline
-Admin.create!(email:"test@test",password:111111
+Admin.create!(email:"test@example.com",password:111111
   )
 
 customer = Customer.create!(
