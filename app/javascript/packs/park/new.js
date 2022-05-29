@@ -122,11 +122,11 @@ $(function(){
               if (status==google.maps.places.PlacesServiceStatus.OK && results.length>0){
                   for (var i=0; i<results.length; i++) {
                       var places=results[i];
-                      console.log(results[i].name)
+                      // console.log(results[i].name)
                       document.getElementById("vicinity_vicinity_name").value += `${results[i].name},`;
                   }
               }else{
-                alert("このエリアでのスポット情報はありません。");
+                // alert("このエリアでのスポット情報はありません。");
               }
             };
 
@@ -150,11 +150,9 @@ $(function(){
 　　　　var service = new google.maps.places.PlacesService(map);
         var request={
             　location: new google.maps.LatLng(33.589815,130.412306),
-            // 　{north: 33.600747, south: 33.578963, east: 130.434000, west: 130.386021},
-            //
             　radius: 2000,
             　query: key,
-            // 　type:[],
+
         };
         service.textSearch(request,callback);
 
@@ -169,7 +167,7 @@ $(function(){
                   position: place.geometry.location,
                 });
                 infowindow[i].open(map);
-                console.log(infowindow[i].content);
+                // console.log(infowindow[i].content);
              }
            }else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
               alert("サーバ接続に失敗しました。");
