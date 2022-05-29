@@ -160,24 +160,9 @@ $(function(){
 
         function callback(results, status){
            if (status == google.maps.places.PlacesServiceStatus.OK) {
-            // var places = [];
-            // for (var i = 0; i < results.length; i++) {
-            //     places.push(results[i].formatted_address);
-            // }
-            // console.log(places);
-            // if(places.indexOf("福岡")){
-            //   alert("福岡県ないです");
-            // }else{
-            //   return
-            // };
 
              for (var i = 0; i < results.length; i++) {
                 var place = results[i];
-                // if(place.formatted_address.search('福岡') === -1){
-                //   alert(place.formatted_address);
-                //   alert("検索範囲外です");
-                //   return;
-                // };
 
                 infowindow[i] = new google.maps.InfoWindow({
                   content: place.name,
@@ -217,18 +202,22 @@ window.addEventListener('load', () => {
         document.querySelector('.avatar1').setAttribute('src', image);
       }
 
-      const reader2 = new FileReader();
-      reader2.readAsDataURL(file2);
-      reader2.onload = () => {
-        const image = reader2.result;
-        document.querySelector('.avatar2').setAttribute('src', image);
-      }
+      if(file2 !== undefined){
+        const reader2 = new FileReader();
+        reader2.readAsDataURL(file2);
+        reader2.onload = () => {
+          const image = reader2.result;
+          document.querySelector('.avatar2').setAttribute('src', image);
+        }
+      };
 
-      const reader3 = new FileReader();
-      reader3.readAsDataURL(file3);
-      reader3.onload = () => {
-        const image = reader3.result;
-        document.querySelector('.avatar3').setAttribute('src', image);
-      }
+      if(file3 !== undefined){
+        const reader3 = new FileReader();
+        reader3.readAsDataURL(file3);
+        reader3.onload = () => {
+          const image = reader3.result;
+          document.querySelector('.avatar3').setAttribute('src', image);
+        }
+      };
     });
 });

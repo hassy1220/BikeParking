@@ -18,18 +18,22 @@ window.addEventListener('load', () => {
         document.querySelector('.avatar1').setAttribute('src', image);
       }
 
-      const reader2 = new FileReader();
-      reader2.readAsDataURL(file2);
-      reader2.onload = () => {
-        const image = reader2.result;
-        document.querySelector('.avatar2').setAttribute('src', image);
-      }
+      if(file2 !== undefined){
+        const reader2 = new FileReader();
+        reader2.readAsDataURL(file2);
+        reader2.onload = () => {
+          const image = reader2.result;
+          document.querySelector('.avatar2').setAttribute('src', image);
+        }
+      };
 
-      const reader3 = new FileReader();
-      reader3.readAsDataURL(file3);
-      reader3.onload = () => {
-        const image = reader3.result;
-        document.querySelector('.avatar3').setAttribute('src', image);
-      }
+      if(file3 !== undefined){
+        const reader3 = new FileReader();
+        reader3.readAsDataURL(file3);
+        reader3.onload = () => {
+          const image = reader3.result;
+          document.querySelector('.avatar3').setAttribute('src', image);
+        }
+      };
     });
 });
