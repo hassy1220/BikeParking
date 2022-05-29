@@ -1,0 +1,25 @@
+ <table class="table table-striped table-hover text-center">
+    <tr>
+      <th style="width: 20%">駐車場</th>
+      <th style="width: 50%">説明</th>
+      <th style="width: 30%">目的地(商業施設等)</th>
+    </tr>
+    <% if customer_park.present? %>
+      <% customer_park.each do |park| %>
+        <tr>
+          <td>
+            <%= link_to public_park_path(park.id) do %>
+              <%= park.name %>
+            <% end %>
+          </td>
+          <td><%= park.description %></td>
+          <td><%= park.purpose %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td class="text-center">投稿なし</td>
+      </tr>
+    <% end %>
+  </table>
+  <%= paginate customer_park,:param_name => 'index_page', remote: true %>

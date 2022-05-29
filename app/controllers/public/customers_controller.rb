@@ -14,7 +14,13 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @customer_park = @customer.parks.page(params[:page]).per(6)
+    @customer_park = @customer.parks.page(params[:index_page]).per(5)
+    @like_park = @customer.favorite_park.page(params[:page]).per(5)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def edit
