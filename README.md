@@ -17,8 +17,8 @@
 　*福岡市内にバイクで遊びに行く時*
 
 ## 設計書
-  https://drive.google.com/file/d/1vToUX5JmQvmqBzKf4NNCLfSWldwJtOfc/view?usp=sharing
-  
+  https://docs.google.com/spreadsheets/d/17fY6545kklbhIeg9sZU-BxXLAWzvwOg0rjWJNl5iRB4/edit?usp=sharing
+
 ## ER図
 　![BikeParking ER図](https://user-images.githubusercontent.com/99014620/170477455-fdcc4a0c-fb19-45b5-9a58-8359ed3a234f.png)
 
