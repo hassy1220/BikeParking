@@ -27,25 +27,25 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto text-center">
                       <% if customer_signed_in? %>
-                        <li class="nav-item active"><%= link_to destroy_customer_session_path,method: :delete, class:"nav-link active menu-list" do %><i class="fas fa-sign-out-alt fa-fw"></i><br>ログアウト<% end %></li>
-                        <li class="nav-item"><%= link_to new_public_park_path, class:"nav-link" do %><i class="fas fa-plus fa-fw"></i><br>駐車場投稿<% end %></li>
-                        <li class="nav-item"><%= link_to public_parks_path, class:"nav-link active menu-list" do %><i class="fas fa-parking fa-fw"></i><br>駐車場一覧<% end %></li>
-                        <li class="nav-item"><%= link_to public_customers_path, class:"nav-link" do %><i class="fas fa-users fa-fw"></i><br>ユーザー一覧<% end %></li>
-                        <li class="nav-item"><%= link_to public_customer_path(current_customer.id), class:"nav-link" do %><i class="fas fa-user fa-fw"></i><br>マイページ<% end %></li>
+                        <li class="nav-item active mr-2"><%= link_to destroy_customer_session_path,method: :delete, class:"nav-link active menu-list" do %><i class="fas fa-sign-out-alt fa-fw"></i><br>ログアウト<% end %></li>
+                        <li class="nav-item mr-2"><%= link_to new_public_park_path, class:"nav-link" do %><i class="fas fa-plus fa-fw"></i><br>駐車場投稿<% end %></li>
+                        <li class="nav-item mr-2"><%= link_to public_parks_path, class:"nav-link active menu-list" do %><i class="fas fa-parking fa-fw"></i><br>駐車場一覧<% end %></li>
+                        <li class="nav-item mr-2"><%= link_to public_customers_path, class:"nav-link" do %><i class="fas fa-users fa-fw"></i><br>ユーザー一覧<% end %></li>
+                        <li class="nav-item mr-2"><%= link_to public_customer_path(current_customer.id), class:"nav-link" do %><i class="fas fa-user fa-fw"></i><br>マイページ<% end %></li>
                         <li class="nav-item"><%= link_to public_notifications_path, class:"nav-link" do %><i class="far fa-bell fa-fw"></i><br>通知<% end %></li>
                       <% end %>
                       <% unless customer_signed_in? %>
                         <% unless  admin_signed_in? %>
-                         <li class="nav-item"><%= link_to new_customer_registration_path, class:"nav-link" do %><i class="fas fa-sign-in-alt fa-fw"></i></i><br>新規登録<% end %></li>
-                         <li class="nav-item"><%= link_to new_customer_session_path, class:"nav-link" do %><i class="fas fa-sign-in-alt fa-fw"></i><br>サインイン<% end %></li>
-                         <li class="nav-item"><%= link_to public_parks_path, class:"nav-link" do %><i class="fas fa-parking fa-fw"></i><br>駐車場一覧<% end %></li>
+                         <li class="nav-item mr-2"><%= link_to new_customer_registration_path, class:"nav-link" do %><i class="fas fa-sign-in-alt fa-fw"></i></i><br>新規登録<% end %></li>
+                         <li class="nav-item mr-2"><%= link_to new_customer_session_path, class:"nav-link" do %><i class="fas fa-sign-in-alt fa-fw"></i><br>サインイン<% end %></li>
+                         <li class="nav-item mr-2"><%= link_to public_parks_path, class:"nav-link" do %><i class="fas fa-parking fa-fw"></i><br>駐車場一覧<% end %></li>
                          <li class="nav-item"><%= link_to customers_guest_sign_in_path,method: :post, class:"nav-link" do %><i class="fas fa-user fa-fw"></i><br>ゲストログイン<% end %></li>
                          </li>
                         <% end %>
                       <% end %>
                       <% if admin_signed_in? %>
-                        <li class="nav-item"><%= link_to admin_customers_path, class:"nav-link" do %><i class="fas fa-user fa-fw"></i><br>会員一覧<% end %></li>
-                        <li class="nav-item"><%= link_to admin_parks_path, class:"nav-link" do %><i class="fas fa-parking fa-fw"></i><br>投稿一覧<% end %></li>
+                        <li class="nav-item mr-2"><%= link_to admin_customers_path, class:"nav-link" do %><i class="fas fa-user fa-fw"></i><br>会員一覧<% end %></li>
+                        <li class="nav-item mr-2"><%= link_to admin_parks_path, class:"nav-link" do %><i class="fas fa-parking fa-fw"></i><br>投稿一覧<% end %></li>
                         <li class="nav-item"><%= link_to destroy_admin_session_path,method: :delete, class:"nav-link" do %><i class="fas fa-sign-out-alt fa-fw"></i><br>ログアウト<% end %></li>
                       <% end %>
                     </ul>
