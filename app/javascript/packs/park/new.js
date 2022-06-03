@@ -126,7 +126,7 @@ $(function(){
        　　　service=new google.maps.places.PlacesService(map);
             var request={
                 location: new google.maps.LatLng(idoInput,keidoInput),
-                radius:250, /* 指定した座標から半径1000m(1km)以内 */
+                radius:350, /* 指定した座標から半径1000m(1km)以内 */
                 types:['shopping_mall'],
             };
 
@@ -184,7 +184,7 @@ $(function(){
                 // console.log(infowindow[i].content);
              }
            }else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
-              alert("サーバ接続に失敗しました。");
+              alert("該当なし");
            };
         }
 
