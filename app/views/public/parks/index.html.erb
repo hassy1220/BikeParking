@@ -8,7 +8,7 @@
         <button type="button"class="btn btn-primary" data-toggle="collapse" data-target="#demo">詳細検索▷</button>
         <div id="demo" class="collapse text-center mb-3 mt-4"> 
           <%= form_with url: public_parks_path,method: :get do |f| %> 
-            <%= f.search_field :content,placeholder:"目的地or駐車場名",class:"form-control" %><br>
+            <%= f.search_field :content,placeholder:"目的地or駐車場名",class:"form-control" %><br> 
             <%= f.collection_radio_buttons :engine_specs, Park.specs_i18n, :first , :last %><br>
             <%= f.search_field :address,placeholder:"住所",class:"form-control" %>
             <div class="text-center mt-3">
