@@ -8,6 +8,7 @@ class Public::ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
     if @contact.save
       ContactMailer.send_mail(@contact).deliver_now
+      flash[:notice] = "お問合せ完了しました"
       respond_to do |format|
         format.js { render ajax_redirect_to(root_path) }
       end
