@@ -22,6 +22,13 @@
 ## ER図
 　![BikeParking ER図](https://user-images.githubusercontent.com/99014620/170477455-fdcc4a0c-fb19-45b5-9a58-8359ed3a234f.png)
 
+## アプリケーション詳細設計
+　　*会員*
+　　![アプリケーション詳細設計１](https://user-images.githubusercontent.com/99014620/173555513-c26cdaf7-1156-4477-9b85-9179eb7aba1f.jpg)
+
+　　*管理者*
+　　![アプリケーション詳細設計２](https://user-images.githubusercontent.com/99014620/173555689-f9ddce3d-7985-4ec0-be92-6f02b0f56d09.jpg)
+
 ## 動作デモ
 https://user-images.githubusercontent.com/99014620/173487862-34d561e7-f9b2-434e-9bbd-1b506ac68611.mp4
 
