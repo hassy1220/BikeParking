@@ -31,41 +31,6 @@ $(function(){
        });
      };
 
-
-
-
-
-    // if (! navigator.geolocation) {
-    //       $('#gmap').text('GPSに対応したブラウザでお試しください');
-    //         return false;
-    //   }
-
-    //   $('#gmap').text('GPSデータを取得します...');
-
-
-    // navigator.geolocation.getCurrentPosition(function(pos) {
-    //     // gps 取得成功
-    // // google map 初期化
-    //   var gmap = new google.maps.Map($('#gmap').get(0), {
-    //       // center: new google.maps.LatLng(35, 135),
-    //       mapTypeId: google.maps.MapTypeId.ROADMAP,
-    //       zoom: 17
-    //   });
-
-    // // 現在位置にピンをたてる
-    //   var currentPos = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-    // 　   var currentMarker = new google.maps.Marker({
-    //         position: currentPos
-
-    //     });
-    //     // alert(currentPos);
-    //     currentMarker.setMap(gmap);
-    // });
-
-
-
-
-
       map.addListener( "click", function ( event ) {
         // 地図をクリックしたらf.hidden_field :lat,value:"lat"f.hidden_field :lng,value:"lng"のValue値変更
       　document.getElementById("park_lat").value = event.latLng.lat();
@@ -140,7 +105,7 @@ $(function(){
                       document.getElementById("vicinity_vicinity_name").value += `${results[i].name},`;
                   }
               }else{
-                // alert("このエリアでのスポット情報はありません。");
+               
               }
             };
 
@@ -181,40 +146,11 @@ $(function(){
                   position: place.geometry.location,
                 });
                 infowindow[i].open(map);
-                // console.log(infowindow[i].content);
              }
            }else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
               alert("該当なし");
            };
         }
-
-      //   // 位置情報取得
-      // if (navigator.geolocation) {
-      //   navigator.geolocation.getCurrentPosition(
-      //     (position) => {
-      //       const pos = {
-      //         lat: position.coords.latitude,
-      //         lng: position.coords.longitude,
-      //       };
-      //       const marker = new google.maps.Marker({
-      //       position: pos,
-      //   　   map:map,
-      //       });
-      //       console.log(position.coords.latitude);
-      //     },
-      //     () => {
-      //       handleLocationError(true, infoWindow, map.getCenter());
-      //     }
-      //   );
-      // } else {
-      //   // Browser doesn't support Geolocation
-      //   handleLocationError(false, infoWindow, map.getCenter());
-      //   alert("ccc");
-      // }
-
-
-
-
 
       });
 

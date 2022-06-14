@@ -50,8 +50,7 @@ $(function(){
 
         var contentStr =
         // バッククォーテーション``で囲む中で${}を使えば式展開できる
-        `<a href="/public/parks/${date[i][3]}">${date[i][2]}'</a>`
-
+        `<a href="/public/parks/${date[i][3]}">${date[i][2]}'</a>`;
 
         // 情報ウインドウを表示させ、駐車場名を表示
           var infowindow = new google.maps.InfoWindow({
@@ -65,5 +64,5 @@ $(function(){
 });
 
 $(function(){
-  
+
 });

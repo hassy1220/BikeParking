@@ -5,7 +5,6 @@ class Public::ParksController < ApplicationController
   include AjaxHelper
   def new
     @park = Park.new
-    # (session[:parks] || {})
     @park_areas = Park.all.pluck(:lat, :lng)
     @park_area = Park.pluck(:lng, :lat)
     @vicinity = Vicinity.new
