@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(version: 2022_05_15_184821) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.text "comment"
-    t.integer "customer_id"
-    t.integer "park_id"
+    t.text "comment", null: false
+    t.integer "customer_id", null: false
+    t.integer "park_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 2022_05_15_184821) do
     t.integer "spec", default: 0, null: false
     t.integer "price", default: 0, null: false
     t.integer "parking_time", default: 0, null: false
-    t.string "addressOutput", default: ""
+    t.string "addressOutput", default: "", null: false
     t.string "purpose", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -136,8 +136,8 @@ ActiveRecord::Schema.define(version: 2022_05_15_184821) do
   end
 
   create_table "vicinity_parks", force: :cascade do |t|
-    t.integer "park_id"
-    t.integer "vicinity_id"
+    t.integer "park_id", null: false
+    t.integer "vicinity_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
