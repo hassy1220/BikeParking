@@ -19,6 +19,9 @@
 ## 設計書
   https://docs.google.com/spreadsheets/d/17fY6545kklbhIeg9sZU-BxXLAWzvwOg0rjWJNl5iRB4/edit?usp=sharing
 
+## テーブル定義書
+　![テーブル定義書](https://user-images.githubusercontent.com/99014620/173570568-8394a07a-3475-4cbb-b214-55e74309d000.jpg)
+
 ## ER図
 　![BikeParking ER図](https://user-images.githubusercontent.com/99014620/170477455-fdcc4a0c-fb19-45b5-9a58-8359ed3a234f.png)
 
