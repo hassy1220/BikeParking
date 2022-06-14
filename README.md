@@ -22,6 +22,14 @@
 ## ER図
 　![BikeParking ER図](https://user-images.githubusercontent.com/99014620/170477455-fdcc4a0c-fb19-45b5-9a58-8359ed3a234f.png)
 
+
+https://user-images.githubusercontent.com/99014620/173487862-34d561e7-f9b2-434e-9bbd-1b506ac68611.mp4
+
+
+
+https://user-images.githubusercontent.com/99014620/173489077-31ddfe28-8148-49d4-b28f-01b1162ee936.mp4
+
+
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
