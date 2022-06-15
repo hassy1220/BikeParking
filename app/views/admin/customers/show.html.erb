@@ -28,7 +28,7 @@
        <% @customer.parks.each do |park| %>
        <tr>
          <td>
-           <%= link_to public_park_path(park.id) do %>
+           <%= link_to admin_park_path(park.id) do %>
              <%= park.name %>
            <% end %>
          </td>
