@@ -46,6 +46,13 @@ https://user-images.githubusercontent.com/99014620/173487862-34d561e7-f9b2-434e-
 
 https://user-images.githubusercontent.com/99014620/173489077-31ddfe28-8148-49d4-b28f-01b1162ee936.mp4
 
+## 使用gem
+  　*devise--ログイン機能実装の為*
+  　*datenv-rails---環境変数を管理する*
+  　*enum_help---enumの日本語化*
+  　*kaminari---ページネーションの為*
+  　*devise-i18n---deviseのviewの日本語化*
+  　*mysql2---本番環境用のデータベースを利用する為*
 
 ## 開発環境
 - OS：Linux(CentOS)
