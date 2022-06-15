@@ -2,7 +2,7 @@ class Park < ApplicationRecord
   has_many_attached :images
   has_many :comments, dependent: :destroy
   # 新しい順番に表示させる
-  has_many :comments, -> { order("created_at desc") }
+  has_many :comments, -> { order("created_at desc") },dependent: :destroy
   belongs_to :customer
   has_many :favorites, dependent: :destroy
   has_many :favorite_user, through: :favorites, source: :customer
