@@ -22,6 +22,13 @@
 ## テーブル定義書
 　![テーブル定義書](https://user-images.githubusercontent.com/99014620/173570568-8394a07a-3475-4cbb-b214-55e74309d000.jpg)
 
+## UI_FLOW
+  　*エンドユーザー*
+  　![UI_FLOW](https://user-images.githubusercontent.com/99014620/173735763-ef79b451-f0a4-4007-9c2a-e37c2ee689f6.jpg)
+
+  　*管理者*
+　　![UI_FLOW2](https://user-images.githubusercontent.com/99014620/173735846-1add7dc0-d944-443d-ac50-0ef650d2c9b9.jpg)
+
 ## ER図
 　![BikeParking ER図](https://user-images.githubusercontent.com/99014620/170477455-fdcc4a0c-fb19-45b5-9a58-8359ed3a234f.png)
 
