@@ -28,15 +28,17 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy, :show]
     end
     resources :customers, only: [:index, :show, :edit, :update] do
+      member do
+        # 退会確認画面
+        get 'customers/:id/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
+       # 論理削除用のルーティング
+        patch 'customers/:id/withdrawal' => 'customers#withdrawal', as: 'withdrawal'
+      end
       resource :relationships, only: [:create, :destroy, :show]
     end
     resources :notifications, only: [:index, :destroy]
     get 'searches/search'
     resources :contacts, only: [:new, :create]
   end
-  # 退会確認画面
-  get 'customers/:id/unsubscribe' => 'public/customers#unsubscribe', as: 'unsubscribe'
-  # 論理削除用のルーティング
-  patch 'customers/:id/withdrawal' => 'public/customers#withdrawal', as: 'withdrawal'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

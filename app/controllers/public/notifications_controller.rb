@@ -3,10 +3,6 @@ class Public::NotificationsController < ApplicationController
   def index
     notifications = current_customer.passive_notifications.all.order(created_at: :desc)
     @notification = notifications.where.not(visitor_id: current_customer.id)
-    # インデックスを開いたってことは、通知は見たってことだから、チェックをtrueにする。※良いね連発で通知が爆発することを恐れて、DBに保存したままにしている。(存在チェックで連続投稿)
-    # notifications.where(checked: false).each do |notification|
-    #   notification.update(checked: true)
-    # end
   end
 
   def destroy
@@ -17,7 +13,7 @@ class Public::NotificationsController < ApplicationController
 
   # 一週間以降のものは削除する(自分の)
   private
-
+　　
   def delete_message
     time = 1.week.ago.beginning_of_day..Time.zone.now.end_of_day
     message = current_customer.passive_notifications.all.where.not(created_at: time)

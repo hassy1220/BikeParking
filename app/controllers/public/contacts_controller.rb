@@ -9,6 +9,7 @@ class Public::ContactsController < ApplicationController
     if @contact.save
       ContactMailer.send_mail(@contact).deliver_now
       flash[:notice] = "お問合せ完了しました"
+      # form_withにて非同期通信するよう設定しているが、redirectさせたい為、以下の記述にてredirectさせる
       respond_to do |format|
         format.js { render ajax_redirect_to(root_path) }
       end

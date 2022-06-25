@@ -85,9 +85,6 @@ $(function(){
                 });
             });
 
-
-
-
        　　　service=new google.maps.places.PlacesService(map);
             var request={
                 location: new google.maps.LatLng(idoInput,keidoInput),
@@ -101,7 +98,6 @@ $(function(){
               if (status==google.maps.places.PlacesServiceStatus.OK && results.length>0){
                   for (var i=0; i<results.length; i++) {
                       var places=results[i];
-                      // console.log(results[i].name)
                       document.getElementById("vicinity_vicinity_name").value += `${results[i].name},`;
                   }
               }else{

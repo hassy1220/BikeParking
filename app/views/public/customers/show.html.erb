@@ -30,7 +30,7 @@
         <p class="customer_fix">
           <% if @customer.name != "guestuser" %>
             <%= link_to"編集",edit_public_customer_path(current_customer.id),class:"btn btn-success" %>
-            <%= link_to"退会",unsubscribe_path(@customer.id),class:"btn btn-danger" %>
+            <%= link_to"退会",unsubscribe_public_customer_path(@customer.id),class:"btn btn-danger" %>
           <% end %>
         </p>
       <% end %>

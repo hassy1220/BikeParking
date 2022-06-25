@@ -16,7 +16,7 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @customer_park = @customer.parks.page(params[:index_page]).per(5)
     @like_park = @customer.favorite_park.page(params[:page]).per(5)
-
+# ページネーション非同期の為の記述
     respond_to do |format|
       format.html
       format.js
