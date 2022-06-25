@@ -11,9 +11,9 @@ class Public::NotificationsController < ApplicationController
     redirect_to request.referer
   end
 
-  # 一週間以降のものは削除する(自分の)
+# 一週間以降のものは削除する(自分の)
   private
-　　
+
   def delete_message
     time = 1.week.ago.beginning_of_day..Time.zone.now.end_of_day
     message = current_customer.passive_notifications.all.where.not(created_at: time)
