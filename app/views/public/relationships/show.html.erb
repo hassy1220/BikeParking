@@ -1,14 +1,14 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4 text-center">
+    <div class="col-md-10 offset-1 text-center">
         <% if @key == "follow" %>
-          <h1>フォロー一覧</h1>
+          <h1><%= @customer.name %>さんのフォロー一覧</h1>
             <table class="table table-borderless text-center" id = "follow_relationship_btn">
                  <%= render "public/relationships/follow_relationship",customer: @customer %>
             </table>
 
         <% elsif @key == "follower" %>
-        <h1>フォロワー一覧</h1>
+        <h1><%= @customer.name %>さんのフォロワー一覧</h1>
            <table class="table table-borderless text-center" id = "follower_relationship_btn">
               <%= render "public/relationships/follower_relationship",customer: @customer %>
            </table>
