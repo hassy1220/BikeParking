@@ -1,4 +1,5 @@
 class Public::CommentsController < ApplicationController
+  before_action :move_to_signed_in
   def create
     @park = Park.find(params[:park_id])
     @comment = Comment.new(comment_params)
@@ -44,7 +45,7 @@ class Public::CommentsController < ApplicationController
       format.html
       format.js
     end
-    # index.js.erbを探しに
+    # index.js.erbを探しにいく
   end
 
   # コメント削除にてページネーションも非同期で呼び出したすぐに、ページネーションにて画面を切り替えるために必要。
@@ -63,5 +64,12 @@ class Public::CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:comment)
+  end
+
+  def move_to_signed_in
+    unless customer_signed_in?
+      # サインインしていないユーザーはログインページが表示される
+      redirect_to new_customer_session_path, notice: 'ログインしてください！'
+    end
   end
 end

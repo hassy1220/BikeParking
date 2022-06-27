@@ -5,7 +5,6 @@ class Public::CustomersController < ApplicationController
   def index
     if params[:key]
       @search = params[:key]
-      # @customers = Customer.where(is_deleted: false).where(['name: LIKE ?', "%#{search}%"])
       @customers = Customer.where(is_deleted: false).where('name LIKE ?', "%#{@search}%")
     else
       @customers = Customer.where(is_deleted: false)
