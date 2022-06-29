@@ -16,8 +16,6 @@
 ### 主な利用シーン
 　*福岡市内にバイクで遊びに行く時*
 
-## 設計書
-  https://docs.google.com/spreadsheets/d/17fY6545kklbhIeg9sZU-BxXLAWzvwOg0rjWJNl5iRB4/edit?usp=sharing
 
 ## テーブル定義書
 　![テーブル定義書](https://user-images.githubusercontent.com/99014620/173570568-8394a07a-3475-4cbb-b214-55e74309d000.jpg)
