@@ -1,5 +1,4 @@
 class Public::ParksController < ApplicationController
-  
   before_action :correct_post, only: [:edit]
   before_action :move_to_signed_in, except: [:index]
   include AjaxHelper

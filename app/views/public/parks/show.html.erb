@@ -12,7 +12,7 @@
           <div id="show_image" class="mb-3">
             <% if @park_area.images.attached? %>
               <% @park_area.images.each do |image| %>
-                <%= image_tag(image, width:150,height:150) %>
+                <%= image_tag(image, class:"img-150") %>
               <% end %>
             <!--投稿画像がなかったら、サンプリ画像を表示-->
             <% else %>
